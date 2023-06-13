@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
+  <display-name>Project</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+  </welcome-file-list>
+
+<!-- 개인 프로젝트용 xml -->  
+  
+<!-- 끝나는 주소가 들어오면 서블릿이름 MemberController 찾아감-->  
+<servlet-mapping>
+	<servlet-name>BookController</servlet-name>
+  	<url-pattern>*.bs</url-pattern> 
+</servlet-mapping>
+
+<!-- 서블릿이름 MemberController 찾아와서 실제 처리담당자(서블릿)파일 연결 -->
+<servlet>
+	<servlet-name>BookController</servlet-name> <!-- 찾아옴  --> <!--*me로끝나면 컨트롤러 작용  -->
+	<servlet-class>com.itwillbs2.controller.BookController</servlet-class> <!-- 실제파일 / 생성(자바 리소스) -->
+</servlet>
+</web-app>
