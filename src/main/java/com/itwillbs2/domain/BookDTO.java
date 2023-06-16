@@ -8,7 +8,13 @@ public class BookDTO {
 	private String id;
 	private String pass;
 	private String name;
-	private Timestamp date;
+	private String phone;
+	private String email;
+	private String addressMain; // 도로명 주소
+	private String addressSub;	// 상세주소 
+	private Timestamp date; 	// 가입일
+	
+	//todo: 회원번호 autoincrement 부여 설정하기 -> db
 	
 	// 메서드() set(저장)/get(가져오기) 메서드 생성(alt shift s -> R)
 	public String getId() {
@@ -34,6 +40,30 @@ public class BookDTO {
 	}
 	public void setDate(Timestamp date) {
 		this.date = date;
+	}
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getAddressMain() {
+		return addressMain;
+	}
+	public void setAddressMain(String addressMain) {
+		this.addressMain = addressMain;
+	}
+	public String getAddressSub() {
+		return addressSub;
+	}
+	public void setAddressSub(String addressSub) {
+		this.addressSub = addressSub;
 	}
 	
 	

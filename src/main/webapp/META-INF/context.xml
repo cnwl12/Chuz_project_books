@@ -5,7 +5,7 @@
 			  auth="Container"
 			  type="javax.sql.DataSource"
 			  driverClassName="com.mysql.cj.jdbc.Driver"
-			  url="jdbc:mysql://localhost:3306/jspdb?serverTimezone=UTC"
+			  url="jdbc:mysql://localhost:3306/chuz?serverTimezone=UTC"
 			  username="root"
 			  password="1234"	/>
 </Context>
