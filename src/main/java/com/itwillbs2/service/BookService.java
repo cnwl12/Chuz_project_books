@@ -75,6 +75,7 @@ public class BookService {
 	public BookDTO getMember(String id) { //id 가져와서 회원정보 가져오기 
 		
 		BookDTO bookDTO = null;
+		
 		try { 
 			BookDAO dao = new BookDAO();
 			bookDTO = dao.getMember(id); 
@@ -87,6 +88,7 @@ public class BookService {
 		}
 		return bookDTO; //없으면 null로 return될것 ~ 
 	} // getMember 메서드 끝
+	
 	
 	// 회원정보 수정 
 	public void updateMember(HttpServletRequest request) {
@@ -126,7 +128,24 @@ public class BookService {
 		
 	} // updateMember 메서드 끝
 	
-	
+	public void deleteMember(HttpServletRequest request) {
+		
+		try {
+			String id = request.getParameter("id");
+			String pass = request.getParameter("pass");
+			
+			BookDAO dao = new BookDAO();
+			BookDTO dto = dao.userCheck(id, pass);
+		
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			
+		}
+		
+		
+	}// deleteMember 회원정보 삭제 
 	
 	
 	

@@ -4,9 +4,24 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>BookStroes_login</title>
+
+<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.js">
+
+
+
+</script>
+
+
 </head>
 <body>
+
+<form action="mypage.jsp" method="post">
+ID : <input type="text" name="id" class="check">
+PASS : <input type="password" name="password" class="check">
+<input type="submit" value="로그인">
+
+</form>
 
 </body>
 </html>

@@ -258,7 +258,7 @@
             <!-- id/pass 설정하기  -->
             <div class="insert__form">
                 <h4>ID / PASS </h4> <br>
-            	   <form action="insertPro.jsp" method="post">
+            	   <form action="insertPro.bs" method="post">
             	    <div class="row">
                         <div class="col-lg-8 col-md-6">
             	     <div class="checkout__input">
@@ -272,12 +272,12 @@
                      
                      <div class="checkout__input">
                          <p>PASS<span>*</span></p>
-                         <input type="text" placeholder="비밀번호는 8자리 이상으로 작성" name="pass">
+                         <input type="password" placeholder="비밀번호는 8자리 이상으로 작성" name="pass">
                      </div>
 					
                      <div class="checkout__input">
                          <p>PASS 재확인<span>*</span></p>
-                         <input type="text" placeholder="입력한 비밀번호를 알맞게 재입력하시오" name="pass2">
+                         <input type="password" placeholder="입력한 비밀번호를 알맞게 재입력하시오" name="pass2">
                      </div>
                        <div class="checkout__input">
                           <p>이름<span>*</span></p>
@@ -286,18 +286,18 @@
                       
                        <div class="checkout__input">
                            <p>휴대폰번호(연락처)<span>*</span></p>
-                           <input type="text">
+                           <input type="text" name="phone">
                        </div>
                      
                        <div class="checkout__input">
                            <p>주소</p>
-                           <input type="text" placeholder="도로명주소" class="checkout__input__add">
-                           <input type="text" placeholder="상세주소">
+                           <input type="text" placeholder="도로명주소" name="addressMain" class="checkout__input__add">
+                           <input type="text" placeholder="상세주소" name="addressSub">
                        </div>
                          
                         <div class="checkout__input">
                             <p>E-mail</p>
-                            <input type="email">
+                            <input type="email" name="email">
                              </div>
                     <!-- 제출/초기화 -->     
                    <div>      

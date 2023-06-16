@@ -33,8 +33,7 @@ public class BookController extends HttpServlet{
 	//주소매핑 메서드 
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String strPath = request.getServletPath(); // 연결된 실제주소 /insert.me
-		// 가상주소 비교해서 실제 파일연결 -> 이동
-		// 뽑아온 가상주소와 원하는 가상주소 비교 -> 일치하면 
+		
 		if(strPath.equals("/insert.bs")) {
 			// "/insert.bs" 주소가 변경되지 않고(가상주소 유지) 이동
 			// RequestDispatcher 자바파일 forward 메서드 호출		// jsp주소 화면에 안보이게 주소변경없이 유지
@@ -86,7 +85,13 @@ public class BookController extends HttpServlet{
 			dis.forward(request, response);
 		}		
 		
-		
+		// logout페이지 매핑 
+		if(strPath.equals("/logout.bs")) {
+			HttpSession session = request.getSession();
+			session.invalidate();
+			
+			response.sendRedirect("main.bs");
+		} // 
 		
 		
 		
