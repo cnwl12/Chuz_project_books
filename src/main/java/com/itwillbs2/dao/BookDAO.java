@@ -60,6 +60,7 @@ public class BookDAO {
 	public BookDTO userCheck(String id, String pass) {
 		
 		BookDTO dto =null; 
+		
 		try {
 			Connection con = getConnection(); 
 			
@@ -68,7 +69,7 @@ public class BookDAO {
 			PreparedStatement pstmt = con.prepareStatement(sql);
 
 			pstmt.setString(1,id);
-			pstmt.setString(2, pass);
+			pstmt.setString(2,pass);
 
 			ResultSet rs = pstmt.executeQuery();
 			
@@ -77,6 +78,9 @@ public class BookDAO {
 				dto.setId(rs.getString("id")); //db열에서 갖고와서(열 접근) dto에 담기 
 				dto.setPass(rs.getString("pass"));
 				dto.setName(rs.getString("name"));
+				dto.setPhone(rs.getString("phone"));
+				dto.setAddressMain(rs.getString("addressMain"));
+				dto.setAddressSub(rs.getString("addressSub"));
 				dto.setDate(rs.getTimestamp("date"));
 				
 			}else	{ // (F)-> 아이디, 비밀번호 불일치
@@ -92,6 +96,7 @@ public class BookDAO {
 	
 	public BookDTO getMember(String id) {
 		BookDTO dto = null;
+		
 		try {
 		Connection con	= getConnection();
 		
@@ -116,6 +121,7 @@ public class BookDAO {
 		}else {
 			// 아이디 부재 => null
 		}
+		
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {

@@ -5,52 +5,58 @@
 <head>
 <meta charset="UTF-8">
 <title>BookStore_join me!</title>
+
+
+<link rel="stylesheet" href="fonts/icomoon/style.css" />
+<link rel="stylesheet" href="fonts/flaticon/font/flaticon.css" />
+
+<link rel="stylesheet" href="css/tiny-slider.css" />
+<link rel="stylesheet" href="css/aos.css" />
+<link rel="stylesheet" href="css/style.css" />
+
 </head>
 <body>
 
+<jsp:include page="../include/top.jsp"></jsp:include>
+
+<!-- id/pass 설정하기  -->
+
+<h1>회원가입 </h1>
+<br>
+<h6> 빈칸을 채워주세요(*필수작성)</h6>
+<form action="joinPro.bs" method="post">
+
+    <p>ID<span>*</span></p>
+  
+  <p>
+    <input type="text" placeholder="id는 최대 4자리 이상으로 작성" name="id"> 
+    <input type="button" value="중복확인" width="10" height="3">
+    </p>
+
+    <p>PASS<span>*</span></p>
+    <input type="password" placeholder="비밀번호는 8자리 이상으로 작성" name="pass">
+
+<div class="checkout__input">
+    <p>PASS 재확인<span>*</span></p>
+    <input type="password" placeholder="비밀번호 동일" name="pass2">
+</div>
+  <div class="checkout__input">
+     <p>이름<span>*</span></p>
+     <input type="text" name="name">
+ </div>
+ 
+  <div class="checkout__input">
+      <p>휴대폰번호(연락처)<span>*</span></p>
+      <input type="text" name="phone">
+  </div>
 
 
-         <table width: 905px
-    border-top-width: 0px    border-bottom-width: 0px
-    border-left-width: 0px
-    border-right-width: 0px
-    margin-inline-start: auto
-    margin-inline-end: auto
-    -webkit-border-horizontal-spacing: 0px
-    -webkit-border-vertical-spacing: 0px>   
-            <!-- id/pass 설정하기  -->
-                <h1>회원가입 </h1> <br>
-  <h6><span class="icon_tag_alt"></span> 빈칸을 채워주세요(*필수작성)</h6>
-            	   <form action="main.jsp" method="post">
-                         <p>ID<span>*</span></p>
-                       
-                       <p>
-                         <input type="text" placeholder="id는 최대 4자리 이상으로 작성" name="id"> 
-                         <input type="button" value="중복확인" width="10" height="3">
-                         </p>
-                     
-                         <p>PASS<span>*</span></p>
-                         <input type="password" placeholder="비밀번호는 8자리 이상으로 작성" name="pass">
-					
-                     <div class="checkout__input">
-                         <p>PASS 재확인<span>*</span></p>
-                         <input type="password" placeholder="비밀번호 동일" name="pass2">
-                     </div>
-                       <div class="checkout__input">
-                          <p>이름<span>*</span></p>
-                          <input type="text" name="name">
-                      </div>
-                      
-                       <div class="checkout__input">
-                           <p>휴대폰번호(연락처)<span>*</span></p>
-                           <input type="text" name="phone">
-                       </div>
-                     </table>
-                     
-                     
-                           <p>주소</p>
+
+<!-- 주소- 다음api  -->
+
+<p>주소</p>
                            
-                           <input type="text" id="sample6_postcode" placeholder="우편번호">
+<input type="text" id="sample6_postcode" placeholder="우편번호">
 <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
 <input type="text" id="sample6_address" placeholder="우편번호 찾기 후 주소작성" name="addressMain"><br>
 <input type="text" id="sample6_detailAddress" placeholder="상세주소" name="addressSub">
@@ -110,11 +116,13 @@
                             <p>E-mail</p>
                             <input type="email" name="email"> <br>
                              </div>
+                  
                     <!-- 제출/초기화 -->     
                    <div>      
                   <input type="submit" value="submit">
                   <input type="reset" value="reset">
                  </div>
+                  </form>
                        
                     
             	   

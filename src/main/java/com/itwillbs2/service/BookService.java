@@ -42,6 +42,7 @@ public class BookService {
 
 			// MemberDAO 객체를 생성해야 호출 가능(기억장소 할당)
 			BookDAO dao = new BookDAO();
+			System.out.println("MemberDAO 기억장소 주소 : " + dao);
 			// insertMember() 메서드 호출  // 회원가입 -> DB로 전달 
 			dao.insertMember(dto);
 			
@@ -58,6 +59,8 @@ public class BookService {
 		BookDTO bookDTO = null; 
 		
 		try {
+			request.setCharacterEncoding("utf-8");
+			
 			String id = request.getParameter("id");
 			String pass = request.getParameter("pass");
 

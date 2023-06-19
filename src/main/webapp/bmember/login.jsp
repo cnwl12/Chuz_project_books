@@ -6,8 +6,6 @@
 <meta charset="UTF-8">
 <title>BookStroes_login</title>
 
-
-
     <link rel="stylesheet" href="fonts/icomoon/style.css" />
     <link rel="stylesheet" href="fonts/flaticon/font/flaticon.css" />
 
@@ -15,10 +13,7 @@
     <link rel="stylesheet" href="css/aos.css" />
     <link rel="stylesheet" href="css/style.css" />
 
-
-
 <!-- <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.js">
-
 
 
 </script>
@@ -44,15 +39,15 @@
 <br>
 <br><br><br><br><br><br><br><br>
 
-<form action="index.jsp" method="post">
+<nav>
+<h2>로그인</h2>
+<form action="loginPro.bs" method="post">
 ID : <input type="text" name="id"> <br>
-PASS : <input type="password" name="password"> <br>
+PASS : <input type="password" name="pass"> <br>
 <input type="submit" value="로그인">
-<a href="join.jsp"><input type="button" value="회원가입"></a>
-
+<a href="join.bs"><input type="button" value="회원가입"></a>
 </form>
-
-
+</nav>
 
 
 </body>
