@@ -41,7 +41,7 @@
 
 <nav>
 <h2>로그인</h2>
-<form action="loginPro.bs" method="post">
+<form id="lgp" action="loginPro.bs" method="post">
 ID : <input type="text" name="id"> <br>
 PASS : <input type="password" name="pass"> <br>
 <input type="submit" value="로그인">

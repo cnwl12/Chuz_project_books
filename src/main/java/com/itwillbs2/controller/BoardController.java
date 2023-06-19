@@ -31,8 +31,6 @@ public class BoardController extends HttpServlet { //상속받아서 오버라�
 		
 		// 가상주소 뽑아오기 getServletPath(); 
 		String strPath = request.getServletPath(); 
-		System.out.println(strPath);
-		// 주소비교 => 실제파일 연결 (주소 매핑)
 		
 		if(strPath.equals("/write.bo")) { // 뽑아온 주소는 앞에 / 
 			// 글쓰기 화면 - board/write.jsp
@@ -41,7 +39,6 @@ public class BoardController extends HttpServlet { //상속받아서 오버라�
 		}
 		
 		if(strPath.equals("/writePro.bo")) {
-			System.out.println("가상주소 비교 : /writePro.bo" + strPath);
 			// pro 실행할 BoardService 객체생성 
 			BoardService boardService = new BoardService();
 			boardService.insertBoard(request);
@@ -51,7 +48,6 @@ public class BoardController extends HttpServlet { //상속받아서 오버라�
 		
 		}
 		if(strPath.equals("/list.bo")) { //list.jsp과정 하나씩 줄여감
-			System.out.println("가상주소 비교 : /list.bo" + strPath);
 			// pageDTO 객체생성  
 			PageDTO pageDTO = new PageDTO();
 			
@@ -133,7 +129,6 @@ public class BoardController extends HttpServlet { //상속받아서 오버라�
 		}
 		
 		if(strPath.equals("/content.bo")) {
-			System.out.println("가상주소 비교 : /content.bo ");
 			// BoardService 객체생성
 			BoardService boardService = new BoardService();
 			BoardDTO dto = boardService.getBoard(request); // 메서드 호출
