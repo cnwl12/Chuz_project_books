@@ -75,6 +75,7 @@ public class BookService {
 		return bookDTO;
 	} // userCheck 메서드 끝 
 	
+	
 	public BookDTO getMember(String id) { //id 가져와서 회원정보 가져오기 
 		
 		BookDTO bookDTO = null;

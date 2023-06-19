@@ -17,11 +17,23 @@
               <li><a href="services.bs">고객센터</a></li>
               
               <li class="has-children">
+              <%
+              String id =(String)session.getAttribute("id"); 
+              
+              if(id==null){ // 로그인 안한 상태 
+              %>
                 <a href="login.bs">login</a>
+                <%
+              }else{ // 세션값 있음 -> 로그인 성공
+            	  %>
+            	  <%=id%>님
+            	  <% 
+              }
+                %>
                 <ul class="dropdown">
                   <li><a href="join.bs">회원가입</a></li>
                   <li><a href="update.bs">회원정보 수정 | 삭제</a></li>
-                  <li><a href="mypage.bs">마이페이지</a></li>
+                  <li><a href="logout.bs">로그아웃</a></li>
                 </ul>
               </li>
             </ul>  

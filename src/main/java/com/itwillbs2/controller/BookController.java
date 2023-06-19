@@ -87,8 +87,8 @@ public class BookController extends HttpServlet{
 			response.sendRedirect("main.bs"); //주소값 바뀌면서 이동 (jsp경우엔 dispatch..)
 			
 			}else { //id,pw 불일치 => member/msg.jsp
-//				RequestDispatcher dis = request.getRequestDispatcher("bmember/msg.jsp");
-//				dis.forward(request, response);
+				RequestDispatcher dis = request.getRequestDispatcher("bmember/msg.jsp");
+				dis.forward(request, response);
 			}
 		}//
 		
@@ -102,16 +102,43 @@ public class BookController extends HttpServlet{
 		//회원정보 수정/삭제 이동
 		if(strPath.equals("/update.bs")) { // main.me 유지하면서 
 			//member/main.jsp로 이동
+			
+			HttpSession session = request.getSession();
+			String id =(String)session.getAttribute("id");
+
+			if(id==null) { // 로그인 안한상태
+				RequestDispatcher dis = request.getRequestDispatcher("bmember/msg2.jsp");
+				dis.forward(request, response);
+				// response.sendRedirect("main.bs");
+			}else {
+			
+			BookService bookService = new BookService();
+			BookDTO bookDTO = bookService.getMember(id);
+			
+			request.setAttribute("bookDTO", bookDTO);
+			
 			RequestDispatcher dis =request.getRequestDispatcher("bmember/update.jsp");
 			dis.forward(request, response);
+			}
 		}	
 		
-		//회원정보 마이페이지 이동
-		if(strPath.equals("/mypage.bs")) { // main.me 유지하면서 
-			//member/main.jsp로 이동
-			RequestDispatcher dis =request.getRequestDispatcher("bmember/mypage.jsp");
-			dis.forward(request, response);
-		}		
+		if(strPath.equals("/updatePro.bs")) { // main.me 유지하면서 
+			
+			BookService bookService = new BookService();
+			
+			BookDTO bookDTO = bookService.userCheck(request);
+			
+			if(bookDTO !=null) {
+				
+				bookService.updateMember(request);
+				
+				response.sendRedirect("main.bs");
+				
+			}else {
+				RequestDispatcher dis =request.getRequestDispatcher("bmember/msg.jsp");
+				dis.forward(request, response);
+			}
+		}	
 		
 		// logout페이지 매핑 
 		if(strPath.equals("/logout.bs")) {
@@ -120,8 +147,6 @@ public class BookController extends HttpServlet{
 			
 			response.sendRedirect("main.bs");
 		} // 
-		
-		
 		
 	}//doProcess()
 } // 클래스 
