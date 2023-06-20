@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,56 +14,112 @@
 <link rel="stylesheet" href="css/aos.css" />
 <link rel="stylesheet" href="css/style.css" />
 
+<script type="text/javascript">
+ 
+function fun1() {
+	// 아이디 작성 
+	if(document.cf.id.value==""){
+		alert("*필수 작성 바랍니다");
+		document.cf.id.focus();
+		return ;
+	}
+	
+	//회원 아이디 제어
+	if(document.cf.id.value.length < 4 ||
+		document.cf.id.value.length >10){
+		alert("ID는 4~10자 내로 작성바랍니다");
+		document.cf.id.focus();
+		return;
+	}
+	
+	//비밀번호 작성 1)
+	if(document.cf.pass.value==""){
+		alert("비밀번호 작성 바랍니다");
+		document.cf.pass.focus();
+		return;
+	}
+	//비밀번호 작성 제어 
+	if(document.cf.pass.value.length < 4 ||
+		document.cf.pass.value.length > 10){
+		alert("비밀번호는 4~10자 내로 작성바랍니다");
+		document.cf.pass.focus();
+		return;
+	}
+	
+	//비밀번호 작성 2 확인용)
+	if(document.cf.pass2.value==""){
+		alert("비밀번호 동일 작성 바랍니다");
+		document.cf.pass2.focus();
+		return;
+	}
+	//비밀번호 작성 재확인 
+	if(document.cf.pass2.value !=document.cf.pass.value){
+		alert("비밀번호가 일치하지 않습니다");
+		document.cf.pass2.focus();
+		return;
+	}
+	
+}//fun1 끝  
+	
+	// 중복확인 완료 안내
+	function idCheck() {
+		alert("중복확인완료");
+	}	
+
+
+
+</script>
+
+
 </head>
 <body>
 
-<jsp:include page="../include/top.jsp"></jsp:include>
+	<jsp:include page="../include/top.jsp"></jsp:include>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
 
-<!-- id/pass 설정하기  -->
+	<!-- id/pass 설정하기  -->
 
-<h1>회원가입 </h1>
-<br>
-<h6> 빈칸을 채워주세요(*필수작성)</h6>
-<form action="joinPro.bs" method="post">
+	<h1>회원가입</h1>
+	<br>
+	<h6>빈칸을 채워주세요(*필수작성)</h6>
+	<form action="joinPro.bs" method="post" name="cf">
 
-    <p>ID<span>*</span></p>
-  
-  <p>
-    <input type="text" placeholder="id는 최대 4자리 이상으로 작성" name="id"> 
-    <input type="button" value="중복확인" width="10" height="3">
-    </p>
+		<p>
+			ID<span>*</span> <input type="text" placeholder="id는 최대 4자리 이상으로 작성"
+				name="id" onclick="fun1()" >
+				 <input type="button"
+				value="중복확인" width="10" height="3" onclick="idCheck()" > <br>
+		</p>
 
-    <p>PASS<span>*</span></p>
-    <input type="password" placeholder="비밀번호는 8자리 이상으로 작성" name="pass">
+		PASS* <input type="password" placeholder="비밀번호는 8자리 이상으로 작성"
+			name="pass" ><br> PASS 재확인* <input
+			type="password" placeholder="비밀번호 동일" name="pass2" ><br>
 
-<div class="checkout__input">
-    <p>PASS 재확인<span>*</span></p>
-    <input type="password" placeholder="비밀번호 동일" name="pass2">
-</div>
-  <div class="checkout__input">
-     <p>이름<span>*</span></p>
-     <input type="text" name="name">
- </div>
- 
-  <div class="checkout__input">
-      <p>휴대폰번호(연락처)<span>*</span></p>
-      <input type="text" name="phone">
-  </div>
+		이름* <input type="text" name="name"><br> 휴대폰번호(연락처)* <input
+			type="text" name="phone"><br>
 
 
 
-<!-- 주소- 다음api  -->
+		<!-- 주소- 다음api  -->
 
-<p>주소</p>
-                           
-<input type="text" id="sample6_postcode" placeholder="우편번호">
-<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-<input type="text" id="sample6_address" placeholder="우편번호 찾기 후 주소작성" name="addressMain"><br>
-<input type="text" id="sample6_detailAddress" placeholder="상세주소" name="addressSub">
-<input type="text" id="sample6_extraAddress" placeholder="참고항목">
+		주소 <input type="text" id="sample6_postcode" placeholder="우편번호">
+		<input type="button" onclick="sample6_execDaumPostcode()"
+			value="우편번호 찾기"><br> <input type="text"
+			id="sample6_address" placeholder="우편번호 찾기 후 주소작성" name="addressMain"><br>
+		<input type="text" id="sample6_detailAddress" placeholder="상세주소"
+			name="addressSub"> <input type="text"
+			id="sample6_extraAddress" placeholder="참고항목">
 
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script>
+		<script
+			src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+		<script>
     function sample6_execDaumPostcode() {
         new daum.Postcode({
             oncomplete: function(data) {  // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
@@ -111,22 +167,14 @@
         }).open();
     }
 </script>
-                         
-                        <div class="checkout__input">
-                            <p>E-mail</p>
-                            <input type="email" name="email"> <br>
-                             </div>
-                  
-                    <!-- 제출/초기화 -->     
-                   <div>      
-                  <input type="submit" value="submit">
-                  <input type="reset" value="reset">
-                 </div>
-                  </form>
-                       
-                    
-            	   
-            		
+		<br> E-mail <input type="email" name="email"> <br>
+
+		<!-- 제출/초기화 -->
+		<div>
+			<input type="submit" value="submit" onclick="return fun1()"> 
+			<input type="reset" value="reset">
+		</div>
+	</form>
 
 
 

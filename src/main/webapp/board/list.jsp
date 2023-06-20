@@ -1,4 +1,4 @@
-<%@page import="com.itwillbs2.domain.*"%>
+<%@page import="com.itwillbs2.domain.PageDTO"%>
 <%@page import="com.itwillbs2.domain.BoardDTO"%>
 <%@page import="java.util.List"%>
 <%@page import="com.itwillbs2.dao.BoardDAO"%>
@@ -13,8 +13,18 @@
 <head>
 <meta charset="UTF-8">
 <title>board/list.jsp</title>
+
+<link rel="stylesheet" href="fonts/icomoon/style.css" />
+<link rel="stylesheet" href="fonts/flaticon/font/flaticon.css" />
+
+<link rel="stylesheet" href="css/tiny-slider.css" />
+<link rel="stylesheet" href="css/aos.css" />
+<link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
+
+<jsp:include page="../include/top.jsp"></jsp:include> 
+<br><br><br><br><br><br>
 
 <%							// 형변환
 List<BoardDTO> dtoList =(List<BoardDTO>)request.getAttribute("dtoList"); //가져와서 변수에 담기 
@@ -22,27 +32,30 @@ List<BoardDTO> dtoList =(List<BoardDTO>)request.getAttribute("dtoList"); //가�
 PageDTO pageDTO =(PageDTO)request.getAttribute("pageDTO"); // 페이징 처리하는 pageDTO가져와서 담기 
 
 String id =(String)session.getAttribute("id"); %>
-<h2><a href="write.bo">글쓰기</a></h2>
-<h1>글목록 : 로그인(<%=id%>)</h1>
-<table border="1">
+<a href="write.bo"><input type="button" value="글작성"></a>
+<h4>글목록 : 로그인(<%=id%>)</h4>
+<table border="3">
 <tr><td>글번호</td>
-<td>작성자</td>
 <td>제목</td>
-<td>작성일</td>
-<td>조회수</td></tr>
+<td>작성자</td>
+<td>조회수</td>
+<td>추천수</td>
+<td>작성일</td></tr>
 
 <% //결과 while 접근(rs.next()) -> T -> 열접근 rs.getInt("num") ...
 
-for(int i = 0; i< dtoList.size(); i++){ // 자바 내장객체 배열길이는 size()
+for(int i = 0; i<dtoList.size(); i++){ // 자바 내장객체 배열길이는 size()
 	BoardDTO dto = dtoList.get(i); //dtoList큰바구니에서 가져와서 BoardDTO형에 담기  
 	// 작은바구니 주소 접근 [dto(10번지)|dto(20번지)|dto|dto|dto] 
 	%>
-	<tr><td><%=dto.getNum()%></td>
-	<td><%=dto.getName()%></td>
-	<td><a href="content.bo?num=<%=dto.getNum()%>"><%=dto.getSubject()%></a></td>
+	<tr>
+	<td><%=dto.getBoard_num()%></td>
 	 <!--글제목 통해서 이동 : 하이퍼링크 연결 // 바뀌는 번호값 들고다니기 -->
-	<td><%=dto.getDate()%></td>
-	<td><%=dto.getReadcount()%></td></tr>
+	<td><a href="content.bo?board_num=<%=dto.getBoard_num()%>"><%=dto.getBoard_subject()%></a></td>
+	<td><%=dto.getBoard_name()%></td>
+	<td><%=dto.getBoard_readcount()%></td>
+	<td><%=dto.getBoard_recommend()%></td>
+	<td><%=dto.getBoard_date()%></td></tr>
 <%
 } 
 %>	
@@ -72,6 +85,7 @@ if(pageDTO.getEndPage() < pageDTO.getPageCount()){ // 1~10 < 11~20, 21~30 ---
 <%
 }
  %>
+
 
 </body>
 </html>

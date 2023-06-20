@@ -11,19 +11,19 @@
 request.setCharacterEncoding("utf-8");
 
 // request에서 파라미터(태그정보)값을 가져오기
-int num=(Integer.parseInt(request.getParameter("num"))); // 정수형으로 전환해서 가져오기 
-String name = request.getParameter("name");
-String subject = request.getParameter("subject");
-String content = request.getParameter("content");
+int board_num=(Integer.parseInt(request.getParameter("board_num"))); // 정수형으로 전환해서 가져오기 
+String board_name = request.getParameter("board_name");
+String board_subject = request.getParameter("board_subject");
+String board_content = request.getParameter("board_content");
 
 //BoardDTO 객체생성-기억장소할당(바구니에서 가져옴) 
 BoardDTO dto = new BoardDTO();
 //DTO 변수에 private으로 막혀있으니까 우회적으로 set을 통해 값을 저장 
 //set메서드 호출 > 파라미터 값을 저장 // 새로 입력값 저장 
-dto.setNum(num);
-dto.setName(name);
-dto.setSubject(subject);
-dto.setContent(content);
+dto.setBoard_num(board_num);
+dto.setBoard_name(board_name);
+dto.setBoard_subject(board_subject);
+dto.setBoard_content(board_content);
 
 //DAO객체생성
 BoardDAO dao = new BoardDAO();

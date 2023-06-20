@@ -34,18 +34,18 @@ MultipartRequest multi 												//중복) 업로드 파일 이름 같은 경�
 	= new MultipartRequest(request, uploadPath, maxSize, "utf-8", new DefaultFileRenamePolicy());
 
 // 파라미터 가져오기 (request->multi)
-String name = multi.getParameter("name");
-String subject = multi.getParameter("subject");
-String content = multi.getParameter("content");
+String board_name = multi.getParameter("board_name");
+String board_subject = multi.getParameter("board_subject");
+String board_content = multi.getParameter("board_content");
 // 파일은 multi로 업로드된 파일 이름을 가져오기 
-String file = multi.getFilesystemName("file");
+String board_file = multi.getFilesystemName("board_file");
 
 //글번호 num => 구해주기 => /*일단 수동으로 1씩 넣어서 작업 */
 int num = 1; 
 //조회수 readcount => 0 설정(작성전까진 아무도 못보니까)
-int readcount = 0;
+int board_readcount = 0;
 //작성일 date	=> 현시스템 날짜,시간 가져오기		//시스템 날짜 가져오기 
-Timestamp date = new Timestamp(System.currentTimeMillis());
+Timestamp board_date = new Timestamp(System.currentTimeMillis());
 
 // BoardDTO에 저장 
 BoardDTO dto = new BoardDTO();
@@ -55,14 +55,14 @@ BoardDAO dao=new BoardDAO();
 
 // set 메서드 호출 ~> 가져온 값 저장 
 // 글번호 -> 최대num +1 
-dto.setNum(dao.getMaxNum()+1);
-dto.setName(name);
-dto.setSubject(subject);
-dto.setContent(content);
-dto.setReadcount(readcount);
-dto.setDate(date);
+dto.setBoard_num(dao.getMaxNum()+1);
+dto.setBoard_name(board_name);
+dto.setBoard_subject(board_subject);
+dto.setBoard_content(board_content);
+dto.setBoard_readcount(board_readcount);
+dto.setBoard_date(board_date);
 //파일 추가(BoardDTO에 객체 생성 )
-dto.setFile(file);
+dto.setBoard_file(board_file);
 
 // BoardDAO insertBoard()
 dao.insertBoard(dto);

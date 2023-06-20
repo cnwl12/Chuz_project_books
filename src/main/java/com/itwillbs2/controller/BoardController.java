@@ -16,19 +16,15 @@ public class BoardController extends HttpServlet { //상속받아서 오버라�
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("BoardController doGet()");
 		doProcess(request, response);
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("BoardController doPost()");
 		doProcess(request, response);
 	}
 	
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("BoardController doPost()");
-		
 		// 가상주소 뽑아오기 getServletPath(); 
 		String strPath = request.getServletPath(); 
 		
@@ -45,14 +41,14 @@ public class BoardController extends HttpServlet { //상속받아서 오버라�
 			
 			// 글목록 이동
 			response.sendRedirect("list.bo");
-		
 		}
+		
 		if(strPath.equals("/list.bo")) { //list.jsp과정 하나씩 줄여감
 			// pageDTO 객체생성  
 			PageDTO pageDTO = new PageDTO();
 			
 			// 한 페이지에 보여줄 글 개수 설정 
-			int pageSize = 3;
+			int pageSize = 2;
 			// 페이지 번호 가져오기 (페이지 번호가 없으면 무조건 1page 설정) [보통 창 켰을 때 첫번째 페이지]
 			String pageNum =request.getParameter("pageNum"); //get방식으로 설정해서 가져오기 
 			

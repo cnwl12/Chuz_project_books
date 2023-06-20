@@ -7,8 +7,9 @@ import java.util.List;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 
-import com.itwillbs2.dao.*;
-import com.itwillbs2.domain.*;
+import com.itwillbs2.dao.BoardDAO;
+import com.itwillbs2.domain.BoardDTO;
+import com.itwillbs2.domain.PageDTO;
 
 public class BoardService {
 
@@ -17,34 +18,40 @@ public class BoardService {
 		try {
 			request.setCharacterEncoding("utf-8");
 			
-			String name = request.getParameter("name");
-			String subject = request.getParameter("subject");
-			String content = request.getParameter("content");
-
+			String board_name = request.getParameter("board_name");
+			String board_subject = request.getParameter("board_subject");
+			String board_content = request.getParameter("board_content");
+			String board_file = request.getParameter("board_file");
+			
+			
 			// 글번호 num => 구해주기 => /*일단 수동으로 1씩 넣어서 작업 */
-			int num = 1; 
+			int board_num = 1; 
 			// 조회수 readcount => 0 설정(작성전까진 아무도 못보니까)
-			int readcount = 0;
+			int board_readcount = 0;
+			// 추천수 
+			int board_recommend = 0;
 			// 작성일 date	=> 현시스템 날짜,시간 가져오기		//시스템 날짜 가져오기 
-			Timestamp date = new Timestamp(System.currentTimeMillis());
+			Timestamp board_date = new Timestamp(System.currentTimeMillis());
 			
 			// BoardDTO 객체생성(기억장소 할당)
 			BoardDTO dto = new BoardDTO();
 			// "set메서드" 호출해서 폼에서 가져온 값을 "저장" 
-			dto.setNum(num);
-			dto.setName(name);
-			dto.setSubject(subject);
-			dto.setContent(content);
-			dto.setReadcount(readcount);
-			dto.setDate(date);
+			dto.setBoard_num(board_num);
+			dto.setBoard_subject(board_subject);
+			dto.setBoard_content(board_content);
+			dto.setBoard_name(board_name);
+			dto.setBoard_readcount(board_readcount);
+			dto.setBoard_recommend(board_recommend);
+			dto.setBoard_file(board_file);
+			dto.setBoard_date(board_date);
 			
 			//사용 시 
 			// BoardDAO 객체생성(기억장소 할당)
 			BoardDAO dao = new BoardDAO();
 			
-			num = dao.getMaxNum()+1;
+			board_num = dao.getMaxNum()+1;
 			//num중 가장 큰 번호 +1 해서 num에 저장하겠다는 뜻 
-			dto.setNum(num); // 바구니에 저장 		
+			dto.setBoard_num(board_num); // 바구니에 저장 		
 
 			// insertBoard(바구니 주소)메서드 호출해서 디비에 게시판 글 저장 
 			dao.insertBoard(dto);
@@ -98,11 +105,11 @@ public class BoardService {
 	}//getBoardList
 
 	public int getBoardCount(){
-		int count = 0;
+		int board_count = 0;
 		try {
 			// BoardDAO 객체생성  -> 호출 
 			BoardDAO dao = new BoardDAO();
-			count = dao.getBoardCount();
+			board_count = dao.getBoardCount();
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -110,7 +117,7 @@ public class BoardService {
 			
 		}
 		
-		return count;
+		return board_count;
 	} //getBoardCount()
 	
 	public BoardDTO getBoard(HttpServletRequest request) {
@@ -121,7 +128,7 @@ public class BoardService {
 			  // 사용자가 가져온 num = 1 값을 서버에 전달 -> request 내장객체 저장(글 바뀌니까 / 세션에 저장 안해도됨 )
 			  // request(String 형)에서 num파라미터 이름에 해당하는 값을 가져오기 
 			  // 정수형으로 <- 문자열을 
-			  int num = Integer.parseInt(request.getParameter("num")); // BoardDAO 객체생성
+			  int board_num = Integer.parseInt(request.getParameter("board_num")); // BoardDAO 객체생성
 			  BoardDAO dao = new BoardDAO();
 			 
 			  // 글 내용보기 -> 게시판 글 조회수 1 증가 (조회수 1증가해서 수정) // 리턴할 형 없음(조회만하고 끝나서)
@@ -129,10 +136,10 @@ public class BoardService {
 			  // update board set readcount=? where num=?
 			  // readcount를 수정할건데 조건은 num=? // update board set readcount=readcount+1 where  num=?
 			  // 기존값에 +1 증가
-			  dao.updateReadcount(num);
+			  dao.updateReadcount(board_num);
 			  
 			  // 리턴할 형 BoardDTO 메서드형 getBoard(int num)메서드 정의 BoardDTO dto =
-			  dto = dao.getBoard(num); // select * from board where num=? (num에대한 전부) 
+			  dto = dao.getBoard(board_num); // select * from board where num=? (num에대한 전부) 
 			  // BoardDTO  dto = getBoard(num)메서드호출 
 			  // 글목록 전체가져올건데 따로 하나씩 말고, dto 바구니에 담아서 가져오기
 			
