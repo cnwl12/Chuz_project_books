@@ -5,8 +5,16 @@
 <head>
 <meta charset="UTF-8">
 <title>board/fwrite.jsp</title>
+
+<link rel="stylesheet" href="css/tiny-slider.css" />
+<link rel="stylesheet" href="css/aos.css" />
+<link rel="stylesheet" href="css/style.css" />
+
 </head>
 <body>
+
+<jsp:include page="../include/top.jsp"></jsp:include> 
+<br><br><br><br><br><br><br><br>
 
 <%
 // main에서 session값을 가져옴
@@ -19,8 +27,8 @@
 
 %>
 
-<h1>첨부파일 글쓰기</h1> <!--get방식 경우)주소값에 입력값이 나타남 -->
-<form action="fwritePro.jsp" method="post" enctype="multipart/form-data">
+<h4>첨부파일 글쓰기</h4> <!--get방식 경우)주소값에 입력값이 나타남 -->
+<form action="fwritePro.bo" method="post" enctype="multipart/form-data">
 <table border="1">	
 <tr><td>글쓴이</td>						<!--  ┌글쓴이 id값 가져올거라서 : 글쓴이 알려주는 인증값  -->
 	<td><input type="text" name="board_name" value="<%=id%>" readonly="readonly"></td></tr>

@@ -109,8 +109,8 @@ public class BoardDAO {
 			con = getConnection(); // DB연결
 			
 			//3 sql구문 									//글순서 최신순으로 
-		//(전체)String sql = "select * from board order by num desc"; // 모든 게시판 글 가지고 올거니까 
-			String sql = "select * from board order by num desc limit ?,?"; 
+			//(전체)String sql = "select * from board order by num desc"; // 모든 게시판 글 가지고 올거니까 
+			String sql = "select * from board order by board_num desc limit ?,?"; 
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1,startRow-1); //limit문법 : 자르겠다(0<x<=1 : 처음 미포함해야지 1~10 : 10개 들어가게! )
 			pstmt.setInt(2, pageSize); // 10개
@@ -168,13 +168,13 @@ public class BoardDAO {
 				dto = new BoardDTO();
 				
 				dto.setBoard_num(rs.getInt("board_num")); // 열접근 
-				dto.setBoard_subject((rs.getString("board_subject")));
-				dto.setBoard_content((rs.getString("board_content")));
+				dto.setBoard_subject(rs.getString("board_subject"));
+				dto.setBoard_content(rs.getString("board_content"));
 				dto.setBoard_name((rs.getString("board_name")));
-				dto.setBoard_readcount((rs.getInt("board_readcount")));
-				dto.setBoard_recommend((rs.getInt("board_recommend")));   
-				dto.setBoard_file((rs.getString("board_file")));
-				dto.setBoard_date((rs.getTimestamp("board_date")));
+				dto.setBoard_readcount(rs.getInt("board_readcount"));
+				dto.setBoard_recommend(rs.getInt("board_recommend"));   
+				dto.setBoard_file(rs.getString("board_file"));
+				dto.setBoard_date(rs.getTimestamp("board_date"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -303,7 +303,7 @@ public class BoardDAO {
 		try {
 			con = getConnection();	
 										//num일치를 찾아서 subject, content, file을 수정할 것임 					
-			String sql = "update board set subject=?, content=?, file=? where num=?";
+			String sql = "update board set board_subject=?, board_content=?, board_file=? where board_num=?";
 			
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1,dto.getBoard_subject());

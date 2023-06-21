@@ -9,8 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.itwillbs2.domain.*;
-import com.itwillbs2.service.*;
+import com.itwillbs2.domain.BoardDTO;
+import com.itwillbs2.service.BoardService;
+import com.itwillbs2.domain.PageDTO;
 
 public class BoardController extends HttpServlet { //상속받아서 오버라이딩 
 
@@ -28,13 +29,14 @@ public class BoardController extends HttpServlet { //상속받아서 오버라�
 		// 가상주소 뽑아오기 getServletPath(); 
 		String strPath = request.getServletPath(); 
 		
-		if(strPath.equals("/write.bo")) { // 뽑아온 주소는 앞에 / 
+		// 첨부파일 포함 글쓰기
+		if(strPath.equals("/fwrite.bo")) { // 뽑아온 주소는 앞에 / 
 			// 글쓰기 화면 - board/write.jsp
-			RequestDispatcher dis = request.getRequestDispatcher("board/write.jsp");
+			RequestDispatcher dis = request.getRequestDispatcher("board/fwrite.jsp");
 			dis.forward(request, response);
 		}
 		
-		if(strPath.equals("/writePro.bo")) {
+		if(strPath.equals("/fwritePro.bo")) {
 			// pro 실행할 BoardService 객체생성 
 			BoardService boardService = new BoardService();
 			boardService.insertBoard(request);
@@ -43,12 +45,33 @@ public class BoardController extends HttpServlet { //상속받아서 오버라�
 			response.sendRedirect("list.bo");
 		}
 		
+		if(strPath.equals("/fupdate.bo")) {
+
+			BoardService boardService = new BoardService(); //  가져와서
+
+			BoardDTO dto = boardService.getBoard(request);
+			
+			request.setAttribute("dto", dto);
+			
+			RequestDispatcher dis = request.getRequestDispatcher("board/fupdate.jsp");
+			dis.forward(request, response);
+		}	
+		
+		if(strPath.equals("/fupdatePro.bo")){
+
+			BoardService boardService = new BoardService();
+			boardService.fupdatePro(request);
+
+			response.sendRedirect("list.bo");
+		}
+		
+		
 		if(strPath.equals("/list.bo")) { //list.jsp과정 하나씩 줄여감
 			// pageDTO 객체생성  
 			PageDTO pageDTO = new PageDTO();
 			
 			// 한 페이지에 보여줄 글 개수 설정 
-			int pageSize = 2;
+			int pageSize = 3;
 			// 페이지 번호 가져오기 (페이지 번호가 없으면 무조건 1page 설정) [보통 창 켰을 때 첫번째 페이지]
 			String pageNum =request.getParameter("pageNum"); //get방식으로 설정해서 가져오기 
 			
@@ -136,6 +159,17 @@ public class BoardController extends HttpServlet { //상속받아서 오버라�
 			dis.forward(request, response);
 			
 		}// getBoard()
+		
+		if(strPath.equals("/delete.bo")) {
+
+			BoardService boardService = new BoardService();
+
+			boardService.deleteBoard(request);
+
+			response.sendRedirect("list.bo");
+		}
+		
+		
 		
 		
 	}// doProcess

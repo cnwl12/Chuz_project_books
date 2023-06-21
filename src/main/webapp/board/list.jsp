@@ -20,9 +20,18 @@
 <link rel="stylesheet" href="css/tiny-slider.css" />
 <link rel="stylesheet" href="css/aos.css" />
 <link rel="stylesheet" href="css/style.css" />
+
+<script type="text/javascript">
+function lgc() {
+	if(id==null){
+		alert("로그인 후 작성가능");
+	}
+}
+</script>
+
 </head>
 <body>
-
+ 
 <jsp:include page="../include/top.jsp"></jsp:include> 
 <br><br><br><br><br><br>
 
@@ -32,10 +41,11 @@ List<BoardDTO> dtoList =(List<BoardDTO>)request.getAttribute("dtoList"); //가�
 PageDTO pageDTO =(PageDTO)request.getAttribute("pageDTO"); // 페이징 처리하는 pageDTO가져와서 담기 
 
 String id =(String)session.getAttribute("id"); %>
-<a href="write.bo"><input type="button" value="글작성"></a>
+
+<a href="fwrite.bo"><input type="button" value="글작성" onclick="lgc()"></a>
 <h4>글목록 : 로그인(<%=id%>)</h4>
-<table border="3">
-<tr><td>글번호</td>
+<table border="1">
+<tr><td>No.</td>
 <td>제목</td>
 <td>작성자</td>
 <td>조회수</td>
@@ -88,4 +98,16 @@ if(pageDTO.getEndPage() < pageDTO.getPageCount()){ // 1~10 < 11~20, 21~30 ---
 
 
 </body>
+
+
+<script type="text/javascript">
+function lgc() {
+	if(id==null){
+		alert("로그인 후 작성");
+	}
+	return;
+}
+
+</script>
+
 </html>

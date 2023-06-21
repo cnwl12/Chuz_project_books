@@ -13,52 +13,64 @@
 <link rel="stylesheet" href="css/tiny-slider.css" />
 <link rel="stylesheet" href="css/aos.css" />
 <link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="css/bs.css"/>
 
 <script type="text/javascript">
+
+function validate() {
+	var re = /^[a-zA-Z0-9]{4,10}$/ // id, pw 검사
+	var id = document.getElementById("id");
+	var pass = document.getElementById("pass");
+}
  
 function fun1() {
+	
 	// 아이디 작성 
-	if(document.cf.id.value==""){
+	if(document.checkform.id.value==""){
 		alert("*필수 작성 바랍니다");
-		document.cf.id.focus();
-		return ;
-	}
+		document.checkform.id.focus();
+		return false;
+	} 
 	
 	//회원 아이디 제어
-	if(document.cf.id.value.length < 4 ||
-		document.cf.id.value.length >10){
+	if(document.checkform.id.value.length < 4 ||
+		document.checkform.id.value.length >10){
 		alert("ID는 4~10자 내로 작성바랍니다");
-		document.cf.id.focus();
-		return;
+		document.checkform.id.focus();
+		return false;
 	}
 	
 	//비밀번호 작성 1)
-	if(document.cf.pass.value==""){
+	if(document.checkform.pass.value==""){
 		alert("비밀번호 작성 바랍니다");
-		document.cf.pass.focus();
-		return;
+		document.checkform.pass.focus();
+		return false;
 	}
 	//비밀번호 작성 제어 
-	if(document.cf.pass.value.length < 4 ||
-		document.cf.pass.value.length > 10){
+	if(document.checkform.pass.value.length < 4 ||
+		document.checkform.pass.value.length > 10){
 		alert("비밀번호는 4~10자 내로 작성바랍니다");
 		document.cf.pass.focus();
-		return;
+		return false;
 	}
 	
 	//비밀번호 작성 2 확인용)
-	if(document.cf.pass2.value==""){
+	if(document.checkform.pass2.value==""){
 		alert("비밀번호 동일 작성 바랍니다");
-		document.cf.pass2.focus();
-		return;
+		document.checkform.pass2.focus();
+		return false;
 	}
 	//비밀번호 작성 재확인 
-	if(document.cf.pass2.value !=document.cf.pass.value){
+	if(document.checkform.pass2.value !=document.cf.pass.value){
 		alert("비밀번호가 일치하지 않습니다");
-		document.cf.pass2.focus();
-		return;
+		document.checkform.pass2.focus();
+		return false;
 	}
-	
+	if(document.checkform.phone.value==""){
+		alert("연락처 작성 바랍니다");
+		document.checkform.phone.focus();
+		return false;
+	}
 }//fun1 끝  
 	
 	// 중복확인 완료 안내
@@ -85,27 +97,43 @@ function fun1() {
 	<br>
 
 	<!-- id/pass 설정하기  -->
-
+	<form action="joinPro.bs" method="post" name="checkform" onsubmit="return fun1()">
+	<ul class="formulli">
+	<li>id<input type="text" placeholder="id는 최대 4자리 이상으로 작성"
+				name="id" id="id" onclick="fun1()" > <input type="button"
+				value="중복확인" width="10" height="3" onclick="idCheck()" ></li>
+	<li>pass<input type="password" placeholder="비밀번호는 8자리 이상으로 작성"
+			name="pass" id="pass" onclick="fun1()"></li>
+	<li>pass 재확인<input type="password" placeholder="비밀번호 동일" name="pass2" id="pass2" onclick="fun1()"></li>		
+	<li>이름<input type="text" name="name" id="name" onclick="fun1()"> </li>
+	<li>휴대폰번호(연락처)<input type="text" name="phone" id="phone" onclick="fun1()"></li>
+	</ul>
+	
+	<div>
+			<input type="button" value="가입취소" onclick="history.back();">
+			<input type="submit" value="회원가입" > 
+			<input type="reset" value="초기화">
+		</div>
+	</form>
+	
 	<h1>회원가입</h1>
 	<br>
 	<h6>빈칸을 채워주세요(*필수작성)</h6>
-	<form action="joinPro.bs" method="post" name="cf">
+	
 
-		<p>
+		<!-- <p>
 			ID<span>*</span> <input type="text" placeholder="id는 최대 4자리 이상으로 작성"
-				name="id" onclick="fun1()" >
+				name="id" id="id" onclick="fun1()" >
 				 <input type="button"
 				value="중복확인" width="10" height="3" onclick="idCheck()" > <br>
 		</p>
 
 		PASS* <input type="password" placeholder="비밀번호는 8자리 이상으로 작성"
-			name="pass" ><br> PASS 재확인* <input
-			type="password" placeholder="비밀번호 동일" name="pass2" ><br>
+			name="pass" id="pass" onclick="fun1()"><br> PASS 재확인* <input
+			type="password" placeholder="비밀번호 동일" name="pass2" id="pass2" onclick="fun1()"><br>
 
-		이름* <input type="text" name="name"><br> 휴대폰번호(연락처)* <input
-			type="text" name="phone"><br>
-
-
+		이름* <input type="text" name="name" id="name" onclick="fun1()"><br> 휴대폰번호(연락처)* <input
+			type="text" name="phone" id="phone" onclick="fun1()"><br> -->
 
 		<!-- 주소- 다음api  -->
 
@@ -168,13 +196,13 @@ function fun1() {
     }
 </script>
 		<br> E-mail <input type="email" name="email"> <br>
-
+		
 		<!-- 제출/초기화 -->
 		<div>
-			<input type="submit" value="submit" onclick="return fun1()"> 
-			<input type="reset" value="reset">
+			<input type="button" value="가입취소" onclick="history.back();">
+			<input type="submit" value="회원가입" > 
+			<input type="reset" value="초기화">
 		</div>
-	</form>
 
 
 
