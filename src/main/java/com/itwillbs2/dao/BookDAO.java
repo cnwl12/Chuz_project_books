@@ -152,15 +152,15 @@ public class BookDAO {
 		try {
 			Connection con = getConnection(); //DB연결 
 			
-			String sql = "delete from bmember where id=?";
+			String sql = "delete from bmember";
+			
 			PreparedStatement pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, id);
 			pstmt.executeUpdate();
 			
 		} catch (Exception e) {
 			e.printStackTrace();			
 		}finally {
-			//select제외 return 값 없음 
+
 		}
 	}//deleteMember 메서드 끝 
 	

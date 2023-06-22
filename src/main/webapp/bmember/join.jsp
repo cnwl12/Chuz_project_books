@@ -97,7 +97,7 @@ function fun1() {
 	<br>
 
 	<!-- id/pass 설정하기  -->
-	<form action="joinPro.bs" method="post" name="checkform" onsubmit="return fun1()">
+	<form action="joinPro.bs" method="post" name="checkform" > <!-- onsubmit="return fun1()" -->
 	<ul class="formulli">
 	<li>id<input type="text" placeholder="id는 최대 4자리 이상으로 작성"
 				name="id" id="id" onclick="fun1()" > <input type="button"

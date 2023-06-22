@@ -21,13 +21,6 @@
 <link rel="stylesheet" href="css/aos.css" />
 <link rel="stylesheet" href="css/style.css" />
 
-<script type="text/javascript">
-function lgc() {
-	if(id==null){
-		alert("로그인 후 작성가능");
-	}
-}
-</script>
 
 </head>
 <body>
@@ -42,10 +35,25 @@ PageDTO pageDTO =(PageDTO)request.getAttribute("pageDTO"); // 페이징 처리�
 
 String id =(String)session.getAttribute("id"); %>
 
-<a href="fwrite.bo"><input type="button" value="글작성" onclick="lgc()"></a>
+<%
+if(id==null){
+	%>
+	<script type="text/javascript">
+	
+	function nologin() {
+		
+	location.href="login.bs";
+	alert("로그인 후 이용 가능합니다!");
+	}
+	
+</script>
+<% 
+}
+%>
 <h4>글목록 : 로그인(<%=id%>)</h4>
-<table border="1">
-<tr><td>No.</td>
+<a href="fwrite.bo"><input type="button" value="글작성" onclick="nologin()"></a>
+<table border="1" width="700" >
+<tr ><td>No.</td>
 <td>제목</td>
 <td>작성자</td>
 <td>조회수</td>
@@ -96,18 +104,9 @@ if(pageDTO.getEndPage() < pageDTO.getPageCount()){ // 1~10 < 11~20, 21~30 ---
 }
  %>
 
-
 </body>
 
 
-<script type="text/javascript">
-function lgc() {
-	if(id==null){
-		alert("로그인 후 작성");
-	}
-	return;
-}
 
-</script>
 
 </html>

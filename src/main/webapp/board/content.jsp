@@ -41,6 +41,7 @@ String id =(String)session.getAttribute("id"); %>
 <!-- 링크를 연결해야 이미지가 나타남(연결된 파일 이름) -->
 <!--download로 되어있으면 하이퍼링크 통해 다운로드 되어짐  -->
 <%=dto.getBoard_file()%></a>
+
 <img src ="upload/<%=dto.getBoard_file()%>" width="100" height="100">
 </td></tr> 
 <tr><td>글내용</td><td><%=dto.getBoard_content() %></td></tr>
@@ -63,6 +64,19 @@ if(id!=null){ //세션값이 있으면
 
 </table>
 <input type="button" value="글목록" onclick="location.href='list.bo'">
+
+<form method="post" encType = "multipart/form-data" action="commentAction.jsp?bbsID=<%=id%>&boardID=<%=id%>">
+			<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
+				<tr>
+					<td style="border-bottom:none;" valign="middle"><br><br><%=id%></td>
+					<td><input type="text" style="height:100px;" class="form-control" placeholder="상대방을 존중하는 댓글을 남깁시다." name = "comment_text"></td>
+					<td><br><br><input type="submit" value="댓글 작성"></td>
+				</tr>
+				<tr>
+					<td colspan="2"><input type="file" name="comment_file"></td>
+				</tr>
+			</table>
+		</form>
 
 </body>
 </html>

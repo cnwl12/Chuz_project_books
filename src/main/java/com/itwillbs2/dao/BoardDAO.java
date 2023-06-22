@@ -307,7 +307,7 @@ public class BoardDAO {
 			
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1,dto.getBoard_subject());
-			pstmt.setString(2,dto.getBoard_content());
+			pstmt.setString(2, dto.getBoard_content());
 			pstmt.setString(3, dto.getBoard_file());
 			pstmt.setInt(4,dto.getBoard_num());
 			

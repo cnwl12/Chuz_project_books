@@ -30,7 +30,7 @@ public class BoardService {
 			String board_name = multi.getParameter("board_name");
 			String board_subject = multi.getParameter("board_subject");
 			String board_content = multi.getParameter("board_content");
-			String board_file = multi.getParameter("board_file");
+			String board_file = multi.getFilesystemName("board_file");
 			
 			// 글번호 num => 구해주기 => /*일단 수동으로 1씩 넣어서 작업 */
 			int board_num = 1; 

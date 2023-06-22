@@ -62,4 +62,6 @@ public class BoardDTO { //boarddto에 담아서 jsp에 전달
 	public void setBoard_date(Timestamp board_date) {
 		this.board_date = board_date;
 	}
+	
+	
 }

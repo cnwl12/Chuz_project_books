@@ -148,5 +148,12 @@ public class BookController extends HttpServlet{
 			response.sendRedirect("main.bs");
 		} // 
 		
+		if(strPath.equals("/delete.bs")) {
+			
+			RequestDispatcher dis = request.getRequestDispatcher("bmember/login.jsp");
+			dis.forward(request, response);
+			
+		}
+		
 	}//doProcess()
 } // 클래스 

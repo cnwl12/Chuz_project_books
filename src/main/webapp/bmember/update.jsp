@@ -33,8 +33,8 @@ BookDTO bookDTO =(BookDTO)request.getAttribute("bookDTO");
 <label>주소</label>
 <input type="text" id="sample6_postcode" placeholder="우편번호">
 <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-<input type="text" id="sample6_address" placeholder="우편번호 찾기 후 주소작성" name="addressMain"><br>
-<input type="text" id="sample6_detailAddress" placeholder="상세주소" name="addressSub">
+<input type="text" id="sample6_address" placeholder="우편번호 찾기 후 주소작성" name="addressMain" value="<%=bookDTO.getAddressMain()%>"><br>
+<input type="text" id="sample6_detailAddress" placeholder="상세주소" name="addressSub" value="<%=bookDTO.getAddressSub()%>">
 <input type="text" id="sample6_extraAddress" placeholder="참고항목">
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
@@ -84,16 +84,16 @@ BookDTO bookDTO =(BookDTO)request.getAttribute("bookDTO");
             }
         }).open();
     }
-</script>
+</script> <br>
 <label>E-mail</label> 
 <input type="email" name="email" value="<%=bookDTO.getEmail()%>"> <br>
 
 <!-- 제출/초기화 -->     
     <input type="submit" value="회원 정보 수정">
-    <input type="reset" value="회원탈퇴"> <br>
     <input type="button" value="뒤로가기"><a href="main.bs"></a>
-      
-</form>
+    </form> 
+    
+
 
 
 </body>

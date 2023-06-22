@@ -43,7 +43,7 @@ String id =(String)session.getAttribute("id"); //글쓴이 = 로그인
 		기존 파일 이름 : <input type="text" name="oldfile" value="<%=dto.getBoard_file()%>" readonly="readonly"> </td></tr>
 		 <!-- 첨부파일은 value 없음 / 기존 첨부파일(oldfile) 들고가야함--> 
 <tr><td>글내용</td>
-	<td><textarea name="content" rows="10" cols="20"><%=dto.getBoard_content()%></textarea></td></tr>
+	<td><textarea name="board_content" rows="10" cols="20"><%=dto.getBoard_content()%></textarea></td></tr>
 <tr><td colspan="2"><input type="submit" value="글수정"></td></tr>
 </table>
 </form>

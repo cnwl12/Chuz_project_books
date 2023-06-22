@@ -19,6 +19,7 @@ public class BookService {
 			request.setCharacterEncoding("utf-8");
 			// todo : 키 값 받기(hashmap) 등 정리하기 
 			String id = request.getParameter("id");
+			System.out.println(id);
 			String pass = request.getParameter("pass");
 			String name = request.getParameter("name");
 			String phone = request.getParameter("phone");
@@ -42,7 +43,6 @@ public class BookService {
 
 			// MemberDAO 객체를 생성해야 호출 가능(기억장소 할당)
 			BookDAO dao = new BookDAO();
-			System.out.println("MemberDAO 기억장소 주소 : " + dao);
 			// insertMember() 메서드 호출  // 회원가입 -> DB로 전달 
 			dao.insertMember(dto);
 			
@@ -140,7 +140,6 @@ public class BookService {
 			
 			BookDAO dao = new BookDAO();
 			BookDTO dto = dao.userCheck(id, pass);
-		
 			
 		} catch (Exception e) {
 			e.printStackTrace();
