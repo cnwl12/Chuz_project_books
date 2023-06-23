@@ -30,19 +30,23 @@ BoardDTO dto=(BoardDTO)request.getAttribute("dto");
 
 String id =(String)session.getAttribute("id"); %>
 <h1>글내용 : 로그인(<%=id%>)</h1>
-<table border="1">
+<table border="2">
 <tr><td>No.</td><td><%=dto.getBoard_num()%></td></tr>
 <tr><td>글쓴이</td><td><%=dto.getBoard_name() %></td></tr>
 <tr><td>조회수</td><td><%=dto.getBoard_readcount()%></td></tr>
 <tr><td>작성일</td><td><%=dto.getBoard_date()%></td></tr>
 <tr><td>제목</td><td><%=dto.getBoard_subject() %></td></tr>
-<tr><td>첨부파일</td><td>
+<tr><td>첨부파일</td>
+
+<td>
+
+
+<img src ="upload/<%=dto.getBoard_file()%>" width="400" height="400"><br>
+
 <a href="upload/<%=dto.getBoard_file()%>" download> 
 <!-- 링크를 연결해야 이미지가 나타남(연결된 파일 이름) -->
 <!--download로 되어있으면 하이퍼링크 통해 다운로드 되어짐  -->
 <%=dto.getBoard_file()%></a>
-
-<img src ="upload/<%=dto.getBoard_file()%>" width="100" height="100">
 </td></tr> 
 <tr><td>글내용</td><td><%=dto.getBoard_content() %></td></tr>
 <tr>
@@ -65,7 +69,7 @@ if(id!=null){ //세션값이 있으면
 </table>
 <input type="button" value="글목록" onclick="location.href='list.bo'">
 
-<form method="post" encType = "multipart/form-data" action="commentAction.jsp?bbsID=<%=id%>&boardID=<%=id%>">
+<form method="post" encType = "multipart/form-data" action="comment_insert.bo">
 			<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
 				<tr>
 					<td style="border-bottom:none;" valign="middle"><br><br><%=id%></td>

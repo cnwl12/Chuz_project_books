@@ -30,14 +30,17 @@ public class BookDAO {
 	}
 	public void insertMember(BookDTO dto) { //회원가입만 처리할거니까 return안해도 됨
 		
+		Connection con = null; //리턴값 con이라서 
+		PreparedStatement pstmt = null;
+		
 		try {
-			Connection con = getConnection(); //리턴값 con이라서 
+			con = getConnection();
 			
 			//todo : sql 구문 정리하기 (파라미터 줄이기!!! )
 			String sql=
 					"insert into bmember(id, pass, name, phone, addressMain, addressSub, email, date)"
 					+ " values(?,?,?,?,?,?,?,?)";
-			PreparedStatement pstmt = con.prepareStatement(sql);
+			pstmt = con.prepareStatement(sql);
 			
 			pstmt.setString(1, dto.getId());
 			pstmt.setString(2, dto.getPass());
@@ -53,25 +56,32 @@ public class BookDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
+			
+			if(pstmt !=null)try{pstmt.close();}catch(Exception ex){}
+			if(con !=null)try{con.close();}catch(Exception ex){}
 		}
 	}//
 	
 	//로그인 메서드 -사용자 체크	(id pass동일한지)				dto 받아서 해도 괜찮음 
 	public BookDTO userCheck(String id, String pass) {
 		
+		Connection con = null; //리턴값 con이라서 
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
 		BookDTO dto =null; 
 		
 		try {
-			Connection con = getConnection(); 
+			con = getConnection(); 
 			
 			String sql = "select * from bmember where id=? and pass=?";
 			//db에서 값 넣어서 실행해보면 일치하면 값 출력되고, 불일치 시 empty set으로 출력
-			PreparedStatement pstmt = con.prepareStatement(sql);
+			pstmt = con.prepareStatement(sql);
 
 			pstmt.setString(1,id);
 			pstmt.setString(2,pass);
 
-			ResultSet rs = pstmt.executeQuery();
+			rs = pstmt.executeQuery();
 			
 			if(rs.next()) { //DB에 정보있는지 조회 
 				dto = new BookDTO(); //dto null이었는데 기억장소생성 
@@ -82,6 +92,7 @@ public class BookDAO {
 				dto.setAddressMain(rs.getString("addressMain"));
 				dto.setAddressSub(rs.getString("addressSub"));
 				dto.setDate(rs.getTimestamp("date"));
+				System.out.println("dao - 유저체크 완료");
 				
 			}else	{ // (F)-> 아이디, 비밀번호 불일치
 				dto = null; 
@@ -90,6 +101,9 @@ public class BookDAO {
 			e.printStackTrace();
 		}finally {
 			//마무리
+			if(rs !=null) try {rs.close();} catch(Exception ex){}
+			if(pstmt !=null)try{pstmt.close();}catch(Exception ex){}
+			if(con !=null)try{con.close();}catch(Exception ex){}
 		}
 		return dto; //dto의 주소값
 	}//
@@ -97,15 +111,19 @@ public class BookDAO {
 	public BookDTO getMember(String id) {
 		BookDTO dto = null;
 		
+		Connection con = null; //리턴값 con이라서 
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
 		try {
-		Connection con	= getConnection();
+		con	= getConnection();
 		
 		String sql="select * from bmember where id=?";
 
-		PreparedStatement pstmt = con.prepareStatement(sql);
+		pstmt = con.prepareStatement(sql);
 		pstmt.setString(1, id);
 
-		ResultSet rs= pstmt.executeQuery();
+		rs= pstmt.executeQuery();
 		
 		if(rs.next()) {// 아이디 존재
 			
@@ -117,6 +135,7 @@ public class BookDAO {
 			dto.setPhone(rs.getString("phone"));
 			dto.setAddressMain(rs.getString("addressMain"));
 			dto.setAddressSub(rs.getString("addressSub"));
+			dto.setEmail(rs.getString("email"));
 			dto.setDate(rs.getTimestamp("date"));
 		}else {
 			// 아이디 부재 => null
@@ -126,16 +145,23 @@ public class BookDAO {
 			e.printStackTrace();
 		}finally {
 			//마무리
+			if(rs !=null) try {rs.close();} catch(Exception ex){}
+			if(pstmt !=null)try{pstmt.close();}catch(Exception ex){}
+			if(con !=null)try{con.close();}catch(Exception ex){}
 		}
 		return dto; 
 	} // getMember 메서드 끝
 	
 	public void updateMember(BookDTO updateDTO) {
+		
+		Connection con = null; //리턴값 con이라서 
+		PreparedStatement pstmt = null;
+		
 		try {
-			Connection con = getConnection();
+			con = getConnection();
 			//todo : sql구문 수정 
 			String sql = "update bmember set name=? where id =?";
-			PreparedStatement pstmt = con.prepareStatement(sql);
+			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1,updateDTO.getName()); //주소값을 통해 값을 가져옴
 			pstmt.setString(2,updateDTO.getId());  
 			
@@ -144,22 +170,31 @@ public class BookDAO {
 			e.printStackTrace();
 		}finally {
 			// 마무리
+			if(pstmt !=null)try{pstmt.close();}catch(Exception ex){}
+			if(con !=null)try{con.close();}catch(Exception ex){}
 		}
 	}//updateMember 메서드 끝 
 	
 	public void deleteMember(String id) {
 		
+		Connection con = null; //리턴값 con이라서 
+		PreparedStatement pstmt = null;
+		
 		try {
-			Connection con = getConnection(); //DB연결 
+			con = getConnection(); //DB연결 
 			
-			String sql = "delete from bmember";
+			String sql = "delete from bmember where id=?";
 			
-			PreparedStatement pstmt = con.prepareStatement(sql);
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
 			pstmt.executeUpdate();
+			System.out.println("dao delete 됨?");
 			
 		} catch (Exception e) {
 			e.printStackTrace();			
 		}finally {
+			if(pstmt !=null)try{pstmt.close();}catch(Exception ex){}
+			if(con !=null)try{con.close();}catch(Exception ex){}
 
 		}
 	}//deleteMember 메서드 끝 
@@ -167,17 +202,21 @@ public class BookDAO {
 	// todo : board 게시판 생성해야함 
 	public List<BookDTO> getMemberList(){
 		
+		Connection con = null; //리턴값 con이라서 
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
 		List<BookDTO> dtoList = new ArrayList<>();
 		
 		try {
-			Connection con = getConnection(); //DB연결
+			con = getConnection(); //DB연결
 			
 			//sql 구문 실행 
 			String sql = "select * from bmember";
 			
-			PreparedStatement pstmt = con.prepareStatement(sql);
+			pstmt = con.prepareStatement(sql);
 			//4단계, sql구문 실행 , 저장
-			ResultSet rs = pstmt.executeQuery();
+			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
 				BookDTO dto = new BookDTO(); // 작은 바구니에 담기
@@ -194,6 +233,9 @@ public class BookDAO {
 			e.printStackTrace();
 		}finally {
 			//마무리
+			if(rs !=null) try {rs.close();} catch(Exception ex){}
+			if(pstmt !=null)try{pstmt.close();}catch(Exception ex){}
+			if(con !=null)try{con.close();}catch(Exception ex){}
 		}
 		
 		return dtoList;

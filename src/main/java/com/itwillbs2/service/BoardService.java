@@ -7,6 +7,7 @@ import java.util.List;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 
+import com.itwillbs2.dao.ApiExamSearchBook;
 import com.itwillbs2.dao.BoardDAO;
 import com.itwillbs2.domain.BoardDTO;
 import com.itwillbs2.domain.PageDTO;
@@ -226,9 +227,13 @@ public class BoardService {
 			e.printStackTrace();
 		}finally {
 		}
-		
 	}//
-
+	
+	public void searchBook() {
+		ApiExamSearchBook api = new ApiExamSearchBook();
+		api.getBook();
+	}
+	
 
 
 }

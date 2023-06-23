@@ -29,16 +29,30 @@
               }
                 %>
                 <ul class="dropdown">
-                  <li><a href="join.bs">회원가입</a></li>
-                  <li><a href="update.bs">회원정보 수정 | 삭제</a></li>
                   
                   <%
+                  if(id==null){
+                  %>
+                    <li><a href="join.bs">회원가입</a></li>
+                  <%
+                  }
+                  %>
+                  
+                  <%
+                  if(id!=null){
+                	 %>
+                  <li><a href="update.bs">회원정보 수정 | 삭제</a></li>
+               		<li><a href="logout.bs">로그아웃</a></li>
+                	  <%
+                  }
+                  %>
+                  
+                  <%-- <%
               if(id!=null){ // 로그인 안한 상태 
               %>
-               <li><a href="logout.bs">로그아웃</a></li>
                <%
                } 
-               %>
+               %> --%>
                
                   
                 </ul>

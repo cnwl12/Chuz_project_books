@@ -35,30 +35,23 @@ PageDTO pageDTO =(PageDTO)request.getAttribute("pageDTO"); // 페이징 처리�
 
 String id =(String)session.getAttribute("id"); %>
 
-<%
-if(id==null){
-	%>
-	<script type="text/javascript">
-	
-	function nologin() {
-		
-	location.href="login.bs";
-	alert("로그인 후 이용 가능합니다!");
-	}
-	
-</script>
-<% 
-}
-%>
 <h4>글목록 : 로그인(<%=id%>)</h4>
-<a href="fwrite.bo"><input type="button" value="글작성" onclick="nologin()"></a>
+<%
+if(id!=null){%>
+
+<a href="fwrite.bo"><input type="button" value="글작성"></a>
+<%} 
+%>	
+
 <table border="1" width="700" >
-<tr ><td>No.</td>
+<tr >
+<td>No.</td>
 <td>제목</td>
 <td>작성자</td>
 <td>조회수</td>
 <td>추천수</td>
-<td>작성일</td></tr>
+<td>작성일</td>
+</tr>
 
 <% //결과 while 접근(rs.next()) -> T -> 열접근 rs.getInt("num") ...
 

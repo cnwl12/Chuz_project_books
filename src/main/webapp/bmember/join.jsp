@@ -77,9 +77,7 @@ function fun1() {
 	function idCheck() {
 		alert("중복확인완료");
 	}	
-
-
-
+	
 </script>
 
 
@@ -96,6 +94,7 @@ function fun1() {
 	<br>
 	<br>
 
+<h1>회원가입</h1>
 	<!-- id/pass 설정하기  -->
 	<form action="joinPro.bs" method="post" name="checkform" > <!-- onsubmit="return fun1()" -->
 	<ul class="formulli">
@@ -108,49 +107,26 @@ function fun1() {
 	<li>이름<input type="text" name="name" id="name" onclick="fun1()"> </li>
 	<li>휴대폰번호(연락처)<input type="text" name="phone" id="phone" onclick="fun1()"></li>
 	</ul>
-	
-	<div>
-			<input type="button" value="가입취소" onclick="history.back();">
-			<input type="submit" value="회원가입" > 
-			<input type="reset" value="초기화">
-		</div>
-	</form>
-	
-	<h1>회원가입</h1>
-	<br>
-	<h6>빈칸을 채워주세요(*필수작성)</h6>
-	
 
-		<!-- <p>
-			ID<span>*</span> <input type="text" placeholder="id는 최대 4자리 이상으로 작성"
-				name="id" id="id" onclick="fun1()" >
-				 <input type="button"
-				value="중복확인" width="10" height="3" onclick="idCheck()" > <br>
-		</p>
-
-		PASS* <input type="password" placeholder="비밀번호는 8자리 이상으로 작성"
-			name="pass" id="pass" onclick="fun1()"><br> PASS 재확인* <input
-			type="password" placeholder="비밀번호 동일" name="pass2" id="pass2" onclick="fun1()"><br>
-
-		이름* <input type="text" name="name" id="name" onclick="fun1()"><br> 휴대폰번호(연락처)* <input
-			type="text" name="phone" id="phone" onclick="fun1()"><br> -->
-
-		<!-- 주소- 다음api  -->
-
-		주소 <input type="text" id="sample6_postcode" placeholder="우편번호">
-		<input type="button" onclick="sample6_execDaumPostcode()"
-			value="우편번호 찾기"><br> <input type="text"
-			id="sample6_address" placeholder="우편번호 찾기 후 주소작성" name="addressMain"><br>
-		<input type="text" id="sample6_detailAddress" placeholder="상세주소"
-			name="addressSub"> <input type="text"
-			id="sample6_extraAddress" placeholder="참고항목">
-
+		<ul class="formulli">
+			<li>E-mail <input type="email" name="email">
+			</li> 주소
+			<input type="text" id="sample6_postcode" placeholder="우편번호">
+			<input type="button" onclick="sample6_execDaumPostcode()"
+				value="우편번호 찾기">
+			<li><input type="text" id="sample6_address" placeholder="주소"
+				name="addressMain"> <input type="text"
+				id="sample6_extraAddress" placeholder="참고항목"></li>
+			<li><input type="text" id="sample6_detailAddress"
+				placeholder="상세주소" name="addressSub"></li>
+		</ul>
 		<script
 			src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 		<script>
     function sample6_execDaumPostcode() {
         new daum.Postcode({
-            oncomplete: function(data) {  // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+            oncomplete: function(data) {
+                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
 
                 // 각 주소의 노출 규칙에 따라 주소를 조합한다.
                 // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
@@ -182,9 +158,9 @@ function fun1() {
                     // 조합된 참고항목을 해당 필드에 넣는다.
                     document.getElementById("sample6_extraAddress").value = extraAddr;
                 
-                } else {
+                }  else {
                     document.getElementById("sample6_extraAddress").value = '';
-                }
+                } 
 
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
                 document.getElementById('sample6_postcode').value = data.zonecode;
@@ -195,15 +171,36 @@ function fun1() {
         }).open();
     }
 </script>
-		<br> E-mail <input type="email" name="email"> <br>
-		
+
+
+
+
 		<!-- 제출/초기화 -->
-		<div>
+	
+	
+	<div>
 			<input type="button" value="가입취소" onclick="history.back();">
 			<input type="submit" value="회원가입" > 
 			<input type="reset" value="초기화">
 		</div>
+	</form>
 
+		<!-- <p>
+			ID<span>*</span> <input type="text" placeholder="id는 최대 4자리 이상으로 작성"
+				name="id" id="id" onclick="fun1()" >
+				 <input type="button"
+				value="중복확인" width="10" height="3" onclick="idCheck()" > <br>
+		</p>
+
+		PASS* <input type="password" placeholder="비밀번호는 8자리 이상으로 작성"
+			name="pass" id="pass" onclick="fun1()"><br> PASS 재확인* <input
+			type="password" placeholder="비밀번호 동일" name="pass2" id="pass2" onclick="fun1()"><br>
+
+		이름* <input type="text" name="name" id="name" onclick="fun1()"><br> 휴대폰번호(연락처)* <input
+			type="text" name="phone" id="phone" onclick="fun1()"><br> -->
+
+		<!-- 주소- 다음api  -->
+		
 
 
 </body>

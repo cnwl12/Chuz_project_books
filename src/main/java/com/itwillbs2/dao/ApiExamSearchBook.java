@@ -1,3 +1,4 @@
+package com.itwillbs2.dao;
 
 // 네이버 검색 API 예제 - 블로그 검색
 import java.io.*;
@@ -11,21 +12,19 @@ import java.util.Map;
 
 public class ApiExamSearchBook {
 
-
-    public static void main(String[] args) {
+    public static void getBook() {
         String clientId = "SG77rERJkx5teoolk8vI"; //애플리케이션 클라이언트 아이디
         String clientSecret = "FaVoUIMTux"; //애플리케이션 클라이언트 시크릿
 
-
         String text = null;
         try {
-            text = URLEncoder.encode("그린팩토리", "UTF-8");
+            text = URLEncoder.encode("행운", "UTF-8");
         } catch (UnsupportedEncodingException e) {
             throw new RuntimeException("검색어 인코딩 실패",e);
         }
 
 
-        String apiURL = "https://openapi.naver.com/v1/search/book?query=" + text;    // JSON 결과
+        String apiURL = "https://openapi.naver.com/v1/search/book.json?query=" + text;    // JSON 결과
         //String apiURL = "https://openapi.naver.com/v1/search/blog.xml?query="+ text; // XML 결과
 
 
@@ -93,4 +92,5 @@ public class ApiExamSearchBook {
             throw new RuntimeException("API 응답을 읽는 데 실패했습니다.", e);
         }
     }
+    
 }

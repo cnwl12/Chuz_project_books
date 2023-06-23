@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.itwillbs2.dao.ApiExamSearchBook;
 import com.itwillbs2.domain.BoardDTO;
 import com.itwillbs2.service.BoardService;
 import com.itwillbs2.domain.PageDTO;
@@ -169,10 +170,15 @@ public class BoardController extends HttpServlet { //상속받아서 오버라�
 			response.sendRedirect("list.bo");
 		}
 		
-		
-		
+		if(strPath.equals("/about.bo")) {
+			
+			BoardService boardService = new BoardService();
+			boardService.searchBook();
+			
+			RequestDispatcher dis = request.getRequestDispatcher("bmember/about.jsp");
+			dis.forward(request, response);
+		}
 		
 	}// doProcess
-	
 
 }
