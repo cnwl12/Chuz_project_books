@@ -170,15 +170,6 @@ public class BoardController extends HttpServlet { //상속받아서 오버라�
 			response.sendRedirect("list.bo");
 		}
 		
-		if(strPath.equals("/about.bo")) {
-			
-			BoardService boardService = new BoardService();
-			boardService.searchBook();
-			
-			RequestDispatcher dis = request.getRequestDispatcher("bmember/about.jsp");
-			dis.forward(request, response);
-		}
-		
 	}// doProcess
 
 }

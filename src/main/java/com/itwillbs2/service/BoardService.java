@@ -18,15 +18,22 @@ public class BoardService {
 
 	public void insertBoard(HttpServletRequest request) {
 		
+		System.out.println(request);
+		
 		try {
 			// 첨부파일 올라갈 물리적 경로 
 			String uploadPath = request.getRealPath("/upload");
+			
+			System.out.println(uploadPath);
 			
 			// 파일 크기 설정 
 			int maxSize =10*1024*1024;
 			
 			MultipartRequest multi 												//중복) 업로드 파일 이름 같은 경우 변환
 			= new MultipartRequest(request, uploadPath, maxSize, "utf-8", new DefaultFileRenamePolicy());
+			
+			System.out.println(multi);
+			
 			
 			String board_name = multi.getParameter("board_name");
 			String board_subject = multi.getParameter("board_subject");
@@ -230,6 +237,7 @@ public class BoardService {
 	}//
 	
 	public void searchBook() {
+		System.out.println("서비스");
 		ApiExamSearchBook api = new ApiExamSearchBook();
 		api.getBook();
 	}

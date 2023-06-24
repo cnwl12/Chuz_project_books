@@ -12,7 +12,9 @@ import java.util.Map;
 
 public class ApiExamSearchBook {
 
-    public static void getBook() {
+    public void getBook() {
+    	
+    	System.out.println("겟북");
         String clientId = "SG77rERJkx5teoolk8vI"; //애플리케이션 클라이언트 아이디
         String clientSecret = "FaVoUIMTux"; //애플리케이션 클라이언트 시크릿
 

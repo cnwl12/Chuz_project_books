@@ -1,12 +1,9 @@
 package com.itwillbs2.controller;
 
 import java.io.IOException;
-import java.lang.module.ResolutionException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,7 +12,6 @@ import javax.servlet.http.HttpSession;
 import com.itwillbs2.domain.BookDTO;
 import com.itwillbs2.service.BoardService;
 import com.itwillbs2.service.BookService;
-import com.mysql.cj.Session;
 
 public class BookController extends HttpServlet {
 	// 가상주소 -> 실제주소 연결 (주소매핑) => 서블릿(처리하는역할|처리담당자) 상속
@@ -100,6 +96,9 @@ public class BookController extends HttpServlet {
 		// 메인으로 이동
 		if (strPath.equals("/main.bs")) { // main.me 유지하면서
 			// member/main.jsp로 이동
+			BoardService boardService = new BoardService();
+			boardService.searchBook();
+			
 			RequestDispatcher dis = request.getRequestDispatcher("bmember/main.jsp");
 			dis.forward(request, response);
 		}
@@ -178,6 +177,17 @@ public class BookController extends HttpServlet {
 
 			response.sendRedirect("content.jsp");
 		}
-
+		
+//		if (strPath.equals("/checkId.bs")) {
+//			 System.out.println("체크 아이디");
+//			    String id = (String) request.getAttribute("id");
+//			    MemberService memberService = new MemberService();
+//			    boolean checkResult = memberService.checkId(id);
+//			    response.setContentType("application/json");
+//			    response.setCharacterEncoding("UTF-8");
+//			    PrintWriter out = response.getWriter();
+//			    out.print("{\"result\": " + checkResult + "}");
+//			    out.flush();
+//		}
 	}// doProcess()
 } // 클래스

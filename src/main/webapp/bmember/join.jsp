@@ -5,8 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>BookStore_join me!</title>
-
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 <link rel="stylesheet" href="fonts/icomoon/style.css" />
 <link rel="stylesheet" href="fonts/flaticon/font/flaticon.css" />
 
@@ -14,11 +13,62 @@
 <link rel="stylesheet" href="css/aos.css" />
 <link rel="stylesheet" href="css/style.css" />
 <link rel="stylesheet" href="css/bs.css"/>
-
+<link rel="stylesheet" href="css/member.css"/>
 <script type="text/javascript">
 
+$(function(){
+	var regex = /^[a-zA-Z0-9]{4,10}$/ // id, pw 검사
+	var pass = $("#pass").val();
+	var pass2 = $("#pass2").val();
+	
+	
+	$("#pass").on("input", function(){
+		console.log("#pass : " + $("#pass"));
+		console.log("#pass.val() : " + $("#pass").val());
+		// console.log($(".checkPassResult").html());
+		console.log(regex.test($("#pass").val()));
+	})
+	
+	console.log(pass==pass2);
+
+	$("#pass2").on("input", function(){
+		pass = $("#pass").val();
+		pass2 = $("#pass2").val();
+		
+		if(pass == pass2){
+			console.log("일치합니다");
+		}else{
+			console.log("불일치");
+		}
+	})
+	
+// 	$("#id").on("input",function(){
+// 		var id = $("#id").val()
+		
+// 		$.ajax({
+// 			data : id,
+// 			method : "POST",
+// 			url : "/checkId.bs"
+// 		})
+// 		.done(function(result){
+// 			if(result.result){
+// 				$(".checkIdResult").html("사용 가능한 아이디입니다.");
+// 			}else{
+// 				$(".checkIdResult").html("중복된 아이디입니다.");
+// 			}
+// 		})
+// // 		$(".checkIdResult").html("");
+// 	})
+	
+// 	$(".checkPassResult")
+
+})
+
+// $(document).ready(function(){})
+	
+
+
 function validate() {
-	var re = /^[a-zA-Z0-9]{4,10}$/ // id, pw 검사
 	var id = document.getElementById("id");
 	var pass = document.getElementById("pass");
 }
@@ -93,19 +143,21 @@ function fun1() {
 	<br>
 	<br>
 	<br>
-
-<h1>회원가입</h1>
+<div class="ySJoinStep">
+	<h1>회원가입</h1>
 	<!-- id/pass 설정하기  -->
-	<form action="joinPro.bs" method="post" name="checkform" > <!-- onsubmit="return fun1()" -->
+	<form action="joinPro.bs" method="post" name="checkform" onsubmit="return fun1()"> <!--  -->
+	<div class="ySContRow w_600">
 	<ul class="formulli">
 	<li>id<input type="text" placeholder="id는 최대 4자리 이상으로 작성"
-				name="id" id="id" onclick="fun1()" > <input type="button"
-				value="중복확인" width="10" height="3" onclick="idCheck()" ></li>
+				name="id" id="id"  > <span class="checkIdResult"> #중복확인용</span></li>
 	<li>pass<input type="password" placeholder="비밀번호는 8자리 이상으로 작성"
-			name="pass" id="pass" onclick="fun1()"></li>
-	<li>pass 재확인<input type="password" placeholder="비밀번호 동일" name="pass2" id="pass2" onclick="fun1()"></li>		
-	<li>이름<input type="text" name="name" id="name" onclick="fun1()"> </li>
-	<li>휴대폰번호(연락처)<input type="text" name="phone" id="phone" onclick="fun1()"></li>
+			name="pass" id="pass" >
+		<div class="checkPassResult">확인용</div>	
+	</li>
+	<li>pass 재확인<input type="password" placeholder="비밀번호 동일" name="pass2" id="pass2" ></li>		
+	<li>이름<input type="text" name="name" id="name" > </li>
+	<li>휴대폰번호(연락처)<input type="text" name="phone" id="phone" ></li>
 	</ul>
 
 		<ul class="formulli">
@@ -178,26 +230,28 @@ function fun1() {
 		<!-- 제출/초기화 -->
 	
 	
-	<div>
-			<input type="button" value="가입취소" onclick="history.back();">
-			<input type="submit" value="회원가입" > 
-			<input type="reset" value="초기화">
+			<div>
+				<input type="button" value="가입취소" onclick="history.back();">
+				<input type="submit" value="회원가입" > 
+				<input type="reset" value="초기화">
+			</div>
 		</div>
 	</form>
+</div>
 
 		<!-- <p>
 			ID<span>*</span> <input type="text" placeholder="id는 최대 4자리 이상으로 작성"
-				name="id" id="id" onclick="fun1()" >
+				name="id" id="id"  >
 				 <input type="button"
 				value="중복확인" width="10" height="3" onclick="idCheck()" > <br>
 		</p>
 
 		PASS* <input type="password" placeholder="비밀번호는 8자리 이상으로 작성"
-			name="pass" id="pass" onclick="fun1()"><br> PASS 재확인* <input
-			type="password" placeholder="비밀번호 동일" name="pass2" id="pass2" onclick="fun1()"><br>
+			name="pass" id="pass" ><br> PASS 재확인* <input
+			type="password" placeholder="비밀번호 동일" name="pass2" id="pass2" ><br>
 
-		이름* <input type="text" name="name" id="name" onclick="fun1()"><br> 휴대폰번호(연락처)* <input
-			type="text" name="phone" id="phone" onclick="fun1()"><br> -->
+		이름* <input type="text" name="name" id="name" ><br> 휴대폰번호(연락처)* <input
+			type="text" name="phone" id="phone" ><br> -->
 
 		<!-- 주소- 다음api  -->
 		
