@@ -1,7 +1,11 @@
 package com.itwillbs2.dao;
 
 // 네이버 검색 API 예제 - 블로그 검색
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -9,10 +13,13 @@ import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
 
 public class ApiExamSearchBook {
 
-    public void getBook() {
+    public JsonObject getBook() {
     	
     	System.out.println("겟북");
         String clientId = "SG77rERJkx5teoolk8vI"; //애플리케이션 클라이언트 아이디
@@ -34,9 +41,10 @@ public class ApiExamSearchBook {
         requestHeaders.put("X-Naver-Client-Id", clientId);
         requestHeaders.put("X-Naver-Client-Secret", clientSecret);
         String responseBody = get(apiURL,requestHeaders);
-
-
         System.out.println(responseBody);
+        
+        
+        return JsonParser.parseString(responseBody).getAsJsonObject();
     }
 
 

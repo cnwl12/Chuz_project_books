@@ -1,12 +1,11 @@
 package com.itwillbs2.service;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 
+import com.google.gson.JsonObject;
 import com.itwillbs2.dao.ApiExamSearchBook;
 import com.itwillbs2.dao.BoardDAO;
 import com.itwillbs2.domain.BoardDTO;
@@ -236,10 +235,10 @@ public class BoardService {
 		}
 	}//
 	
-	public void searchBook() {
-		System.out.println("서비스");
-		ApiExamSearchBook api = new ApiExamSearchBook();
-		api.getBook();
+	public JsonObject searchBook() {
+	    System.out.println("서비스");
+	    ApiExamSearchBook api = new ApiExamSearchBook();
+	    return api.getBook();
 	}
 	
 

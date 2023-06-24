@@ -96,8 +96,10 @@ public class BookController extends HttpServlet {
 		// 메인으로 이동
 		if (strPath.equals("/main.bs")) { // main.me 유지하면서
 			// member/main.jsp로 이동
+			
 			BoardService boardService = new BoardService();
-			boardService.searchBook();
+			request.setAttribute("bookList", boardService.searchBook());
+			//이거 딴데서도 쓰면되깅
 			
 			RequestDispatcher dis = request.getRequestDispatcher("bmember/main.jsp");
 			dis.forward(request, response);
