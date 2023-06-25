@@ -17,10 +17,13 @@
 <script type="text/javascript">
 
 $(function(){
-	var regex = /^[a-zA-Z0-9]{4,10}$/ // id, pw 검사
-	var pass = $("#pass").val();
-	var pass2 = $("#pass2").val();
+	var regex = /^[a-zA-Z0-9]{4,10}$/ 	// id, pw 검사
+	var regexTel = /^[0-9]{3}-[0-9]{4}-[0-9]{4}$/		// 휴대폰 검사
 	
+	var pass = $.trim($("#pass").val());
+	var pass2 = $.trim($("#pass2").val());
+	
+	//trim 쓰기!! 
 	
 	$("#pass").on("input", function(){
 		console.log("#pass : " + $("#pass"));
@@ -36,11 +39,26 @@ $(function(){
 		pass2 = $("#pass2").val();
 		
 		if(pass == pass2){
-			console.log("일치합니다");
+			//console.log("일치합니다");
+			$(".checkPassResult").html("비밀번호가 일치합니다");	
 		}else{
-			console.log("불일치");
+			$(".checkPassResult").html("비밀번호가 불일치합니다");	
+			// $("#pass2").focus();
+			console.log("불일치"); 
 		}
 	})
+	
+	$("#phone").on("input",function(){
+		
+		tel =$("#phone").val();
+		
+		if(!(regexTel.tel)){
+			
+		$(".checkTelResult").html("-을 삽입해주세요");
+		}else
+			$(".checkTelResult").html("연락처 확인");
+		
+	})//
 	
 // 	$("#id").on("input",function(){
 // 		var id = $("#id").val()
@@ -153,11 +171,11 @@ function fun1() {
 				name="id" id="id"  > <span class="checkIdResult"> #중복확인용</span></li>
 	<li>pass<input type="password" placeholder="비밀번호는 8자리 이상으로 작성"
 			name="pass" id="pass" >
-		<div class="checkPassResult">확인용</div>	
 	</li>
-	<li>pass 재확인<input type="password" placeholder="비밀번호 동일" name="pass2" id="pass2" ></li>		
+	<li>pass 재확인<input type="password" placeholder="비밀번호 동일" name="pass2" id="pass2" >		
+		<div class="checkPassResult">확인용</div>	</li>
 	<li>이름<input type="text" name="name" id="name" > </li>
-	<li>휴대폰번호(연락처)<input type="text" name="phone" id="phone" ></li>
+	<li>휴대폰번호(연락처)<input type="text" name="phone" id="phone" ><span class="checkTelResult">연락처유효성</span></li>
 	</ul>
 
 		<ul class="formulli">

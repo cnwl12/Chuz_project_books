@@ -1,5 +1,6 @@
 package com.itwillbs2.service;
 
+import java.io.File;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -33,6 +34,9 @@ public class BoardService {
 			
 			System.out.println(multi);
 			
+			/*
+			 * File file = new File(uploadPath); file.mkdirs();
+			 */
 			
 			String board_name = multi.getParameter("board_name");
 			String board_subject = multi.getParameter("board_subject");
@@ -74,7 +78,7 @@ public class BoardService {
 		}
 	} //insertBoard
 	
-	public List<BoardDTO> getBoardList(PageDTO pageDTO) {
+	public List<BoardDTO> getBoardList(PageDTO pageDTO, String searchKeyword) {
 		
 		List<BoardDTO> dtoList = null;
 		
@@ -106,7 +110,7 @@ public class BoardService {
 							//(게시판 목록-- 페이지 자르지않아서 전체목록 전부 나타나서 서버 과부하)
 
 			// select * from board order by num desc limt 시작행-1, 10개
-			dtoList =dao.getBoardList(startRow,pageSize);
+			dtoList =dao.getBoardList(startRow,pageSize, searchKeyword);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -241,6 +245,11 @@ public class BoardService {
 	    return api.getBook();
 	}
 	
+	public JsonObject searchBook(String keyWord) {
+	    System.out.println("키워드");
+	    ApiExamSearchBook api = new ApiExamSearchBook();
+	    return api.getBook(keyWord);
+	}
 
 
 }

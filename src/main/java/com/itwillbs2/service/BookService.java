@@ -65,6 +65,7 @@ public class BookService {
 			
 			String id = request.getParameter("id");
 			String pass = request.getParameter("pass");
+			System.out.println(pass);
 
 			BookDAO dao = new BookDAO();
 			bookDTO = dao.userCheck(id, pass); // id,pass값 있으면 dto에 저장 | 없으면 null

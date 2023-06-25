@@ -17,13 +17,30 @@
 <link rel="stylesheet" href="fonts/icomoon/style.css" />
 <link rel="stylesheet" href="fonts/flaticon/font/flaticon.css" />
 
+<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.js"></script>
 <link rel="stylesheet" href="css/tiny-slider.css" />
 <link rel="stylesheet" href="css/aos.css" />
 <link rel="stylesheet" href="css/style.css" />
 
-
 </head>
 <body>
+
+<script type="text/javascript">
+
+$(function() {
+  function submitCheck() {
+    var keyword = $("#keyWord").val();
+    if (keyword.trim() === "") { // 입력없이 검색 누름
+      alert("검색어를 입력해주세요");
+      return false;
+    }
+    // 검색 로직 실행
+    // ...
+  }
+  $("form").submit(submitCheck);
+})
+
+</script>
  
 <jsp:include page="../include/top.jsp"></jsp:include> 
 <br><br><br><br><br><br>
@@ -40,8 +57,12 @@ String id =(String)session.getAttribute("id"); %>
 if(id!=null){%>
 
 <a href="fwrite.bo"><input type="button" value="글작성"></a>
-<%} 
-%>	
+<%} %>
+
+<form action="list.bo">
+<input type="text" name="keyWord" id="keyWord" >
+<input type="submit" value="검색">
+</form>
 
 <table border="1" width="700" >
 <tr >
@@ -52,7 +73,6 @@ if(id!=null){%>
 <td>추천수</td>
 <td>작성일</td>
 </tr>
-
 <% //결과 while 접근(rs.next()) -> T -> 열접근 rs.getInt("num") ...
 
 for(int i = 0; i<dtoList.size(); i++){ // 자바 내장객체 배열길이는 size()

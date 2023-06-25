@@ -23,9 +23,9 @@ BookDTO bookDTO =(BookDTO)request.getAttribute("bookDTO");
 
 <form action="updatePro.bs" method="post">
 <label>ID<span>*</span></label>
-<input type="text" name="id" value="<%=bookDTO.getId()%>" readonly="readonly"> 
+<input type="text" name="id" value="<%=bookDTO.getId()%>" readonly> 
 <label>PASS<span>*</span></label>
-<input type="password" name="pass" value="<%=bookDTO.getPass()%>" ><br>
+<input type="password" name="pass" value="" ><br>
 <label>이름<span>*</span></label>
 <input type="text" name="name" value="<%=bookDTO.getName()%>" ><br>
 <label>휴대폰번호(연락처)<span>*</span></label>

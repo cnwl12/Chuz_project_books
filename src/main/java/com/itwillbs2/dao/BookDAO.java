@@ -83,6 +83,8 @@ public class BookDAO {
 
 			rs = pstmt.executeQuery();
 			
+			System.out.println(pstmt);
+			
 			if(rs.next()) { //DB에 정보있는지 조회 
 				dto = new BookDTO(); //dto null이었는데 기억장소생성 
 				dto.setId(rs.getString("id")); //db열에서 갖고와서(열 접근) dto에 담기 
@@ -118,7 +120,7 @@ public class BookDAO {
 		try {
 		con	= getConnection();
 		
-		String sql="select * from bmember where id=?";
+		String sql="select * from bmember where id=?"; 
 
 		pstmt = con.prepareStatement(sql);
 		pstmt.setString(1, id);

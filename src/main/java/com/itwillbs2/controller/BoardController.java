@@ -93,9 +93,19 @@ public class BoardController extends HttpServlet { //상속받아서 오버라�
 			//DB에서 글목록 가져오기 
 			//BoardService 객체생성 
 			BoardService boardService = new BoardService();
-			List<BoardDTO> dtoList = boardService.getBoardList(pageDTO);
+//			String searchKeyword="1=1";
+//			System.out.println(request.getParameter("keyWord"));
 			
-			// getBoardCount() 메서드 정의
+//			if(request.getParameter("keyWord")==null || request.getParameter("keyWord").equals("") ) { // 키워드가 있을 경우 
+//	
+				
+//			}else {
+				String searchKeyword = request.getParameter("keyWord");
+				System.out.println(searchKeyword);
+//			}
+			
+			List<BoardDTO> dtoList = boardService.getBoardList(pageDTO,searchKeyword);
+			
 			// getBoardCount() 메서드 호출
 			int count = boardService.getBoardCount();
 			
@@ -143,10 +153,15 @@ public class BoardController extends HttpServlet { //상속받아서 오버라�
 			request.setAttribute("dtoList", dtoList);
 			request.setAttribute("pageDTO", pageDTO);
 			
+			System.out.println("set밑에");
+			
 			//board/list.jsp로 이동 (주소변경 없이 이동)
 			RequestDispatcher dis = request.getRequestDispatcher("board/list.jsp");
 			dis.forward(request, response);
 		}
+		
+		
+		
 		
 		if(strPath.equals("/content.bo")) {
 			// BoardService 객체생성
@@ -169,6 +184,27 @@ public class BoardController extends HttpServlet { //상속받아서 오버라�
 
 			response.sendRedirect("list.bo");
 		}
+		
+		
+		if(strPath.equals("/allbookList.bo")) {
+			RequestDispatcher dis = request.getRequestDispatcher("board/allbookList.jsp");
+			dis.forward(request, response);
+			
+			String keyWord = request.getParameter("searchKeyWord");
+
+			BoardService boardService = new BoardService();
+			request.setAttribute("bookList", boardService.searchBook(keyWord));
+			
+			// System.out.println(	request.getParameter("searchKeyWord"));
+			
+		}
+		
+		if(strPath.equals("/gallary.bo")) {
+			RequestDispatcher dis = request.getRequestDispatcher("board/gallary.jsp");
+			dis.forward(request, response);
+			
+		}
+		
 		
 	}// doProcess
 

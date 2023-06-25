@@ -97,24 +97,38 @@ public class BoardDAO {
 	}//getMaxNum 메서드 
 	
 	// 메서드 정의 getBoardList()
-	public List<BoardDTO> getBoardList(int startRow,int pageSize) { //List 배열에 <BoardDTO> 정보를 넘기겠다 
+	public List<BoardDTO> getBoardList(int startRow,int pageSize, String searchKeyword) { //List 배열에 <BoardDTO> 정보를 넘기겠다 
 		//BoardDTO 게시판글을 배열에 담아서 리턴(큰틀)  //ArrayList 자식
 		List<BoardDTO> dtoList = new ArrayList<>(); //arraylist는 10개 공간 생성 
 		//큰바구니
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
+		String sql ="";
 		
 		try {//1~4단계 sql 구문작성 및 db연결
 			con = getConnection(); // DB연결
 			
 			//3 sql구문 									//글순서 최신순으로 
 			//(전체)String sql = "select * from board order by num desc"; // 모든 게시판 글 가지고 올거니까 
-			String sql = "select * from board order by board_num desc limit ?,?"; 
-			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1,startRow-1); //limit문법 : 자르겠다(0<x<=1 : 처음 미포함해야지 1~10 : 10개 들어가게! )
-			pstmt.setInt(2, pageSize); // 10개
-
+//			String sql = "select * from board order by board_num desc limit ?,?";
+			
+			// 제목 검색 키워드 있을 때 
+			if(searchKeyword != null) {
+			    sql = "select * from board where board_subject LIKE ? order by board_num desc limit ?,?";
+			    pstmt = con.prepareStatement(sql);
+			    pstmt.setString(1, "%" + searchKeyword + "%");
+				pstmt.setInt(2,startRow-1); //limit문법 : 자르겠다(0<x<=1 : 처음 미포함해야지 1~10 : 10개 들어가게! )
+				pstmt.setInt(3, pageSize); // 10개
+			}else{
+				sql = "select * from board order by board_num desc limit ?,?"; 
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1,startRow-1); //limit문법 : 자르겠다(0<x<=1 : 처음 미포함해야지 1~10 : 10개 들어가게! )
+				pstmt.setInt(2, pageSize); // 10개
+			}
+			
+			System.out.println(searchKeyword);
+			
 			//실행 -> 저장 
 			rs = pstmt.executeQuery(); 
 			
@@ -142,6 +156,7 @@ public class BoardDAO {
 			if(con !=null) try {con.close();} catch(Exception ex){}
 		}
 		
+		System.out.println(dtoList);
 		return dtoList;
 	}//getBoardList()메서드 끝 
 	
