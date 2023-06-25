@@ -67,20 +67,23 @@ if(id!=null){ //세션값이 있으면
 %>
 
 </table>
-<input type="button" value="글목록" onclick="location.href='list.bo'">
 
 <form method="post" encType = "multipart/form-data" action="comment_insert.bo">
 			<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
 				<tr>
-					<td style="border-bottom:none;" valign="middle"><br><br><%=id%></td>
-					<td><input type="text" style="height:100px;" class="form-control" placeholder="상대방을 존중하는 댓글을 남깁시다." name = "comment_text"></td>
-					<td><br><br><input type="submit" value="댓글 작성"></td>
+					<td style="border-bottom:none;" valign="middle"><%=id%></td>
+					<td><input type="text" style="height:50px;" class="form-control" placeholder="상대방을 존중하는 댓글을 남깁시다." name = "comment_text"></td>
+					<td><br><input type="submit" value="댓글 작성"></td>
 				</tr>
 				<tr>
 					<td colspan="2"><input type="file" name="comment_file"></td>
 				</tr>
 			</table>
 		</form>
+		<!-- 이전, 다음글 없을 때  -->
+		<input type="button" value="이전 글" onclick="location.href='content.bo?board_num=<%=dto.getBoard_num()-1%>'">
+		<input type="button" value="글목록" onclick="location.href='list.bo'">
+		<input type="button" value="다음 글" onclick="location.href='content.bo?board_num=<%=dto.getBoard_num()+1%>'">
 
 </body>
 </html>
