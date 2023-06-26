@@ -3,3 +3,24 @@
 .formulli{
 	list-style: none;
 }
+
+#ySContent{ 
+	margin: 0 auto;
+    padding: 130px 0;
+    width: 958px;
+    _width: 960px;
+    border: solid 1px #d8d8d8;
+    text-align: center;
+    background-color: #fff;
+}
+
+.loginCont{
+	float: left;
+    width: 360px;
+}
+
+.btnC.xb_size .bWrap {
+    padding: 15px 0;
+    height: 28px;
+    text-align: center;
+}

@@ -100,6 +100,8 @@ public class BookController extends HttpServlet {
 			BoardService boardService = new BoardService();
 			request.setAttribute("bookList", boardService.searchBook());
 			//이거 딴데서도 쓰면되깅
+			System.out.println("bookList");
+			
 			
 			RequestDispatcher dis = request.getRequestDispatcher("bmember/main.jsp");
 			dis.forward(request, response);

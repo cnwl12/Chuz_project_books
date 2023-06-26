@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>BookStore_update</title>
+<title>회원정보 수정</title>
 <link rel="stylesheet" href="fonts/icomoon/style.css" />
 <link rel="stylesheet" href="fonts/flaticon/font/flaticon.css" />
 
@@ -23,34 +23,48 @@ BookDTO bookDTO =(BookDTO)request.getAttribute("bookDTO");
 
 <form action="updatePro.bs" method="post">
 <label>ID<span>*</span></label>
-<input type="text" name="id" value="<%=bookDTO.getId()%>" readonly> 
+<input type="text" name="id" value="<%=bookDTO.getId()%>" readonly> <br>
 <label>PASS<span>*</span></label>
 <input type="password" name="pass" value="" ><br>
 <label>이름<span>*</span></label>
 <input type="text" name="name" value="<%=bookDTO.getName()%>" ><br>
 <label>휴대폰번호(연락처)<span>*</span></label>
 <input type="text" name="phone" value="<%=bookDTO.getPhone()%>"><br>
-<label>주소</label>
-<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-<input type="text" id="sample6_postcode" placeholder="우편번호"> 
-<input type="text" name="addressMain" value="<%=bookDTO.getAddressMain()%>" id="sample6_address"><br>
-<input type="text" name="addressSub" value="<%=bookDTO.getAddressSub()%>" id="sample6_detailAddress"><br>
-<input type="text" id="sample6_extraAddress" placeholder="참고항목"> <br>
- <br>
 <label>E-mail</label> 
 <input type="email" name="email" value="<%=bookDTO.getEmail()%>"> <br>
-<br><br>
+<label>주소</label>
+<input type="text" id="sample6_postcode" placeholder="우편번호">
+<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"> <br>
+<input type="text" name="addressMain" id="sample6_address" value="<%=bookDTO.getAddressMain()%>"> 
+<input type="text" id="sample6_extraAddress" placeholder="상세주소" name="addressSub" value="<%=bookDTO.getAddressSub()%>">
 
-<!-- <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br> -->
+			
+			
+		
 
-<%-- <input type="text" id="sample6_address" placeholder="우편번호 찾기 후 주소작성" name="addressMain" value="<%=bookDTO.getAddressMain()%>"><br>
- --%><%-- <input type="text" id="sample6_detailAddress" placeholder="상세주소" name="addressSub" value="<%=bookDTO.getAddressSub()%>">
- --%>
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script>
+
+
+
+<!-- 제출/초기화 -->   
+<div>
+    <input type="submit" value="회원 정보 수정">
+    <a href="main.bs"><input type="button" value="뒤로가기"></a>
+    </form> 
+</div>  
+  <!--회원탈퇴 -->
+    <a href="delete.bs"><input type="submit" value="회원탈퇴"></a>
+</body>
+</html>
+
+
+
+		<script
+			src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+		<script>
     function sample6_execDaumPostcode() {
         new daum.Postcode({
-            oncomplete: function(data) {  // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+            oncomplete: function(data) {
+                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
 
                 // 각 주소의 노출 규칙에 따라 주소를 조합한다.
                 // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
@@ -82,9 +96,9 @@ BookDTO bookDTO =(BookDTO)request.getAttribute("bookDTO");
                     // 조합된 참고항목을 해당 필드에 넣는다.
                     document.getElementById("sample6_extraAddress").value = extraAddr;
                 
-                } else {
+                }  else {
                     document.getElementById("sample6_extraAddress").value = '';
-                }
+                } 
 
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
                 document.getElementById('sample6_postcode').value = data.zonecode;
@@ -94,16 +108,4 @@ BookDTO bookDTO =(BookDTO)request.getAttribute("bookDTO");
             }
         }).open();
     }
-</script> <br>
-
-
-<!-- 제출/초기화 -->   
-<div>
-    <input type="submit" value="회원 정보 수정">
-    <a href="main.bs"><input type="button" value="뒤로가기"></a>
-    </form> 
-</div>  
-  <!--회원탈퇴 -->
-    <a href="delete.bs"><input type="submit" value="회원탈퇴"></a>
-</body>
-</html>
+</script>

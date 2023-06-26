@@ -6,6 +6,8 @@
 <meta charset="UTF-8">
 <title>BookStore_join me!</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+
+
 <link rel="stylesheet" href="fonts/icomoon/style.css" />
 <link rel="stylesheet" href="fonts/flaticon/font/flaticon.css" />
 
@@ -18,7 +20,7 @@
 
 $(function(){
 	var regex = /^[a-zA-Z0-9]{4,10}$/ 	// id, pw 검사
-	var regexTel = /^[0-9]{3}-[0-9]{4}-[0-9]{4}$/		// 휴대폰 검사
+	var regexTel = /^[010][0-9]{4}[0-9]{4}$/		// 휴대폰 검사
 	
 	var pass = $.trim($("#pass").val());
 	var pass2 = $.trim($("#pass2").val());
@@ -54,7 +56,7 @@ $(function(){
 		
 		if(!(regexTel.tel)){
 			
-		$(".checkTelResult").html("-을 삽입해주세요");
+		$(".checkTelResult").html("연락처 자리수를 확인해주세요");
 		}else
 			$(".checkTelResult").html("연락처 확인");
 		
@@ -83,8 +85,14 @@ $(function(){
 })
 
 // $(document).ready(function(){})
-	
 
+// - 제거 
+function removeHyphen(event) {
+  var input = event.target;
+  var phoneNumber = input.value;
+  var cleanedPhoneNumber = phoneNumber.replace(/-/g, '');
+  input.value = cleanedPhoneNumber;
+}
 
 function validate() {
 	var id = document.getElementById("id");
@@ -165,7 +173,7 @@ function fun1() {
 	<h1>회원가입</h1>
 	<!-- id/pass 설정하기  -->
 	<form action="joinPro.bs" method="post" name="checkform" onsubmit="return fun1()"> <!--  -->
-	<div class="ySContRow w_600">
+	<div id="">
 	<ul class="formulli">
 	<li>id<input type="text" placeholder="id는 최대 4자리 이상으로 작성"
 				name="id" id="id"  > <span class="checkIdResult"> #중복확인용</span></li>
@@ -175,7 +183,7 @@ function fun1() {
 	<li>pass 재확인<input type="password" placeholder="비밀번호 동일" name="pass2" id="pass2" >		
 		<div class="checkPassResult">확인용</div>	</li>
 	<li>이름<input type="text" name="name" id="name" > </li>
-	<li>휴대폰번호(연락처)<input type="text" name="phone" id="phone" ><span class="checkTelResult">연락처유효성</span></li>
+	<li>휴대폰번호(연락처)<input type="text" name="phone" id="phone" oninput="removeHyphen(event)" ><span class="checkTelResult">연락처유효성</span></li>
 	</ul>
 
 		<ul class="formulli">

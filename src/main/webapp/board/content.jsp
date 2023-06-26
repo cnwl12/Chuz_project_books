@@ -32,6 +32,8 @@ String id =(String)session.getAttribute("id"); %>
 <h1>글내용 : 로그인(<%=id%>)</h1>
 <table border="2">
 <tr><td>No.</td><td><%=dto.getBoard_num()%></td></tr>
+
+
 <tr><td>글쓴이</td><td><%=dto.getBoard_name() %></td></tr>
 <tr><td>조회수</td><td><%=dto.getBoard_readcount()%></td></tr>
 <tr><td>작성일</td><td><%=dto.getBoard_date()%></td></tr>
@@ -80,10 +82,31 @@ if(id!=null){ //세션값이 있으면
 				</tr>
 			</table>
 		</form>
+		
+		
+		
 		<!-- 이전, 다음글 없을 때  -->
-		<input type="button" value="이전 글" onclick="location.href='content.bo?board_num=<%=dto.getBoard_num()-1%>'">
-		<input type="button" value="글목록" onclick="location.href='list.bo'">
-		<input type="button" value="다음 글" onclick="location.href='content.bo?board_num=<%=dto.getBoard_num()+1%>'">
 
+<%
+int max = 10;
+int num = (dto != null) ? dto.getBoard_num() : 0;
+%>
+
+<input type="button" value="이전 글" onclick="location.href='content.bo?board_num=<%=num-1%>'">
+<input type="button" value="글목록" onclick="location.href='list.bo'">
+
+<% 
+if(dto == null || (num + 1) > max) {
+%>
+<input type="hide" value="다음 글" style="display: none;">
+<% 
+} else {
+%>
+<input type="button" value="다음 글" onclick="location.href='content.bo?board_num=<%=num + 1%>'">
+<%
+}
+%>
+	 
+		
 </body>
 </html>

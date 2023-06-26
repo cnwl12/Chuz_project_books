@@ -187,15 +187,14 @@ public class BoardController extends HttpServlet { //상속받아서 오버라�
 		
 		
 		if(strPath.equals("/allbookList.bo")) {
-			RequestDispatcher dis = request.getRequestDispatcher("board/allbookList.jsp");
-			dis.forward(request, response);
 			
 			String keyWord = request.getParameter("searchKeyWord");
 
 			BoardService boardService = new BoardService();
 			request.setAttribute("bookList", boardService.searchBook(keyWord));
 			
-			// System.out.println(	request.getParameter("searchKeyWord"));
+			RequestDispatcher dis = request.getRequestDispatcher("board/allbookList.jsp");
+			dis.forward(request, response);
 			
 		}
 		

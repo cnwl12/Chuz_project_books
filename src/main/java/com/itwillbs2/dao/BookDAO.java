@@ -83,8 +83,6 @@ public class BookDAO {
 
 			rs = pstmt.executeQuery();
 			
-			System.out.println(pstmt);
-			
 			if(rs.next()) { //DB에 정보있는지 조회 
 				dto = new BookDTO(); //dto null이었는데 기억장소생성 
 				dto.setId(rs.getString("id")); //db열에서 갖고와서(열 접근) dto에 담기 
@@ -111,6 +109,7 @@ public class BookDAO {
 	}//
 	
 	public BookDTO getMember(String id) {
+		
 		BookDTO dto = null;
 		
 		Connection con = null; //리턴값 con이라서 
@@ -138,11 +137,10 @@ public class BookDAO {
 			dto.setAddressMain(rs.getString("addressMain"));
 			dto.setAddressSub(rs.getString("addressSub"));
 			dto.setEmail(rs.getString("email"));
-			dto.setDate(rs.getTimestamp("date"));
+			
 		}else {
 			// 아이디 부재 => null
 		}
-		
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
@@ -162,12 +160,17 @@ public class BookDAO {
 		try {
 			con = getConnection();
 			//todo : sql구문 수정 
-			String sql = "update bmember set name=? where id =?";
+			String sql = "update bmember set name=?, phone=?, email=?, addressMain=?, addressSub=? where id=?";
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1,updateDTO.getName()); //주소값을 통해 값을 가져옴
-			pstmt.setString(2,updateDTO.getId());  
+			pstmt.setString(1, updateDTO.getName());
+			pstmt.setString(2, updateDTO.getPhone());
+			pstmt.setString(3, updateDTO.getEmail());
+			pstmt.setString(4, updateDTO.getAddressMain());
+			pstmt.setString(5, updateDTO.getAddressSub());
+			pstmt.setString(6, updateDTO.getId());
 			
 			pstmt.executeUpdate();
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
@@ -190,7 +193,6 @@ public class BookDAO {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			pstmt.executeUpdate();
-			System.out.println("dao delete 됨?");
 			
 		} catch (Exception e) {
 			e.printStackTrace();			

@@ -65,11 +65,9 @@ public class BookService {
 			
 			String id = request.getParameter("id");
 			String pass = request.getParameter("pass");
-			System.out.println(pass);
 
 			BookDAO dao = new BookDAO();
 			bookDTO = dao.userCheck(id, pass); // id,pass값 있으면 dto에 저장 | 없으면 null
-			System.out.println("서비스에 유저체크");
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -112,15 +110,6 @@ public class BookService {
 			String addressSub = request.getParameter("addressSub");
 			String email = request.getParameter("email");
 			
-			System.out.println("ID확인");
-			System.out.println(id);
-			System.out.println(pass);
-			System.out.println(name);
-			System.out.println(phone);
-			System.out.println(addressMain);
-			System.out.println(addressSub);
-			System.out.println(email);
-			
 			// 수정할 데이터를 하나의 바구니 저장 
 			//set 메서드 호출 후 값 저장
 			BookDTO bookDTO = new BookDTO();
@@ -133,15 +122,6 @@ public class BookService {
 			bookDTO.setAddressMain(addressMain);
 			bookDTO.setAddressSub(addressSub);
 			bookDTO.setEmail(email);
-			
-			System.out.println("bookDTO");
-			System.out.println(id);
-			System.out.println(pass);
-			System.out.println(name);
-			System.out.println(phone);
-			System.out.println(addressMain);
-			System.out.println(addressSub);
-			System.out.println(email);
 			
 			BookDAO dao = new BookDAO();
 			dao.updateMember(bookDTO);

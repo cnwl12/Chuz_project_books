@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="css/tiny-slider.css" />
     <link rel="stylesheet" href="css/aos.css" />
     <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/bs.css"/>
 
 <!-- <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.js">
 
@@ -38,16 +39,24 @@
 
 <br>
 <br><br><br><br><br><br><br><br>
-
-<nav>
-<h2>로그인</h2>
-<form id="lgp" action="loginPro.bs" method="post">
-ID : <input type="text" name="id"> <br>
-PASS : <input type="password" name="pass"> <br>
+<div id ="ySContent">
+<div class="loginCont">
+<div id="divTabMemberArea" class="yesTab_nor yesTab_blue tab_2col">
+<form  action="loginPro.bs" method="post">
+<ul  class="formulli" id="ulTabMember">
+<li><input type="text" name="id" placeholder="아이디"></li>
+<li><input type="password" name="pass" placeholder="비밀번호"> <br>
 <input type="submit" value="로그인">
 <a href="join.bs"><input type="button" value="회원가입"></a>
+</ul>
 </form>
-</nav>
+
+</div>
+
+
+
+</div>
+</div>
 
 
 </body>
