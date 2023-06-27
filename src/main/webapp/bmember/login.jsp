@@ -46,7 +46,7 @@
 <ul  class="formulli" id="ulTabMember">
 <li><input type="text" name="id" placeholder="아이디"></li>
 <li><input type="password" name="pass" placeholder="비밀번호"> <br>
-<input type="submit" value="로그인">
+<span class="loginCont btn_login bWrap btnC xb_size bWrap"><input type="submit" value="로그인" class="button btnC xb_size bWrap"></span>
 <a href="join.bs"><input type="button" value="회원가입"></a>
 </ul>
 </form>

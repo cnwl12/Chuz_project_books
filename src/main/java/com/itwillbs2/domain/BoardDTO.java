@@ -13,10 +13,33 @@ public class BoardDTO { //boarddto에 담아서 jsp에 전달
 	private String board_file;
 	private Timestamp board_date;
 	
+	// 넘길페이지 
+	private int prev_num; 
+	private int next_num;
+	
 	// get/set 메서드 생성
+	
+	
 	public int getBoard_num() {
 		return board_num;
 	}
+	
+	public int getPrev_num() {
+		return prev_num;
+	}
+
+	public void setPrev_num(int prev_num) {
+		this.prev_num = prev_num;
+	}
+
+	public int getNext_num() {
+		return next_num;
+	}
+
+	public void setNext_num(int next_num) {
+		this.next_num = next_num;
+	}
+
 	public void setBoard_num(int board_num) {
 		this.board_num = board_num;
 	}

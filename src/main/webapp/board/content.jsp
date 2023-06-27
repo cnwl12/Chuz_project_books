@@ -61,6 +61,7 @@ if(id!=null){ //세션값이 있으면
 %>
 <input type="button" value="삭제" onclick="location.href='delete.bo?board_num=<%=dto.getBoard_num()%>'">
 <input type="button" value="수정" onclick="location.href='fupdate.bo?board_num=<%=dto.getBoard_num()%>'">
+<input type="submit" value="추천">
 <%	
 		
 	}
@@ -70,42 +71,30 @@ if(id!=null){ //세션값이 있으면
 
 </table>
 
-<form method="post" encType = "multipart/form-data" action="comment_insert.bo">
+<form method="post"  action="comment_insert.bo">
 			<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
 				<tr>
 					<td style="border-bottom:none;" valign="middle"><%=id%></td>
 					<td><input type="text" style="height:50px;" class="form-control" placeholder="상대방을 존중하는 댓글을 남깁시다." name = "comment_text"></td>
 					<td><br><input type="submit" value="댓글 작성"></td>
 				</tr>
-				<tr>
-					<td colspan="2"><input type="file" name="comment_file"></td>
-				</tr>
 			</table>
 		</form>
 		
-		
-		
 		<!-- 이전, 다음글 없을 때  -->
 
-<%
-int max = 10;
-int num = (dto != null) ? dto.getBoard_num() : 0;
-%>
+<% if (dto.getPrev_num() != 0) { %>
+<input type="button" value="이전 글" onclick="location.href='content.bo?board_num=<%=dto.getPrev_num()%>'">
+<% } %>
+<!-- <input type="hidden" value="이전 글"> -->
 
-<input type="button" value="이전 글" onclick="location.href='content.bo?board_num=<%=num-1%>'">
 <input type="button" value="글목록" onclick="location.href='list.bo'">
 
-<% 
-if(dto == null || (num + 1) > max) {
-%>
-<input type="hide" value="다음 글" style="display: none;">
-<% 
-} else {
-%>
-<input type="button" value="다음 글" onclick="location.href='content.bo?board_num=<%=num + 1%>'">
-<%
-}
-%>
+<% if (dto.getNext_num() != 0) { %>
+<input type="button" value="다음 글" onclick="location.href='content.bo?board_num=<%=dto.getNext_num()%>'">
+<% } %>
+<!-- <input type="hidden" value="다음 글" >  -->
+
 	 
 		
 </body>

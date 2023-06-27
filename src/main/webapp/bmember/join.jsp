@@ -25,6 +25,19 @@ $(function(){
 	var pass = $.trim($("#pass").val());
 	var pass2 = $.trim($("#pass2").val());
 	
+	console.log(pass);
+	
+	$("#id").on("input", function() {
+		id = $("#id").length;
+		
+		if(id < 4 ){
+			$(".checkIdResult").html("4자리 이상으로 작성해주세요");
+		}else{
+			// 요건 충족했을 때 삭제
+		}
+		
+	})
+	
 	//trim 쓰기!! 
 	
 	$("#pass").on("input", function(){
@@ -55,10 +68,10 @@ $(function(){
 		tel =$("#phone").val();
 		
 		if(!(regexTel.tel)){
-			
 		$(".checkTelResult").html("연락처 자리수를 확인해주세요");
-		}else
-			$(".checkTelResult").html("연락처 확인");
+		}
+		
+		// $(".checkTelResult").remove();
 		
 	})//
 	
@@ -94,11 +107,6 @@ function removeHyphen(event) {
   input.value = cleanedPhoneNumber;
 }
 
-function validate() {
-	var id = document.getElementById("id");
-	var pass = document.getElementById("pass");
-}
- 
 function fun1() {
 	
 	// 아이디 작성 
@@ -176,14 +184,14 @@ function fun1() {
 	<div id="">
 	<ul class="formulli">
 	<li>id<input type="text" placeholder="id는 최대 4자리 이상으로 작성"
-				name="id" id="id"  > <span class="checkIdResult"> #중복확인용</span></li>
+				name="id" id="id"  > <span class="checkIdResult"></span></li>
 	<li>pass<input type="password" placeholder="비밀번호는 8자리 이상으로 작성"
 			name="pass" id="pass" >
 	</li>
 	<li>pass 재확인<input type="password" placeholder="비밀번호 동일" name="pass2" id="pass2" >		
-		<div class="checkPassResult">확인용</div>	</li>
+		<div class="checkPassResult"></div>	</li>
 	<li>이름<input type="text" name="name" id="name" > </li>
-	<li>휴대폰번호(연락처)<input type="text" name="phone" id="phone" oninput="removeHyphen(event)" ><span class="checkTelResult">연락처유효성</span></li>
+	<li>휴대폰번호(연락처)<input type="text" name="phone" id="phone" oninput="removeHyphen(event)" ><span class="checkTelResult"></span></li>
 	</ul>
 
 		<ul class="formulli">

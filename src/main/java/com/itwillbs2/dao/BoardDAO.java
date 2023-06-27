@@ -170,11 +170,16 @@ public class BoardDAO {
 		try {
 			con = getConnection(); // DB연결
 			
-			String sql = "select * from board where board_num=?";
+			// String sql = "select * from board where board_num=?";
+			//String sql = "SELECT *,  (SELECT  board_num FROM board WHERE board_num < 1 LIMIT1), (SELECT  board_num FROM board WHERE board_num > 1 LIMIT1)  FROM board_num = ?";
+			// String sql = "SELECT *, (SELECT board_num FROM board WHERE board_num < 1 LIMIT 1),  (SELECT board_num FROM board WHERE board_num > 1 LIMIT 1)  FROM board  WHERE board_num = ?";
+			String sql = "SELECT *, (SELECT board_num FROM board WHERE board_num < ? ORDER BY board_num DESC LIMIT 1) AS prev_num,  (SELECT board_num FROM board WHERE board_num > ? LIMIT 1) AS next_num FROM board WHERE board_num = ?";
 			
 			pstmt = con.prepareStatement(sql);
-			
+
 			pstmt.setInt(1,board_num); // 메서드명에 num으로 받아왔으니까 
+			pstmt.setInt(2, board_num);
+			pstmt.setInt(3, board_num);
 			
 			rs= pstmt.executeQuery(); // 실행 
 			
@@ -190,6 +195,10 @@ public class BoardDAO {
 				dto.setBoard_recommend(rs.getInt("board_recommend"));   
 				dto.setBoard_file(rs.getString("board_file"));
 				dto.setBoard_date(rs.getTimestamp("board_date"));
+				
+				// 이전글, 다음글 
+				dto.setPrev_num(rs.getInt("prev_num"));
+				dto.setNext_num(rs.getInt("next_num"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -336,5 +345,32 @@ public class BoardDAO {
 		}
 		
 	}//fupdateBoard 메서드 마무리 
+	
+	public int recommend(String id) {
+
+		int recommend_num =0;
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			con = getConnection();	
+			
+			String sql = "insert into board board_recommend values=?";
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, recommend_num);
+			pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			if(pstmt !=null)try{pstmt.close();}catch(Exception ex){}
+			if(con !=null)try{con.close();}catch(Exception ex){}
+		}
+		
+		return -1;
+	}
+	
 	
 }

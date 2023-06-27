@@ -62,11 +62,13 @@ String id =(String)session.getAttribute("id"); %>
 
 
 <%
+// TODO: 글작성, 갤러리 버튼 아이콘 변경
+
 if(id!=null){%>
 
 <a href="fwrite.bo"><input type="button" value="글작성"></a>
 <%} %>
-
+<a href="gallary.bo"><input type="button" value="갤러리"></a>
 
 <table border="1" width="700" >
 <tr >

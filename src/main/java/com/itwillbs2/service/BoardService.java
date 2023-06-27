@@ -219,8 +219,6 @@ public class BoardService {
 		
 		try {
 			// 삭제작업 바로 
-			// delete.jsp?num=1
-			// num=1 서버에 전달 => 서버 request 저장
 			int board_num = Integer.parseInt(request.getParameter("board_num"));
 
 			// DB작업하러가기 
@@ -239,12 +237,14 @@ public class BoardService {
 		}
 	}//
 	
+	// 메인화면에서 (기존 입력값) 
 	public JsonObject searchBook() {
 	    System.out.println("서비스");
 	    ApiExamSearchBook api = new ApiExamSearchBook();
 	    return api.getBook();
 	}
 	
+	// 키워드 검색했을 때 
 	public JsonObject searchBook(String keyWord) {
 	    System.out.println("키워드");
 	    ApiExamSearchBook api = new ApiExamSearchBook();

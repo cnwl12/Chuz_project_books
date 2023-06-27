@@ -19,7 +19,10 @@ import com.google.gson.JsonParser;
 
 public class ApiExamSearchBook {
 
-    public JsonObject getBook() {
+	// TODO : 오버로딩 줄이기,,,,,,,,,,, 
+	
+    // 없을 때 
+	public JsonObject getBook() {
     	
     	System.out.println("겟북");
         String clientId = "SG77rERJkx5teoolk8vI"; //애플리케이션 클라이언트 아이디
@@ -47,10 +50,9 @@ public class ApiExamSearchBook {
         return JsonParser.parseString(responseBody).getAsJsonObject();
     }
 
-    
+ // 키워드 검색했을 때    
  public JsonObject getBook(String keyWord) {
     	
-    	System.out.println("겟북");
         String clientId = "SG77rERJkx5teoolk8vI"; //애플리케이션 클라이언트 아이디
         String clientSecret = "FaVoUIMTux"; //애플리케이션 클라이언트 시크릿
 
@@ -76,8 +78,6 @@ public class ApiExamSearchBook {
         
         return JsonParser.parseString(responseBody).getAsJsonObject();
     }
-    
-    
     
     
     

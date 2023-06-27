@@ -19,8 +19,24 @@
     width: 360px;
 }
 
-.btnC.xb_size .bWrap {
-    padding: 15px 0;
+.btnC.btn_blue .bWrap{
+        border-color: #196ab3;
+    border-bottom-color: #165fa1;
+    border-right-color: #165fa1;
+    background-color: #196ab3;
+}
+button.btnC.xb_size .bWrap{
+height: 48px;
+}
+
+
+.btnC.xb_size .bWrap{
+	padding: 0px 65px;
     height: 28px;
     text-align: center;
+}
+
+.loginCont .btn_login {
+	margin: 20px 0 0 0;
+	width: 100%;
 }
