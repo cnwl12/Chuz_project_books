@@ -2,6 +2,7 @@
 <%@page import="com.itwillbs2.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,12 +26,15 @@
 
 <!--로그인 되어있는 아이디 == 세션에 저장된 "id"일치  -->
 <!-- string으로 형변환 -->
+
 <%
 BoardDTO dto=(BoardDTO)request.getAttribute("dto");
+String id =(String)session.getAttribute("id");
+%>
 
-String id =(String)session.getAttribute("id"); %>
 <h1>글내용 : 로그인(<%=id%>)</h1>
 <table border="2">
+
 <tr><td>No.</td><td><%=dto.getBoard_num()%></td></tr>
 
 
@@ -71,15 +75,48 @@ if(id!=null){ //세션값이 있으면
 
 </table>
 
-<form method="post"  action="comment_insert.bo">
-			<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
-				<tr>
-					<td style="border-bottom:none;" valign="middle"><%=id%></td>
-					<td><input type="text" style="height:50px;" class="form-control" placeholder="상대방을 존중하는 댓글을 남깁시다." name = "comment_text"></td>
-					<td><br><input type="submit" value="댓글 작성"></td>
-				</tr>
-			</table>
-		</form>
+<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
+
+		<tr>
+			<td>아이디</td>
+			<td>내용</td>
+			<td>작성일</td>
+		</tr>	
+		
+		<c:forEach var="comment" items="${commentList }">
+		<tr>
+			<td>${comment.comment_id }</td>
+			<td>${comment.comment_text }</td>
+			<td>${comment.comment_date }</td>
+		</tr>
+		</c:forEach>
+
+
+	</table>
+
+
+	<form method="post"  action="comment_insert.bo">
+		<input type="hidden" name="board_num" value="<%=dto.getBoard_num()%>">
+		<input type="hidden" name="comment_id" value="<%=id%>">
+		
+		<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
+			<tr>
+				<td style="border-bottom:none;" valign="middle"><%=id%></td>
+				<td><input type="text" style="height:50px;"
+				 class="form-control"  name = "comment_text"
+				 <c:choose>
+				 	<c:when test="${empty sessionScope.id }">
+				 		disabled="disabled" placeholder="로그인 후 이용해주세요."
+				 	</c:when>
+				 	<c:otherwise>
+				 		placeholder="상대방을 존중하는 댓글을 남깁시다."
+				 	</c:otherwise>
+				 </c:choose>
+				 ></td>
+				<td><br><input type="submit" value="댓글 작성"></td>
+			</tr>
+		</table>
+	</form>
 		
 		<!-- 이전, 다음글 없을 때  -->
 

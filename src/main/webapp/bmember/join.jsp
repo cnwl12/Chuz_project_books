@@ -28,12 +28,12 @@ $(function(){
 	console.log(pass);
 	
 	$("#id").on("input", function() {
-		id = $("#id").length;
-		
+		id = $("#id").val().length;
 		if(id < 4 ){
-			$(".checkIdResult").html("4자리 이상으로 작성해주세요");
+			$(".checkIdResult").html("4자리 이상으로 작성해주세요").css("color","red");
 		}else{
 			// 요건 충족했을 때 삭제
+			$(".checkIdResult").html("");
 		}
 		
 	})
@@ -65,8 +65,10 @@ $(function(){
 	
 	$("#phone").on("input",function(){
 		
-		tel =$("#phone").val();
-		
+		tel =$("#phone").val().length;
+// 		if(tel > 11){
+// 			tel.replace(/\D/g, '').slice(0, 11);
+// 		}
 		if(!(regexTel.tel)){
 		$(".checkTelResult").html("연락처 자리수를 확인해주세요");
 		}

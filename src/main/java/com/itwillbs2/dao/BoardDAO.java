@@ -1,14 +1,15 @@
 package com.itwillbs2.dao;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.sql.DataSource;
 
 import com.itwillbs2.domain.BoardDTO;
@@ -65,7 +66,7 @@ public class BoardDAO {
 		
 	} // insertBoard() 메서드 끝 
 	
-	public int getMaxNum() {
+	public int getMaxNum() { // 글넘버 +
 		int board_num = 0; // 초기화
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -308,6 +309,7 @@ public class BoardDAO {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
+			
 		}finally {//예외처리 
 			if(pstmt !=null) try {pstmt.close();} catch(Exception ex){}
 			if(con !=null) try {con.close();} catch(Exception ex){}
@@ -371,6 +373,118 @@ public class BoardDAO {
 		
 		return -1;
 	}
+	
+	
+	public void insertComment(HashMap<String, String> comment ) {
+		
+		// comment.get("board_num"); 
+		// HashMap<String, String> comment, 
+		Connection con = null; 
+		PreparedStatement pstmt = null;
+		
+		try {
+			con = getConnection(); 
+			// sql실행문						// 생략해도 되지만, 프로그램 가독성 등을 위해 작성이 좋음 
+			String sql="insert into comment(board_num,comment_num,comment_id, comment_text) values(?,?,?,?)";
+			// 연결된 문자열 통해 들어온(sql) 실행정보 변수에 담기 pstmt(prepareStatement 담을 리턴형 연결 맞추기)
+			pstmt = con.prepareStatement(sql);
+			
+			// ?에 채워넣을 값 가져오기 
+			pstmt.setInt(1, Integer.parseInt(comment.get("board_num"))); // 첫번째열에 , 주소값 dto에 저장된 num가져오기 
+			pstmt.setInt(2, Integer.parseInt(comment.get("comment_num"))); 
+			pstmt.setString(3, comment.get("comment_id"));
+			pstmt.setString(4, comment.get("comment_text"));
+			
+			// 실행
+			pstmt.executeUpdate(); 
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			
+		}finally {
+			if(pstmt !=null)try{pstmt.close();}catch(Exception ex){}
+			if(con !=null)try{con.close();}catch(Exception ex){}
+		}
+		
+	} // insertComment() 
+	
+	public String getMaxNum_comment() { // 댓글 숫자 +
+		int comment_num = 0; // 초기화
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {//1~4단계 sql 구문작성 및 db연결
+			con = getConnection(); // DB연결
+			
+			//3 sql구문 
+			String sql ="select max(comment_num)from comment"; 
+			pstmt = con.prepareStatement(sql);
+			
+			//4 실행 -> 결과 저장
+			rs = pstmt.executeQuery(); 
+			
+			if(rs.next()) { //5 결과접근 -> num에 저장 
+				comment_num = rs.getInt("max(comment_num)"); //rs.getInt(1) - 1번열로 해도 됨 
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			if(rs !=null) try {rs.close();} catch(Exception ex){}
+			if(pstmt !=null) try {pstmt.close();} catch(Exception ex){}
+			if(con !=null) try {con.close();} catch(Exception ex){}
+		
+			
+		}// 마무리
+		return (comment_num + 1) + "";
+	}//getMaxNum 메서드 
+
+	public List<HashMap<String, String>> getCommentList(int board_num) {
+		
+		List<HashMap<String, String>> commentList = new ArrayList<>();
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			
+			con = getConnection();
+			
+			String sql = "select * from comment where board_num=?";
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1,board_num);
+			
+			rs= pstmt.executeQuery();
+			
+			while(rs.next()) {
+				
+				HashMap<String, String> comment = new HashMap<String, String>(); // 작은바구니 타입
+				
+//				comment.put("board_num", board_num); // 화면에 보여줄 필요가 없어서 put no
+				comment.put("comment_num", rs.getInt("comment_num")+"");
+				comment.put("comment_id", rs.getString("comment_id"));
+				comment.put("comment_text", rs.getString("comment_text"));
+				comment.put("comment_date", rs.getString("comment_date"));
+				
+				commentList.add(comment);
+			}
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+		
+		}finally {
+			if(rs !=null) try {rs.close();} catch(Exception ex){}
+			if(pstmt !=null) try {pstmt.close();} catch(Exception ex){}
+			if(con !=null) try {con.close();} catch(Exception ex){}
+		}
+		
+		return commentList;
+	}
+	
+	
+	
 	
 	
 }

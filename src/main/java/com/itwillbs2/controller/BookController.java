@@ -177,10 +177,7 @@ public class BookController extends HttpServlet {
 			
 		} // 세션 삭제
 
-		if (strPath.equals("/comment_insert.bo")) {
-
-			response.sendRedirect("content.jsp");
-		}
+		
 		
 //		if (strPath.equals("/checkId.bs")) {
 //			 System.out.println("체크 아이디");

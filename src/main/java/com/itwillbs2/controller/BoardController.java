@@ -1,6 +1,7 @@
 package com.itwillbs2.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.itwillbs2.dao.ApiExamSearchBook;
 import com.itwillbs2.domain.BoardDTO;
 import com.itwillbs2.service.BoardService;
+import com.itwillbs2.service.BookService;
 import com.itwillbs2.domain.PageDTO;
 
 public class BoardController extends HttpServlet { //상속받아서 오버라이딩 
@@ -162,15 +164,20 @@ public class BoardController extends HttpServlet { //상속받아서 오버라�
 		if(strPath.equals("/content.bo")) {
 			// BoardService 객체생성
 			BoardService boardService = new BoardService();
-			BoardDTO dto = boardService.getBoard(request); // 메서드 호출
 			
+			BoardDTO dto = boardService.getBoard(request); // 메서드 호출
 			request.setAttribute("dto", dto); //request에 저장 
+			
+			List<HashMap<String, String>> commentList = boardService.getComment(request);
+			request.setAttribute("commentList", commentList);
+			System.out.println(commentList);
 			
 			// content.jsp로 이동 (주소변동 없이) 
 			RequestDispatcher dis = request.getRequestDispatcher("board/content.jsp");
 			dis.forward(request, response);
 			
 		}// getBoard()
+		
 		
 		if(strPath.equals("/delete.bo")) {
 
@@ -285,8 +292,23 @@ public class BoardController extends HttpServlet { //상속받아서 오버라�
 			dis.forward(request, response);
 			
 		}
+
+		if (strPath.equals("/comment_insert.bo")) {
+
+//			RequestDispatcher dis = request.getRequestDispatcher("content.bo");
+//			dis.forward(request, response);
+			
+			BoardService boardService = new BoardService();
+			String board_num = request.getParameter("board_num");
+			boardService.insertComment(request);
+			
+			response.sendRedirect("content.bo?board_num=" + board_num);
+			
+			
 		
-		
+		}
+
+
 	}// doProcess
 
 }

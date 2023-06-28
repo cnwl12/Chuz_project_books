@@ -1,7 +1,9 @@
 package com.itwillbs2.service;
 
 import java.io.File;
+import java.io.UnsupportedEncodingException;
 import java.sql.Timestamp;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,8 +19,6 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 public class BoardService {
 
 	public void insertBoard(HttpServletRequest request) {
-		
-		System.out.println(request);
 		
 		try {
 			// 첨부파일 올라갈 물리적 경로 
@@ -249,6 +249,50 @@ public class BoardService {
 	    System.out.println("키워드");
 	    ApiExamSearchBook api = new ApiExamSearchBook();
 	    return api.getBook(keyWord);
+	}
+
+	public void insertComment(HttpServletRequest request) {
+		
+		try {
+			request.setCharacterEncoding("UTF-8");
+			
+			BoardDAO dao = new BoardDAO();
+			
+			HashMap<String, String> comment = new HashMap<>();
+			
+			comment.put("board_num", request.getParameter("board_num"));
+			comment.put("comment_num", dao.getMaxNum_comment());
+			comment.put("comment_id", request.getParameter("comment_id"));
+			comment.put("comment_text", request.getParameter("comment_text"));
+		//	comment.put("comment_date", request.getParameter("comment_date"));
+			
+			System.out.println(comment);
+			// insertBoard(바구니 주소)메서드 호출해서 디비에 게시판 글 저장 
+			dao.insertComment(comment);
+			
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		
+	}//
+
+	public List<HashMap<String, String>> getComment(HttpServletRequest request) {
+		
+		List<HashMap<String, String>> commentList = null;
+		
+		try {
+			int board_num = Integer.parseInt(request.getParameter("board_num"));
+			
+			  BoardDAO dao = new BoardDAO();
+			  commentList = dao.getCommentList(board_num);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+
+		}
+		
+		return commentList;
 	}
 
 
