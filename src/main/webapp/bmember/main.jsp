@@ -44,6 +44,7 @@
   			console.log(book);
   			var str = "";
   			// book.title
+  			?????
   			
   			str += "<div class='property-item'> ";
             str += 		"<a href='property-single.html' class='img'> ";
