@@ -29,6 +29,8 @@ public class BoardController extends HttpServlet { //상속받아서 오버라�
 	}
 	
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// 한글 깨짐 방지) doProcess 과정 거칠 때 if 만나기 전에 위에서 아예 선언
+		request.setCharacterEncoding("UTF-8");
 		// 가상주소 뽑아오기 getServletPath(); 
 		String strPath = request.getServletPath(); 
 		
@@ -297,9 +299,13 @@ public class BoardController extends HttpServlet { //상속받아서 오버라�
 
 //			RequestDispatcher dis = request.getRequestDispatcher("content.bo");
 //			dis.forward(request, response);
+
+			request.setCharacterEncoding("UTF-8");
 			
 			BoardService boardService = new BoardService();
 			String board_num = request.getParameter("board_num");
+			
+			System.out.println(request.getParameter("comment_text"));
 			boardService.insertComment(request);
 			
 			response.sendRedirect("content.bo?board_num=" + board_num);
@@ -307,8 +313,7 @@ public class BoardController extends HttpServlet { //상속받아서 오버라�
 			
 		
 		}
-
-
+		
 	}// doProcess
 
 }

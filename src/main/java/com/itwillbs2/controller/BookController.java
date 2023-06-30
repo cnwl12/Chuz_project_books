@@ -43,14 +43,6 @@ public class BookController extends HttpServlet {
 			dis.forward(request, response);
 		}
 
-		// 고객센터 매핑
-		if (strPath.equals("/services.bs")) {
-			// "/insert.bs" 주소가 변경되지 않고(가상주소 유지) 이동
-			// RequestDispatcher 자바파일 forward 메서드 호출 // jsp주소 화면에 안보이게 주소변경없이 유지
-			RequestDispatcher dis = request.getRequestDispatcher("bmember/services.jsp");
-			dis.forward(request, response);
-		}
-
 		// 회원가입 매핑
 		if (strPath.equals("/join.bs")) {
 			// "/insert.bs" 주소가 변경되지 않고(가상주소 유지) 이동

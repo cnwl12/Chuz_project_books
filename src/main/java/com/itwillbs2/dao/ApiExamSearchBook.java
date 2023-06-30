@@ -13,6 +13,8 @@ import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.catalina.connector.Response;
+
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
@@ -24,7 +26,7 @@ public class ApiExamSearchBook {
     // 없을 때 
 	public JsonObject getBook() {
     	
-    	System.out.println("겟북");
+    	// System.out.println("겟북");
         String clientId = "SG77rERJkx5teoolk8vI"; //애플리케이션 클라이언트 아이디
         String clientSecret = "FaVoUIMTux"; //애플리케이션 클라이언트 시크릿
 

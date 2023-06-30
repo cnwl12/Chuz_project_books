@@ -22,6 +22,7 @@
 <link rel="stylesheet" href="css/tiny-slider.css" />
 <link rel="stylesheet" href="css/aos.css" />
 <link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="css/listcomment.css" />
 
 </head>
 <body>
@@ -56,9 +57,10 @@ List<BoardDTO> dtoList =(List<BoardDTO>)request.getAttribute("dtoList"); //가�
 PageDTO pageDTO =(PageDTO)request.getAttribute("pageDTO"); // 페이징 처리하는 pageDTO가져와서 담기 
 
 String id =(String)session.getAttribute("id"); %>
+<div class="sub_cont">
+<div class=".box_left">
 
-<h4>글목록 : 로그인(<%=id%>)</h4>
-
+</div>
 
 
 <%
@@ -68,17 +70,16 @@ if(id!=null){%>
 
 <a href="fwrite.bo"><input type="button" value="글작성"></a>
 <%} %>
-<a href="gallary.bo"><input type="button" value="갤러리"></a>
+<a href="gallary.bo"><input type="button" value="갤러리" id="gallaryBt"></a>
 
-<table border="1" width="700" >
-<tr >
-<td>No.</td>
-<td>제목</td>
-<td>작성자</td>
-<td>조회수</td>
-<td>추천수</td>
-<td>작성일</td>
-</tr>
+<table border="1" width="100" class="brod_table">
+<tr>
+<th>No.</th>
+<th>제목</th>
+<th>작성자</th>
+<th>조회수</th>
+<th>작성일</th>
+
 <% //결과 while 접근(rs.next()) -> T -> 열접근 rs.getInt("num") ...
 
 for(int i = 0; i<dtoList.size(); i++){ // 자바 내장객체 배열길이는 size()
@@ -91,7 +92,6 @@ for(int i = 0; i<dtoList.size(); i++){ // 자바 내장객체 배열길이는 si
 	<td><a href="content.bo?board_num=<%=dto.getBoard_num()%>"><%=dto.getBoard_subject()%></a></td>
 	<td><%=dto.getBoard_name()%></td>
 	<td><%=dto.getBoard_readcount()%></td>
-	<td><%=dto.getBoard_recommend()%></td>
 	<td><%=dateFormat.format(dto.getBoard_date())%></td></tr>
 <%
 } 
@@ -122,17 +122,15 @@ if(pageDTO.getEndPage() < pageDTO.getPageCount()){ // 1~10 < 11~20, 21~30 ---
 <%
 }
  %>
-<div>
+<div class="buttonDiv">
 <form action="list.bo">
-<input type="text" name="keyWord" id="keyWord" >
-<input type="submit" value="검색">
+<input type="text" name="keyWord" id="keyWord"  >
+<input type="submit" value="검색" >
 </form>
 </div>
 
 
-
-
-
+ </div>
 </body>
 
 

@@ -48,7 +48,6 @@ public class BoardService {
 			// 조회수 readcount => 0 설정(작성전까진 아무도 못보니까)
 			int board_readcount = 0;
 			// 추천수 
-			int board_recommend = 0;
 			// 작성일 date	=> 현시스템 날짜,시간 가져오기		//시스템 날짜 가져오기 
 			Timestamp board_date = new Timestamp(System.currentTimeMillis());
 			
@@ -64,7 +63,6 @@ public class BoardService {
 			dto.setBoard_content(board_content);
 			dto.setBoard_name(board_name);
 			dto.setBoard_readcount(board_readcount);
-			dto.setBoard_recommend(board_recommend);
 			dto.setBoard_file(board_file);
 			dto.setBoard_date(board_date);
 
@@ -239,14 +237,14 @@ public class BoardService {
 	
 	// 메인화면에서 (기존 입력값) 
 	public JsonObject searchBook() {
-	    System.out.println("서비스");
+	   //  System.out.println("서비스");
 	    ApiExamSearchBook api = new ApiExamSearchBook();
 	    return api.getBook();
 	}
 	
 	// 키워드 검색했을 때 
 	public JsonObject searchBook(String keyWord) {
-	    System.out.println("키워드");
+		
 	    ApiExamSearchBook api = new ApiExamSearchBook();
 	    return api.getBook(keyWord);
 	}
@@ -281,6 +279,9 @@ public class BoardService {
 		List<HashMap<String, String>> commentList = null;
 		
 		try {
+			
+			request.setCharacterEncoding("utf-8");
+			
 			int board_num = Integer.parseInt(request.getParameter("board_num"));
 			
 			  BoardDAO dao = new BoardDAO();

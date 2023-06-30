@@ -12,7 +12,6 @@
             >
               <li class="active"><a href="main.bs">Home</a></li>
               <li><a href="list.bo">게시판</a></li>
-              <li><a href="services.bs">고객센터</a></li>
               
               <li class="has-children">
               <%

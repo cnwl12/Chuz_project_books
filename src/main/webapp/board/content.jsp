@@ -15,6 +15,7 @@
 <link rel="stylesheet" href="css/tiny-slider.css" />
 <link rel="stylesheet" href="css/aos.css" />
 <link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="css/listcomment.css" />
 
 
 </head>
@@ -32,12 +33,9 @@ BoardDTO dto=(BoardDTO)request.getAttribute("dto");
 String id =(String)session.getAttribute("id");
 %>
 
-<h1>글내용 : 로그인(<%=id%>)</h1>
-<table border="2">
+<table border="2" class="contenTable">
 
 <tr><td>No.</td><td><%=dto.getBoard_num()%></td></tr>
-
-
 <tr><td>글쓴이</td><td><%=dto.getBoard_name() %></td></tr>
 <tr><td>조회수</td><td><%=dto.getBoard_readcount()%></td></tr>
 <tr><td>작성일</td><td><%=dto.getBoard_date()%></td></tr>
@@ -65,7 +63,6 @@ if(id!=null){ //세션값이 있으면
 %>
 <input type="button" value="삭제" onclick="location.href='delete.bo?board_num=<%=dto.getBoard_num()%>'">
 <input type="button" value="수정" onclick="location.href='fupdate.bo?board_num=<%=dto.getBoard_num()%>'">
-<input type="submit" value="추천">
 <%	
 		
 	}
@@ -74,6 +71,10 @@ if(id!=null){ //세션값이 있으면
 %>
 
 </table>
+<br>
+<br>
+<br>
+<br>
 
 <table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
 
@@ -81,6 +82,7 @@ if(id!=null){ //세션값이 있으면
 			<td>아이디</td>
 			<td>내용</td>
 			<td>작성일</td>
+			<td> </td>
 		</tr>	
 		
 		<c:forEach var="comment" items="${commentList }">
@@ -88,13 +90,41 @@ if(id!=null){ //세션값이 있으면
 			<td>${comment.comment_id }</td>
 			<td>${comment.comment_text }</td>
 			<td>${comment.comment_date }</td>
+			<td><input type="button" value="삭제"></td>
 		</tr>
+	
 		</c:forEach>
-
+	
 
 	</table>
 
+<form method="post" action="comment_insert.bo">
+		<input type="hidden" name="board_num" value="<%=dto.getBoard_num()%>">
+		<input type="hidden" name="comment_id" value="<%=id%>">
+		
+		<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
+			<tr>
+			<%
+			if(id !=null){
+			%>
+			<td style="border-bottom:none;" valign="middle"><%=id%></td>
+			<td><input type="text" style="height:50px;" class="form-control"  placeholder="상대방을 존중하는 댓글을 남깁시다." name ="comment_text">
+			<td><input type="submit" value="댓글 작성"></td>
+			<%
+			}else{
+				%>
+				<td>
+				<input type="text" style="height:50px;" class="form-control"  disabled  placeholder="로그인 후 작성가능합니다" name ="comment_text">
+				</td>
+			<%} 
+			%>
+			
+			
+			</tr>
+		</table>
+	</form>
 
+<%-- 
 	<form method="post"  action="comment_insert.bo">
 		<input type="hidden" name="board_num" value="<%=dto.getBoard_num()%>">
 		<input type="hidden" name="comment_id" value="<%=id%>">
@@ -116,7 +146,7 @@ if(id!=null){ //세션값이 있으면
 				<td><br><input type="submit" value="댓글 작성"></td>
 			</tr>
 		</table>
-	</form>
+	</form> --%>
 		
 		<!-- 이전, 다음글 없을 때  -->
 

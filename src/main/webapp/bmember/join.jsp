@@ -29,8 +29,9 @@ $(function(){
 	
 	$("#id").on("input", function() {
 		id = $("#id").val().length;
+		
 		if(id < 4 ){
-			$(".checkIdResult").html("4자리 이상으로 작성해주세요").css("color","red");
+			$(".checkIdResult").html("4자리 이상 작성").css("color","red");
 		}else{
 			// 요건 충족했을 때 삭제
 			$(".checkIdResult").html("");
@@ -38,8 +39,8 @@ $(function(){
 		
 	})
 	
-	//trim 쓰기!! 
-	
+	// 콘솔 확인용
+	/* 
 	$("#pass").on("input", function(){
 		console.log("#pass : " + $("#pass"));
 		console.log("#pass.val() : " + $("#pass").val());
@@ -48,6 +49,8 @@ $(function(){
 	})
 	
 	console.log(pass==pass2);
+	*/
+	
 
 	$("#pass2").on("input", function(){
 		pass = $("#pass").val();
@@ -56,8 +59,9 @@ $(function(){
 		if(pass == pass2){
 			//console.log("일치합니다");
 			$(".checkPassResult").html("비밀번호가 일치합니다");	
+			$(".checkPassResult").html("");
 		}else{
-			$(".checkPassResult").html("비밀번호가 불일치합니다");	
+			$(".checkPassResult").html("비밀번호가 불일치합니다").css("color","red");	
 			// $("#pass2").focus();
 			console.log("불일치"); 
 		}
@@ -70,7 +74,7 @@ $(function(){
 // 			tel.replace(/\D/g, '').slice(0, 11);
 // 		}
 		if(!(regexTel.tel)){
-		$(".checkTelResult").html("연락처 자리수를 확인해주세요");
+		$(".checkTelResult").html("연락처 자리수 확인").css("color","red");
 		}
 		
 		// $(".checkTelResult").remove();
@@ -179,35 +183,55 @@ function fun1() {
 	<br>
 	<br>
 	<br>
-<div class="ySJoinStep">
-	<h1>회원가입</h1>
+	
 	<!-- id/pass 설정하기  -->
 	<form action="joinPro.bs" method="post" name="checkform" onsubmit="return fun1()"> <!--  -->
-	<div id="">
-	<ul class="formulli">
-	<li>id<input type="text" placeholder="id는 최대 4자리 이상으로 작성"
-				name="id" id="id"  > <span class="checkIdResult"></span></li>
-	<li>pass<input type="password" placeholder="비밀번호는 8자리 이상으로 작성"
-			name="pass" id="pass" >
-	</li>
-	<li>pass 재확인<input type="password" placeholder="비밀번호 동일" name="pass2" id="pass2" >		
-		<div class="checkPassResult"></div>	</li>
-	<li>이름<input type="text" name="name" id="name" > </li>
-	<li>휴대폰번호(연락처)<input type="text" name="phone" id="phone" oninput="removeHyphen(event)" ><span class="checkTelResult"></span></li>
-	</ul>
-
-		<ul class="formulli">
-			<li>E-mail <input type="email" name="email">
-			</li> 주소
-			<input type="text" id="sample6_postcode" placeholder="우편번호">
+	<div >
+	
+	<table style=" margin:0 auto; padding:30px 0 0 0;">
+	<tbody >
+	<tr><td style="color: maroon;" > 회원가입 :)</td> </tr>
+	
+	<tr>
+	<td>아이디 </td>
+	<td><input type="text" name="id" id="id" ></td>	
+	<td><span class="checkIdResult"></span></td>
+	</tr>
+	
+	<tr>
+	<td>비밀번호 </td> <td><input type="password" name="pass" id="pass" ></td></tr>
+	
+	<tr>
+	<td>비밀번호 재입력 </td>
+	<td><input type="password" name="pass2" id="pass2"></td>	
+	<td><span class="checkPassResult"></span></td>
+	</tr>
+	
+	<tr><td>이름 </td>
+		<td><input type="text" name="name" id="name" ></td></tr>
+	<tr><td>휴대전화 </td>
+		<td><input type="text" name="phone" id="phone" oninput="removeHyphen(event)" ></td>
+		<td><span class="checkTelResult"></span></td></tr>
+	<tr><td>E-mail</td>
+		<td><input type="email" name="email"></td></tr>
+	<tr>
+	<td vertical-align:top>주소</td>
+	<td>
+			<input type="text" id="sample6_postcode" placeholder="우편번호"></td>
+			<td>
 			<input type="button" onclick="sample6_execDaumPostcode()"
-				value="우편번호 찾기">
-			<li><input type="text" id="sample6_address" placeholder="주소"
-				name="addressMain"> <input type="text"
-				id="sample6_extraAddress" placeholder="참고항목"></li>
-			<li><input type="text" id="sample6_detailAddress"
-				placeholder="상세주소" name="addressSub"></li>
-		</ul>
+				value="우편번호 찾기"></td></tr>
+				<tr>
+				<td></td>
+			<td><input type="text" id="sample6_address" placeholder="주소"
+				name="addressMain"></td></tr>
+				<tr>
+				<td></td>
+				<td><input type="text" id="sample6_detailAddress"
+				placeholder="상세주소" name="addressSub"></td>
+				<td> <input type="text"
+				id="sample6_extraAddress" placeholder="참고항목"></td></tr>
+			
 		<script
 			src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 		<script>
@@ -259,39 +283,18 @@ function fun1() {
         }).open();
     }
 </script>
-
-
-
-
+</tbody>
+</table>
 		<!-- 제출/초기화 -->
+	<div style=" margin:0 auto; padding:30px 0 0 0; border-bottom:4px solid #505050; width:930px"></div>
 	
-	
-			<div>
+			<div style=" margin:0 auto; padding:20px 0; text-align:center;width:930px">
 				<input type="button" value="가입취소" onclick="history.back();">
 				<input type="submit" value="회원가입" > 
 				<input type="reset" value="초기화">
 			</div>
 		</div>
 	</form>
-</div>
-
-		<!-- <p>
-			ID<span>*</span> <input type="text" placeholder="id는 최대 4자리 이상으로 작성"
-				name="id" id="id"  >
-				 <input type="button"
-				value="중복확인" width="10" height="3" onclick="idCheck()" > <br>
-		</p>
-
-		PASS* <input type="password" placeholder="비밀번호는 8자리 이상으로 작성"
-			name="pass" id="pass" ><br> PASS 재확인* <input
-			type="password" placeholder="비밀번호 동일" name="pass2" id="pass2" ><br>
-
-		이름* <input type="text" name="name" id="name" ><br> 휴대폰번호(연락처)* <input
-			type="text" name="phone" id="phone" ><br> -->
-
-		<!-- 주소- 다음api  -->
-		
-
 
 </body>
 </html>
