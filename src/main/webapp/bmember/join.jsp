@@ -9,13 +9,15 @@
 
 
 <link rel="stylesheet" href="fonts/icomoon/style.css" />
-<link rel="stylesheet" href="fonts/flaticon/font/flaticon.css" />
 
-<link rel="stylesheet" href="css/tiny-slider.css" />
-<link rel="stylesheet" href="css/aos.css" />
 <link rel="stylesheet" href="css/style.css" />
 <link rel="stylesheet" href="css/bs.css"/>
 <link rel="stylesheet" href="css/member.css"/>
+<style type="text/css">
+td not("#notd"){
+padding-left: 20px;
+}
+</style>
 <script type="text/javascript">
 
 $(function(){
@@ -70,14 +72,25 @@ $(function(){
 	$("#phone").on("input",function(){
 		
 		tel =$("#phone").val().length;
-// 		if(tel > 11){
-// 			tel.replace(/\D/g, '').slice(0, 11);
-// 		}
-		if(!(regexTel.tel)){
-		$(".checkTelResult").html("연락처 자리수 확인").css("color","red");
-		}
 		
-		// $(".checkTelResult").remove();
+ 		/* if(tel > 11){
+ 			tel.replace(/\D/g, '').slice(0, 11);
+		}
+ 		 */
+ 		
+ 		if(tel > 11 || tel < 11){
+ 			$(".checkTelResult").html("연락처 자리수 확인").css("color","red");
+ 		}else{
+			$(".checkTelResult").html(" ")	
+		}
+ 		
+ 		
+		/* if(!(regexTel.tel)){
+			$(".checkTelResult").html("연락처 자리수 확인").css("color","red");
+		}else{
+			$(".checkTelResult").html(" ")	
+		} */
+		
 		
 	})//
 	
@@ -175,20 +188,12 @@ function fun1() {
 <body>
 
 	<jsp:include page="../include/top.jsp"></jsp:include>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
 	
 	<!-- id/pass 설정하기  -->
 	<form action="joinPro.bs" method="post" name="checkform" onsubmit="return fun1()"> <!--  -->
-	<div >
+	<div>
 	
-	<table style=" margin:0 auto; padding:30px 0 0 0;">
+	<table style=" margin:0 auto; padding:30px 0 0 0;" class="joinTable">
 	<tbody >
 	<tr><td style="color: maroon;" > 회원가입 :)</td> </tr>
 	
@@ -218,7 +223,7 @@ function fun1() {
 	<td vertical-align:top>주소</td>
 	<td>
 			<input type="text" id="sample6_postcode" placeholder="우편번호"></td>
-			<td>
+			<td id="notd">
 			<input type="button" onclick="sample6_execDaumPostcode()"
 				value="우편번호 찾기"></td></tr>
 				<tr>
@@ -229,7 +234,7 @@ function fun1() {
 				<td></td>
 				<td><input type="text" id="sample6_detailAddress"
 				placeholder="상세주소" name="addressSub"></td>
-				<td> <input type="text"
+				<td > <input type="text"
 				id="sample6_extraAddress" placeholder="참고항목"></td></tr>
 			
 		<script

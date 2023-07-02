@@ -12,23 +12,13 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="author" content="Untree.co" />
-    <link rel="shortcut icon" href="favicon.png" />
-
-    <meta name="description" content="" />
-    <meta name="keywords" content="bootstrap, bootstrap5" />
-
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
-
     <link rel="stylesheet" href="fonts/icomoon/style.css" />
-    <link rel="stylesheet" href="fonts/flaticon/font/flaticon.css" />
-
     <link rel="stylesheet" href="css/tiny-slider.css"   />
-    <link rel="stylesheet" href="css/aos.css" />
     <link rel="stylesheet" href="css/style.css" />
 	<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.js"></script>
+	<style>
+	.site-nav{position: absolute;}
+	</style>
     <title>
      main
     </title>
@@ -40,35 +30,40 @@
   $(function(){
 	  
 	  $("#searchForm").on("submit",function(e){
-		
-		  e.preventDefault(); 
+		  e.preventDefault();
+		  var searchKeyWord = $.trim($("#searchF").val());
+		  if(searchKeyWord==""){
+			  alert("검색어를 입력해주세요.");
+			  return false;
+		  }
+		  
+		  location.href="allbookList.bo?pageNum=1&searchKeyWord="+searchKeyWord;
 		  // 페이지 이동없이 접근 제한
 		  // 맨처음에 와야함 
-		  alert("검색어를 입력해주세요!");
+		//  alert("검색어를 입력하세요");
 		  
-		  if(trim(searchKeyword)="") {// 공백제겋
-			  alert("검색어를 입력해주세요")} // if문안에 뭐쓰징
-		  else{location.href="list.bo?searchKeyword"+searchKeyword}
-		  })
-		  if(trim(searchKeyword)="") {
-		  alert("검색어를 입력해주세요");
-		  $("#searchF).focus();
-		  }else{location.href="list.bo?searchKeyword"+searchKeyword}
-		  })
 		  
-	  })
+		  /* if((searchKeyword)=="") {// 공백제거
+			  alert(searchKeyword)
+			  	
+		  
+		  }else{ //이동 
+			  location.href="list.bo?searchKeyword"+searchKeyword
+		  } */
+		  
+		  /* if(trim(searchKeyword)="") {
+		  	alert("검색어를 입력해주세요");
+		  	$("#searchF").focus();
+		  }else{
+			  location.href="list.bo?searchKeyword"+searchKeyword
+		  } */
+	  }) 
   })
-  
-  
-   $(document).ready(function() {
- 	 $("#searchF").focus();
-	});
-  
   
   </script>
   
-  
-  <!-- 여기 -->
+<!--   
+  여기
   <script>
   $(document).ready(function(){
   		console.log(${bookList});
@@ -85,7 +80,7 @@
             str += 			"<img src= '"+book.image+"' alt='Image' class='img-fluid' />"
             str += 		"</a>"
             str += "<div class='property-content'>"
-            str += 		"<div class='price mb-2'>"
+             str += 		"<div class='price mb-2'>"
             str +=			"<span>"+book.discount+"</span>"
             str +=		"</div>"
             str += 		"<div>"
@@ -104,11 +99,9 @@
   		/*  var bookList = ${bookList.get("items")};
   		 
   		console.log(bookList.get("items")[0]); */
-  	
-  		
 	  		
   	})
-  </script>
+  </script> -->
   <!--   -->
     <div class="site-mobile-menu site-navbar-target">
       <div class="site-mobile-menu-header">
@@ -121,10 +114,8 @@
     
     <!-- header 부분 - top  -->
 <jsp:include page="../include/top.jsp"></jsp:include>
-
-
                   
-      	<!-- 드롭다운메뉴      
+    	<!-- 드롭다운메뉴      
       	<li class="has-children">
                  <a href="#">Dropdown</a>
                  <ul class="dropdown">
@@ -133,9 +124,6 @@
                       <li><a href="#">Sub Menu Three</a></li>
                    </ul> 
               	</li> --> 
-              
-
-
 
 <!-- 메인 슬라이드 : 검색창 -->
     <div class="hero">
@@ -161,7 +149,6 @@
               쉽고 빠르게 검색해보세요
             </h1>
             <form 
-              action="allbookList.bo"
               class="narrow-w form-search d-flex align-items-stretch mb-3"
               data-aos="fade-up"
               data-aos-delay="200"
@@ -180,203 +167,58 @@
       </div>
     </div>
 
-    <div class="section">
-      <div class="container">
-        <div class="row mb-5 align-items-center">
-          <div class="col-lg-6">
-            <h2 class="font-weight-bold text-primary heading">
-            	추천리스트
-            </h2>
-          </div>
-        </div>
+<!--     <div class="section"> -->
+<!--       <div class="container"> -->
+<!--         <div class="row mb-5 align-items-center"> -->
+<!--           <div class="col-lg-6"> -->
+<!--             <h2 class="font-weight-bold text-primary heading"> -->
+<!--             	추천리스트 -->
+<!--             </h2> -->
+<!--           </div> -->
+<!--         </div>  -->
         
-        <div class="row">
-          <div class="col-12">
-            <div class="property-slider-wrap">
-              <div class="property-slider">
+<!--         <div class="row"> -->
+<!--           <div class="col-12"> -->
+<!--             <div class="property-slider-wrap"> -->
+<!--               <div class="property-slider"> -->
                
-<!--                 .item -->
-              </div>
+<!-- 			 item  -->
+<!--               </div> -->
 
-              <div
-                id="property-nav"
-                class="controls"
-                tabindex="0"
-                aria-label="Carousel Navigation"
-              >
-                <span
-                  class="prev"
-                  data-controls="prev"
-                  aria-controls="property"
-                  tabindex="-1"
-                  >Prev</span
-                >
-                <span
-                  class="next"
-                  data-controls="next"
-                  aria-controls="property"
-                  tabindex="-1"
-                  >Next</span
-                >
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-<!-- /////하단/////   -->
-
-    <div class="section sec-testimonials">
-      <div class="container">
-        <div class="row mb-5 align-items-center">
-          <div class="col-md-6">
-            <h2 class="font-weight-bold heading text-primary mb-4 mb-md-0">
-              Customer Says
-            </h2>
-          </div>
-          <div class="col-md-6 text-md-end">
-            <div id="testimonial-nav">
-              <span class="prev" data-controls="prev">Prev</span>
-
-              <span class="next" data-controls="next">Next</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-lg-4"></div>
-        </div>
-        <div class="testimonial-slider-wrap">
-          <div class="testimonial-slider">
-            <div class="item">
-              <div class="testimonial">
-                <img
-                  src="images/person_1-min.jpg"
-                  alt="Image"
-                  class="img-fluid rounded-circle w-25 mb-4"
-                />
-                <div class="rate">
-                  <span class="icon-star text-warning"></span>
-                  <span class="icon-star text-warning"></span>
-                  <span class="icon-star text-warning"></span>
-                  <span class="icon-star text-warning"></span>
-                  <span class="icon-star text-warning"></span>
-                </div>
-                <h3 class="h5 text-primary mb-4">James Smith</h3>
-                <blockquote>
-                  <p>
-                    &ldquo;Far far away, behind the word mountains, far from the
-                    countries Vokalia and Consonantia, there live the blind
-                    texts. Separated they live in Bookmarksgrove right at the
-                    coast of the Semantics, a large language ocean.&rdquo;
-                  </p>
-                </blockquote>
-                <p class="text-black-50">Designer, Co-founder</p>
-              </div>
-            </div>
-
-            <div class="item">
-              <div class="testimonial">
-                <img
-                  src="images/person_2-min.jpg"
-                  alt="Image"
-                  class="img-fluid rounded-circle w-25 mb-4"
-                />
-                <div class="rate">
-                  <span class="icon-star text-warning"></span>
-                  <span class="icon-star text-warning"></span>
-                  <span class="icon-star text-warning"></span>
-                  <span class="icon-star text-warning"></span>
-                  <span class="icon-star text-warning"></span>
-                </div>
-                <h3 class="h5 text-primary mb-4">Mike Houston</h3>
-                <blockquote>
-                  <p>
-                    &ldquo;Far far away, behind the word mountains, far from the
-                    countries Vokalia and Consonantia, there live the blind
-                    texts. Separated they live in Bookmarksgrove right at the
-                    coast of the Semantics, a large language ocean.&rdquo;
-                  </p>
-                </blockquote>
-                <p class="text-black-50">Designer, Co-founder</p>
-              </div>
-            </div>
-
-            <div class="item">
-              <div class="testimonial">
-                <img
-                  src="images/person_3-min.jpg"
-                  alt="Image"
-                  class="img-fluid rounded-circle w-25 mb-4"
-                />
-                <div class="rate">
-                  <span class="icon-star text-warning"></span>
-                  <span class="icon-star text-warning"></span>
-                  <span class="icon-star text-warning"></span>
-                  <span class="icon-star text-warning"></span>
-                  <span class="icon-star text-warning"></span>
-                </div>
-                <h3 class="h5 text-primary mb-4">Cameron Webster</h3>
-                <blockquote>
-                  <p>
-                    &ldquo;Far far away, behind the word mountains, far from the
-                    countries Vokalia and Consonantia, there live the blind
-                    texts. Separated they live in Bookmarksgrove right at the
-                    coast of the Semantics, a large language ocean.&rdquo;
-                  </p>
-                </blockquote>
-                <p class="text-black-50">Designer, Co-founder</p>
-              </div>
-            </div>
-
-            <div class="item">
-              <div class="testimonial">
-                <img
-                  src="images/person_4-min.jpg"
-                  alt="Image"
-                  class="img-fluid rounded-circle w-25 mb-4"
-                />
-                <div class="rate">
-                  <span class="icon-star text-warning"></span>
-                  <span class="icon-star text-warning"></span>
-                  <span class="icon-star text-warning"></span>
-                  <span class="icon-star text-warning"></span>
-                  <span class="icon-star text-warning"></span>
-                </div>
-                <h3 class="h5 text-primary mb-4">Dave Smith</h3>
-                <blockquote>
-                  <p>
-                    &ldquo;Far far away, behind the word mountains, far from the
-                    countries Vokalia and Consonantia, there live the blind
-                    texts. Separated they live in Bookmarksgrove right at the
-                    coast of the Semantics, a large language ocean.&rdquo;
-                  </p>
-                </blockquote>
-                <p class="text-black-50">Designer, Co-founder</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
+<!--               <div -->
+<!--                 id="property-nav" -->
+<!--                 class="controls" -->
+<!--                 tabindex="0" -->
+<!--                 aria-label="Carousel Navigation" -->
+<!--               > -->
+<!--                 <span -->
+<!--                   class="prev" -->
+<!--                   data-controls="prev" -->
+<!--                   aria-controls="property" -->
+<!--                   tabindex="-1" -->
+<!--                   >Prev</span -->
+<!--                 > -->
+<!--                 <span -->
+<!--                   class="next" -->
+<!--                   data-controls="next" -->
+<!--                   aria-controls="property" -->
+<!--                   tabindex="-1" -->
+<!--                   >Next</span -->
+<!--                 > -->
+<!--               </div> -->
+<!--             </div> -->
+<!--           </div> -->
+<!--         </div> -->
+<!--       </div> -->
+<!--     </div> -->
 
   <%-- <jsp:include page="../include/bottom.jsp"></jsp:include> --%>
-
-    <!-- Preloader -->
-    <div id="overlayer"></div>
-    <div class="loader">
-      <div class="spinner-border" role="status">
-        <span class="visually-hidden">Loading...</span>
-      </div>
-    </div>
-
+  
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/tiny-slider.js"></script>
     <script src="js/aos.js"></script>
     <script src="js/navbar.js"></script>
-    <script src="js/counter.js"></script>
+<!--     <script src="js/counter.js"></script> -->
     <script src="js/custom.js"></script>
   </body>
 </html>

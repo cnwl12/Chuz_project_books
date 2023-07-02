@@ -265,6 +265,35 @@ public class BoardDAO {
 		}
 	} //deleteBoard 메서드 끝
 	
+	
+	
+	public void deleteComment(int comment_num) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		System.out.println("들리나요?");
+		
+		try {
+			con = getConnection(); // DB연결
+			
+			//SQL 구문 
+			String sql = "delete from comment where comment_num=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1,comment_num);
+			
+			pstmt.executeUpdate(); //delete 실행
+			System.out.println("행실");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			// 마무리
+			if(pstmt !=null) try {pstmt.close();} catch(Exception ex){}
+			if(con !=null) try {con.close();} catch(Exception ex){}
+		}
+	}
+	
+	
 	public void updateReadcount(int board_num) { 
 		// 파라미터 dto로 가져와도 되는데, where 조건이 num만 일치하면 readcount 자동으로 증가라 
 		// 굳이 dto로 만들어서 가져올 필요없음. 

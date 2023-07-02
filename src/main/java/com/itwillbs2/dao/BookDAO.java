@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.naming.Context;
@@ -245,4 +246,50 @@ public class BookDAO {
 		return dtoList;
 	}// getMemberList() 메서드 끝 
 	
+	
+	
+	public List<HashMap<String, String>> getBookShelves(String id) {
+		
+		List<HashMap<String, String>> bookShelves = new ArrayList<>();
+		
+		Connection con = null; 
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			con	= getConnection();
+			
+			String sql="select * from BookShelf where bookShelf_id=?"; 
+	
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+	
+			rs= pstmt.executeQuery();
+			
+			if(rs.next()) {// 아이디 존재
+				
+				HashMap<String, String> books = new HashMap<String, String>();
+				
+				books.put("bookShelf_id", rs.getString("bookShelf_id"));
+				books.put("bookShelf_isbn", rs.getString("bookShelf_isbn"));
+				books.put("bookShelf_title", rs.getString("bookShelf_title"));
+				books.put("bookShelf_image", rs.getString("bookShelf_image"));
+				books.put("bookShelf_date", rs.getString("bookShelf_date"));
+				
+				bookShelves.add(books);
+				
+			}else {
+				// 아이디 부재 => null
+			}
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			//마무리
+			if(rs !=null) try {rs.close();} catch(Exception ex){}
+			if(pstmt !=null)try{pstmt.close();}catch(Exception ex){}
+			if(con !=null)try{con.close();}catch(Exception ex){}
+		}
+		return bookShelves; 
+	}
 }// 클래스

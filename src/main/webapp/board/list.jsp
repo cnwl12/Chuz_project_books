@@ -16,13 +16,10 @@
 <title>board/list.jsp</title>
 
 <link rel="stylesheet" href="fonts/icomoon/style.css" />
-<link rel="stylesheet" href="fonts/flaticon/font/flaticon.css" />
 
 <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.js"></script>
-<link rel="stylesheet" href="css/tiny-slider.css" />
-<link rel="stylesheet" href="css/aos.css" />
 <link rel="stylesheet" href="css/style.css" />
-<link rel="stylesheet" href="css/listcomment.css" />
+<link rel="stylesheet" href="css/board.css" />
 
 </head>
 <body>
@@ -45,7 +42,6 @@ $(function() {
 </script>
  
 <jsp:include page="../include/top.jsp"></jsp:include> 
-<br><br><br><br><br><br>
 
 <%
 //날짜 포맷 -> 문자열로 변경 
@@ -58,27 +54,42 @@ PageDTO pageDTO =(PageDTO)request.getAttribute("pageDTO"); // 페이징 처리�
 
 String id =(String)session.getAttribute("id"); %>
 <div class="sub_cont">
-<div class=".box_left">
+<div>
+
+<!--  <form  -->
+<!--               class="narrow-w form-search d-flex align-items-stretch mb-3" -->
+<!--               data-aos="fade-up" -->
+<!--               data-aos-delay="200" -->
+<!--               id="searchForm" -->
+              
+<!--             > -->
+<!--               <input type="text" -->
+<!--                 class="form-control px-4" -->
+<!--                 placeholder="검색어를 입력해주세요" -->
+<!--                 name = "searchKeyWord" -->
+<!--                 id = "searchF"> -->
+<!--               <button type="submit" class="btn btn-primary">Search</button> -->
+<!--             </form> -->
 
 </div>
-
-
+   
+ 
+<div class="buttonUtil">
 <%
 // TODO: 글작성, 갤러리 버튼 아이콘 변경
-
 if(id!=null){%>
-
 <a href="fwrite.bo"><input type="button" value="글작성"></a>
-<%} %>
-<a href="gallary.bo"><input type="button" value="갤러리" id="gallaryBt"></a>
-
+<%} %> 
+<a href="gallary.bo"><input type="button" value="갤러리" ></a>
+</div>
+ 
 <table border="1" width="100" class="brod_table">
 <tr>
-<th>No.</th>
-<th>제목</th>
+<th>No.</th>   
+<th>제목</th> 
 <th>작성자</th>
-<th>조회수</th>
-<th>작성일</th>
+<th>조회수</th>   
+<th>작성일</th>   
 
 <% //결과 while 접근(rs.next()) -> T -> 열접근 rs.getInt("num") ...
 
@@ -98,6 +109,7 @@ for(int i = 0; i<dtoList.size(); i++){ // 자바 내장객체 배열길이는 si
 %>	
 </table>
 <!-- 페이지번호  -->
+<div class="pageNum">
 <%
 // 이전 startPage 시작페이지 pageBlock 보여줄 페이지 수 비교 
 // startPage 더 크면 [이전] 글자 나타남
@@ -122,6 +134,8 @@ if(pageDTO.getEndPage() < pageDTO.getPageCount()){ // 1~10 < 11~20, 21~30 ---
 <%
 }
  %>
+</div> 
+ 
 <div class="buttonDiv">
 <form action="list.bo">
 <input type="text" name="keyWord" id="keyWord"  >

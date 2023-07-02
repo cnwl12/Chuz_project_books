@@ -4,12 +4,15 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
+import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
 import com.itwillbs2.dao.ApiExamSearchBook;
 import com.itwillbs2.dao.BookDAO;
 import com.itwillbs2.domain.BookDTO;
+import com.mysql.cj.Session;
 
 public class BookService {
 	
@@ -148,8 +151,22 @@ public class BookService {
 		}
 		
 	}// deleteMember 회원정보 삭제 
-	
-	
-	
+
+	public List<HashMap<String, String>> getBookShelves(String id) {
+		
+		List<HashMap<String, String>> bookShelves = null;
+		
+		try {
+			BookDAO bookDAO = new BookDAO();
+			bookShelves = bookDAO.getBookShelves(id);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+		
+		}
+		
+		return bookShelves;
+	}
 	
 } // 클래스

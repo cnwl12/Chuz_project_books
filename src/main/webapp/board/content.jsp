@@ -10,13 +10,22 @@
 <title>BookStores_board</title>
 
 <link rel="stylesheet" href="fonts/icomoon/style.css" />
-<link rel="stylesheet" href="fonts/flaticon/font/flaticon.css" />
-
-<link rel="stylesheet" href="css/tiny-slider.css" />
-<link rel="stylesheet" href="css/aos.css" />
 <link rel="stylesheet" href="css/style.css" />
 <link rel="stylesheet" href="css/listcomment.css" />
 
+<script type="text/javascript">
+function comment_delete(comment_num){
+	
+	var board_num = ${dto.getBoard_num()};
+	alert(board_num);
+	
+	if(confirm("삭제하시겠습니까?" + comment_num)){
+		location.href="commentDelete.bo?comment_num="+comment_num +"&board_num="+board_num;
+	//	location.href="main.bs";
+	}
+}
+
+</script>
 
 </head>
 <body>
@@ -90,7 +99,11 @@ if(id!=null){ //세션값이 있으면
 			<td>${comment.comment_id }</td>
 			<td>${comment.comment_text }</td>
 			<td>${comment.comment_date }</td>
-			<td><input type="button" value="삭제"></td>
+			<td>
+			<c:if test="${comment.comment_id eq id }">
+			<input type="button" value="삭제" onclick="comment_delete(${comment.comment_num})">
+			</c:if>
+			</td>
 		</tr>
 	
 		</c:forEach>
@@ -159,7 +172,9 @@ if(id!=null){ //세션값이 있으면
 
 <% if (dto.getNext_num() != 0) { %>
 <input type="button" value="다음 글" onclick="location.href='content.bo?board_num=<%=dto.getNext_num()%>'">
-<% } %>
+<%
+} 
+%>
 <!-- <input type="hidden" value="다음 글" >  -->
 
 	 

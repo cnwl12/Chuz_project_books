@@ -1,0 +1,195 @@
+@charset "UTF-8";
+
+
+.printLi{
+	list-style: none;
+	color : black;
+	padding-top : 6px;
+}
+
+.title{
+	color: blue;
+    font-weight: bold;
+    font-size : 20px;
+    padding-bottom: 10px;
+}
+
+.price{
+ 	color: red;
+ 	font-weight: bold;
+ 	padding : 6px;
+} 
+
+.publisher{
+	padding : 6px;	
+}
+
+.link{
+	padding : 6px;	
+}
+
+
+.sub_cont {
+    clear: both;
+    width: 100%;
+    min-height: 400px;
+    height: auto;
+    overflow: auto;
+    padding-top: 45px;
+    padding-bottom: 40px;
+    text-align: left;
+}
+
+.box_left {
+    float: left;
+    padding-left: 10px;
+}
+
+.brod_table {
+	text-align: center;
+	margin : 0 auto;
+    width: 1300px;
+    border-top: 1px solid #8d8d8d; 
+}
+
+
+.showBook{
+	margin : 0 auto;
+}
+
+#gallaryBt{
+	
+}
+
+.contenTable{ 
+	margin : auto;
+	width : 80%;
+}
+
+.buttonDiv{
+	text-align: center;
+    align-content: center;
+}
+
+.pageNum{
+    text-align: center;
+    margin :5px;
+}
+
+.buttonUtil{
+	margin : auto;
+	margin-bottom : 10px;
+	text-align:right;
+	width:1300px;
+}
+
+/*  갤러리 css  */
+.mnb_blank {
+    width: 100%;
+    float: left;
+    height: 64px;
+    display: none;
+}
+.div_inner {
+    width: 1300px;
+    height: 100%;
+    margin: 0 auto;
+}
+.contents_wrap2 {
+    width: 1300px;
+    height: 100%;
+}
+.con_title {
+    font-size: 34px;
+    color: #333;
+    margin-top: 30px;
+    width: 100%;
+    float: left;
+    margin-bottom: 30px;
+    height: 40px;
+}
+.media_list {
+    width: 110%;
+}
+.media_list li {
+    width: 378px;
+    height: 324px;
+    border: 1px solid #e5e5e5;
+    float: left;
+    margin-right: 29px;
+    margin-bottom: 30px;
+    overflow: hidden;
+}
+.m_sum {
+    width: 100%;
+    height: 212px;
+    float: left;
+    overflow: hidden;
+}
+.m_sum img {
+    width: 100%;
+    transform: scale(1);
+    transition: all 0.5s ease;
+}
+.m_cover {
+    width: 100%;
+    left: 0;
+    top: 0;
+    height: 212px;
+    opacity: 0;
+    transition: all 0.5s ease;
+}
+.m_info {
+    width: 100%;
+    height: 112px;
+    background-color: #343a5e;
+    float: left;
+    color: #fff;
+}
+.m_info dt {
+    width: 100%;
+    text-align: center;
+    height: 77px;
+    float: left;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 1.4;
+    font-size: 18px;
+    padding: 0 5%;
+    word-break: keep-all;
+}
+.m_info dd {
+    width: 100%;
+    float: left;
+    display: flex;
+    justify-content: center;
+    font-size: 12px;
+    color: #aaaaaa;
+    font-family: "Tahoma";
+}
+.m_info a {
+    color: #fff !important;
+}
+.eye_cnt {
+    background: url(https://ssl.nexon.com/s2/game/maplestory/renewal/common/eye_new.png) left 0px no-repeat;
+    padding-left: 18px;
+}
+.media_list li {
+    width: 403px;
+    height: 324px;
+    border: 1px solid #e5e5e5;
+    float: left;
+/*     margin-right: 29px; */
+    margin-bottom: 30px;
+    overflow: hidden;
+}
+ol, ul, dl {
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+#container {
+/*     float: left; */
+    width: 100%;
+    height: 100%;
+}

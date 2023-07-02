@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.JsonObject;
 import com.itwillbs2.dao.ApiExamSearchBook;
 import com.itwillbs2.domain.BoardDTO;
 import com.itwillbs2.service.BoardService;
@@ -105,7 +106,7 @@ public class BoardController extends HttpServlet { //상속받아서 오버라�
 				
 //			}else {
 				String searchKeyword = request.getParameter("keyWord");
-				System.out.println(searchKeyword);
+			//	System.out.println(searchKeyword);
 //			}
 			
 			List<BoardDTO> dtoList = boardService.getBoardList(pageDTO,searchKeyword);
@@ -172,7 +173,7 @@ public class BoardController extends HttpServlet { //상속받아서 오버라�
 			
 			List<HashMap<String, String>> commentList = boardService.getComment(request);
 			request.setAttribute("commentList", commentList);
-			System.out.println(commentList);
+		//	System.out.println(commentList);
 			
 			// content.jsp로 이동 (주소변동 없이) 
 			RequestDispatcher dis = request.getRequestDispatcher("board/content.jsp");
@@ -193,10 +194,72 @@ public class BoardController extends HttpServlet { //상속받아서 오버라�
 		
 		if(strPath.equals("/allbookList.bo")) {
 			
+			BoardService boardService = new BoardService();
+			
+			PageDTO pageDTO = new PageDTO();
+			
+			// 한 페이지에 보여줄 글 개수 설정 
+			int pageSize = 10;
+			// 페이지 번호 가져오기 (페이지 번호가 없으면 무조건 1page 설정) [보통 창 켰을 때 첫번째 페이지]
+			String pageNum =request.getParameter("pageNum"); //get방식으로 설정해서 가져오기 
+			System.out.println(pageNum + ": pageNum");
+//			if(pageNum == null){
+//				pageNum="1"; //페이지 번호 없으면 무조건 1페이지로 하겠다 
+//			}
+			
 			String keyWord = request.getParameter("searchKeyWord");
 
-			BoardService boardService = new BoardService();
-			request.setAttribute("bookList", boardService.searchBook(keyWord));
+			JsonObject bookList = boardService.searchBook(request);		
+			
+			//System.out.println(bookList.asMap().get("total") + " : total");
+			
+			int count = Integer.parseInt(bookList.asMap().get("total").toString());		
+			
+			if(count ==0) {
+				RequestDispatcher dis = request.getRequestDispatcher("board/searchFail.jsp");
+				dis.forward(request, response);
+			}
+			
+			// pageNum 정수형으로 변경(currentPage)
+			int currentPage = Integer.parseInt(pageNum);
+			
+			// 페이징 처리할게 너무 많아서 DTO 따로 생성해서 담아옴 
+			// request를 -> pageDTO에 저장 
+			pageDTO.setPageSize(pageSize);
+			pageDTO.setPageNum(pageNum);
+			pageDTO.setCurrentPage(currentPage);
+			// DB에서 가져올 행번호 구하기(구한 행(시작행)부터 ~ pageSize10개 ) 
+			// mysql 이렇게 해도 됨-> limit문법: limit 시작행-1, 10개
+			
+			// 한 화면에 보여줄 페이지 개수
+			int pageBlock=10; //(1~10 / 11~20 / 21~30)
+
+			// 시작하는 페이지번호 구하기
+			int startPage = (currentPage-1)/pageBlock * pageBlock +1;
+								// 0~9		/ 10 
+
+			// 끝나는 페이지번호 구하기 
+			int endPage = startPage + pageBlock -1;
+			// 계산으로 끝나는 페이지번호 => 실제 있는 전체 페이지 번호 비교 
+
+			int pageCount =count/pageSize +(count%pageSize==0?0:1); // 전체s글 개수 DB에서 가져옴 
+							//나머지가 없는 경우  //+남은 경우 삼항연산자로 값 저장 
+			if(endPage > pageCount){//endPage > 전체 페이지번호
+				endPage = pageCount; //endPage = 전체 페이지번호;
+			}
+			
+			//가져온 목록 request 저장 
+			pageDTO.setCnt(count);
+			pageDTO.setPageBlock(pageBlock);
+			pageDTO.setStartPage(startPage);
+			pageDTO.setEndPage(endPage);
+			pageDTO.setPageCount(pageCount);
+			
+			request.setAttribute("pageDTO", pageDTO);
+			
+			// ----------------------------------------------
+			
+			request.setAttribute("bookList", bookList );
 			
 			RequestDispatcher dis = request.getRequestDispatcher("board/allbookList.jsp");
 			dis.forward(request, response);
@@ -208,7 +271,7 @@ public class BoardController extends HttpServlet { //상속받아서 오버라�
 			PageDTO pageDTO = new PageDTO();
 
 			// 한 페이지에 보여줄 글 개수 설정 
-			int pageSize = 9;
+			int pageSize = 10;
 			// 페이지 번호 가져오기 (페이지 번호가 없으면 무조건 1page 설정) [보통 창 켰을 때 첫번째 페이지]
 			String pageNum =request.getParameter("pageNum"); //get방식으로 설정해서 가져오기 
 			
@@ -237,7 +300,7 @@ public class BoardController extends HttpServlet { //상속받아서 오버라�
 				
 //			}else {
 				String searchKeyword = request.getParameter("keyWord");
-				System.out.println(searchKeyword);
+			//	System.out.println(searchKeyword);
 //			}
 			
 			List<BoardDTO> dtoList = boardService.getBoardList(pageDTO,searchKeyword);
@@ -310,9 +373,31 @@ public class BoardController extends HttpServlet { //상속받아서 오버라�
 			
 			response.sendRedirect("content.bo?board_num=" + board_num);
 			
-			
-		
 		}
+		
+		if(strPath.equals("/commentDelete.bo")) {
+			
+			BoardService boardService = new BoardService();
+			
+			
+			String board_num = request.getParameter("board_num");
+			
+			System.out.println(board_num + "COMMENT.BO 컨트롤러");
+
+			boardService.deleteComment(request);
+
+			response.sendRedirect("content.bo?board_num=" + board_num);
+			
+		}
+		
+		
+		if(strPath.equals("/searchFail.bo")) {
+			
+			RequestDispatcher dis = request.getRequestDispatcher("board/searchFail.jsp");
+			dis.forward(request, response);
+			
+		}
+		
 		
 	}// doProcess
 

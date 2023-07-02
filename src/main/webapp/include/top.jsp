@@ -7,13 +7,12 @@
           <div class="site-navigation">
             <a href="main.bs" class="logo m-0 float-start">BookStore</a>
             
-            <ul
-              class="js-clone-nav d-none d-lg-inline-block text-start site-menu float-end"
-            >
-              <li class="active"><a href="main.bs">Home</a></li>
-              <li><a href="list.bo">게시판</a></li>
+            <ul class="js-clone-nav d-none d-lg-inline-block text-start site-menu float-end">
               
-              <li class="has-children">
+              <li class="active"><a href="main.bs">Home</a></li>
+              <li class="active"><a href="list.bo">게시판</a></li>
+              
+              <li class="has-children">  
               <%
               String id =(String)session.getAttribute("id"); 
               
@@ -41,8 +40,9 @@
                   if(id!=null){
                 	 %>
                   <li><a href="update.bs">회원정보 수정 | 삭제</a></li>
-               		<li><a href="logout.bs">로그아웃</a></li>
-                	  <%
+             	  <li><a href="logout.bs">로그아웃</a></li>
+                  <li><a href="bookShelf.bs">읽은책장</a></li>
+                	<%
                   }
                   %>
                   

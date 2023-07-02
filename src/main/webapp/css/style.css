@@ -9206,7 +9206,7 @@ textarea.form-control-lg {
 .site-nav {
   padding-top: 20px;
   padding-bottom: 20px;
-  position: absolute;
+ /*  position: absolute; */
   top: 0;
   z-index: 9;
   width: 100%; }
@@ -9238,10 +9238,12 @@ textarea.form-control-lg {
       .site-nav .site-navigation .site-menu > li.active > a {
         color: #fff; }
     .site-nav .site-navigation .site-menu .has-children {
+    	color: #fff;
       position: relative; }
       .site-nav .site-navigation .site-menu .has-children > a {
         position: relative;
-        padding-right: 20px; }
+        padding-right: 20px; 
+        color: #fff;        }
         .site-nav .site-navigation .site-menu .has-children > a:before {
           position: absolute;
           content: "\e313";
@@ -9662,7 +9664,7 @@ textarea {
   padding: 20px 30px;
   position: relative;
   float: left;
-  width: 100%;
+  width: 1300px;
   border-radius: 7px;
   -webkit-box-shadow: 0 15px 30px -15px rgba(0, 0, 0, 0.1);
   box-shadow: 0 15px 30px -15px rgba(0, 0, 0, 0.1); }

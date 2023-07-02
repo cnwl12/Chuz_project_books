@@ -1,6 +1,8 @@
 package com.itwillbs2.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -66,6 +68,26 @@ public class BookController extends HttpServlet {
 			RequestDispatcher dis = request.getRequestDispatcher("bmember/login.jsp");
 			dis.forward(request, response);
 		}
+		
+		if (strPath.equals("/bookShelf.bs")) { // 
+			
+			HttpSession session = request.getSession();
+			String id = (String)session.getAttribute("id");
+			System.out.println(id);
+			BookService bookService = new BookService();
+			// bookService.getBookShelves(id);
+			
+			List<HashMap<String, String>> bookShelves = bookService.getBookShelves(id);
+			request.setAttribute("bookShelves", bookShelves);
+			
+			//System.out.println("bookShelves  컨: "+ bookShelves);
+			
+			RequestDispatcher dis = request.getRequestDispatcher("bmember/bookShelf.jsp");
+			dis.forward(request, response);
+		}
+		
+		
+		
 		// 로그인 일치여부 확인
 		if (strPath.equals("/loginPro.bs")) { // 뽑아온 값은 / 붙여줘야함
 			BookService bookService = new BookService();
@@ -90,9 +112,9 @@ public class BookController extends HttpServlet {
 			// member/main.jsp로 이동
 			
 			BoardService boardService = new BoardService();
-			request.setAttribute("bookList", boardService.searchBook());
-			//이거 딴데서도 쓰면되깅
-			System.out.println("bookList");
+			request.setAttribute("bookList", boardService.searchBook("자바"));
+//			이거 딴데서도 쓰면되깅
+//			System.out.println("bookList");
 			
 			
 			RequestDispatcher dis = request.getRequestDispatcher("bmember/main.jsp");

@@ -24,42 +24,11 @@ public class ApiExamSearchBook {
 	// TODO : 오버로딩 줄이기,,,,,,,,,,, 
 	
     // 없을 때 
-	public JsonObject getBook() {
-    	
-    	// System.out.println("겟북");
-        String clientId = "SG77rERJkx5teoolk8vI"; //애플리케이션 클라이언트 아이디
-        String clientSecret = "FaVoUIMTux"; //애플리케이션 클라이언트 시크릿
-
-        String text = null;
-        try {
-            text = URLEncoder.encode("행운", "UTF-8"); // keyWord 안받았을 때 무조건 받음 (하드코딩)
-        } catch (UnsupportedEncodingException e) {
-            throw new RuntimeException("검색어 인코딩 실패",e);
-        }
-
-
-        String apiURL = "https://openapi.naver.com/v1/search/book.json?query=" + text;    // JSON 결과
-        //String apiURL = "https://openapi.naver.com/v1/search/blog.xml?query="+ text; // XML 결과
-
-
-        Map<String, String> requestHeaders = new HashMap<>();
-        requestHeaders.put("X-Naver-Client-Id", clientId);
-        requestHeaders.put("X-Naver-Client-Secret", clientSecret);
-        String responseBody = get(apiURL,requestHeaders);
-        System.out.println(responseBody);
-        
-        
-        return JsonParser.parseString(responseBody).getAsJsonObject();
-    }
-
- // 키워드 검색했을 때    
- public JsonObject getBook(String keyWord) {
+	public JsonObject getBook(String keyWord) {
     	
         String clientId = "SG77rERJkx5teoolk8vI"; //애플리케이션 클라이언트 아이디
         String clientSecret = "FaVoUIMTux"; //애플리케이션 클라이언트 시크릿
-
         String text = null;
-        
         try {
             text = URLEncoder.encode(keyWord, "UTF-8"); // keyWord 안받았을 때 무조건 받음 (하드코딩)
         } catch (UnsupportedEncodingException e) {
@@ -67,9 +36,35 @@ public class ApiExamSearchBook {
         }
 
 
-        String apiURL = "https://openapi.naver.com/v1/search/book.json?query=" + text;    // JSON 결과
+        String apiURL = "https://openapi.naver.com/v1/search/book.json?query=" + text ;    // JSON 결과
         //String apiURL = "https://openapi.naver.com/v1/search/blog.xml?query="+ text; // XML 결과
 
+
+        Map<String, String> requestHeaders = new HashMap<>();
+        requestHeaders.put("X-Naver-Client-Id", clientId);
+        requestHeaders.put("X-Naver-Client-Secret", clientSecret);
+        String responseBody = get(apiURL,requestHeaders);
+      //  System.out.println(responseBody);
+        
+        
+        return JsonParser.parseString(responseBody).getAsJsonObject();
+    }
+
+ // 키워드 검색했을 때    
+	public JsonObject getBook(String keyWord, int start) {
+    	
+        String clientId = "SG77rERJkx5teoolk8vI"; //애플리케이션 클라이언트 아이디
+        String clientSecret = "FaVoUIMTux"; //애플리케이션 클라이언트 시크릿
+        String text = null;
+        try {
+            text = URLEncoder.encode(keyWord, "UTF-8"); // keyWord 안받았을 때 무조건 받음 (하드코딩)
+            
+        } catch (UnsupportedEncodingException e) {
+            throw new RuntimeException("검색어 인코딩 실패",e);
+        }
+
+
+        String apiURL = "https://openapi.naver.com/v1/search/book.json?query=" + text +"&start="+ start;    // JSON 결과
 
         Map<String, String> requestHeaders = new HashMap<>();
         requestHeaders.put("X-Naver-Client-Id", clientId);

@@ -34,9 +34,7 @@ public class BoardService {
 			
 			System.out.println(multi);
 			
-			/*
-			 * File file = new File(uploadPath); file.mkdirs();
-			 */
+			File file = new File(uploadPath); file.mkdirs();
 			
 			String board_name = multi.getParameter("board_name");
 			String board_subject = multi.getParameter("board_subject");
@@ -235,11 +233,41 @@ public class BoardService {
 		}
 	}//
 	
+	
+	public void deleteComment(HttpServletRequest request) {
+		
+		try {
+			// 삭제작업 바로 
+			int comment_num = Integer.parseInt(request.getParameter("comment_num"));
+
+			// DB작업하러가기 
+			// DAO 객체생성 -기억장소 할당
+			BoardDAO dao = new BoardDAO();
+
+			// 메서드 정의 및 호출 
+			// 리턴할 형 없음 deleteBoard(int num) 메서드 정의 
+			// delete from board where num=?
+			// deleteBoard(num)메서드 호출 // 게시판 번호 
+			dao.deleteComment(comment_num);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+		}
+	}//
+	
 	// 메인화면에서 (기존 입력값) 
-	public JsonObject searchBook() {
+	public JsonObject searchBook(HttpServletRequest request) {
 	   //  System.out.println("서비스");
+		String keyWord = request.getParameter("searchKeyWord");
+		int pageNum = Integer.parseInt(request.getParameter("pageNum"));
+		
+		if(pageNum != 1){
+			pageNum = pageNum*10+1; //페이지 번호 없으면 무조건 1페이지로 하겠다 
+		}
+		
 	    ApiExamSearchBook api = new ApiExamSearchBook();
-	    return api.getBook();
+	    return api.getBook(keyWord, pageNum);
 	}
 	
 	// 키워드 검색했을 때 
@@ -295,6 +323,8 @@ public class BoardService {
 		
 		return commentList;
 	}
+
+	
 
 
 }
