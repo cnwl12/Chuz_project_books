@@ -1,6 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
             
+<script type="text/javascript">
+	function fun1() {
+		window.open("login.bs","","width=450,height=450, top=250,left=150");
+	}	
+	
+	/* // 부모 창에서 메시지 수신 및 처리
+    window.addEventListener("message", function(event) {
+        var data = event.data;
+        if (data.isLoggedIn) {
+            // 로그인 성공한 경우 세션값을 이용하여 로그인 상태로 처리
+            var userId = data.userId;
+            // 세션값을 이용한 로그인 상태 처리 로직을 구현합니다.
+            // 예시로 콘솔에 로그인 상태 메시지를 출력하는 것으로 대체하였습니다.
+            console.log("로그인 상태로 변경됨. 사용자 아이디: " + userId);
+            
+            location.reload();
+        }
+    }); */
+		
+</script>            
+             
     <nav class="site-nav">
       <div class="container">
         <div class="menu-bg-wrap">
@@ -18,13 +39,13 @@
               
               if(id==null){ // 로그인 안한 상태 
               %>
-                <a href="login.bs">login</a>
+               <a href="#" onclick="fun1()">login</a>
                 <%
               }else{ // 세션값 있음 -> 로그인 성공
             	  %>
             	  <%=id%>님
             	  <% 
-              }
+               }
                 %>
                 <ul class="dropdown">
                   
@@ -57,13 +78,13 @@
                 </ul>
               </li>
             </ul>  
-
+<!-- 
             <a
               href="#"
               class="burger light me-auto float-end mt-1 site-menu-toggle js-menu-toggle d-inline-block d-lg-none"
               data-toggle="collapse"
               data-target="#main-navbar"
-            >
+            > -->
               <span></span>
             </a>
           </div>

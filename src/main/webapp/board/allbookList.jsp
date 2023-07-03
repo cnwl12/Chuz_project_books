@@ -6,19 +6,13 @@
 <link rel="stylesheet" href="fonts/icomoon/style.css" />
 
 <link rel="stylesheet" href="css/style.css" />
-<link rel="stylesheet" href="css/listcomment.css" />
+<link rel="stylesheet" href="css/board.css" />
 <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.js"></script>
 
 <head>
 <div>
 	<jsp:include page="../include/top.jsp"></jsp:include>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
+	
 </div>
 </head>
 
@@ -49,10 +43,10 @@ PageDTO pageDTO =(PageDTO)request.getAttribute("pageDTO");
 				console.log(document.getElementById('bookDiscount').textContent = book.discount);
 				console.log(document.getElementById('bookImg').src = book.image);
 			})
-			
+			 
 		}
 		
-	</script>
+	</script> 
 
 	<!-- 출력하기!  -->
 	<div id="outputDiv"></div>
@@ -63,23 +57,26 @@ PageDTO pageDTO =(PageDTO)request.getAttribute("pageDTO");
 			var arr = bookJson.items;
 			var output = '';  
 			
+				//output += '<div>Total : '+ book.total +' (권)</div>';
+			
 			arr.forEach(function(book, index) {
 				output += '<div data-isbn='+book.isbn+'>';
 				output += '<table width="1300" border="1" class="showBook">';
 				output += '<tbody>'  
 				output += '<tr>'
-				output += '<td><img src='+ book.image +' class="imgLi" alt=+'+  +' width="'+ 200 +'" height="'+ 300+'"></td>';
+				output += '<td width="'+ 250 +'" height="'+ 200+'">';
+				output += '<img src='+ book.image +' class="imgLi" alt=+'+  +'"></td>';
+				output += '</tr>'
 				output += '<td>'
-				output += '  <ul class="printLi">';    
+				output += '  <ul class="printLi">';
 				output += '    <li class="title">' + book.title + '</li>'; 
-				output += '    <li class="price"> 판매가(할인적용) ' + book.discount + '</sli>';
+				output += '    <li class="price">판매가(할인적용)' + book.discount + '</sli>'; 
 				output += '    <li class="author"> 지은이 ' + book.author + '</li>';
-				output += '    <li class="publisher">출판사 '+book.publisher + '</li>';
+				output += '    <li class="publisher">출판사 ' + book.publisher + '</li>';
 				output += '    <li class="description">' + book.description + '</li>';
 				output += '    <li class="link"><a href="' + book.link + '">구매하기</a></li>';
 				output += '   </ul>';  
-				output += '</td>'
-				output += '</tr>'
+				output += '</td>' 
 				output += '<td>'
 				output += 	'<div class="chex" style="background-image: url(\'image/unChecked.png\'); background-size: cover; background-repeat: no-repeat; background-position: center; width: 50px; height: 25px;">'
 				output += 		'<a href="#" onclick="checkBook()"> 조아요 </a>' 
@@ -92,18 +89,15 @@ PageDTO pageDTO =(PageDTO)request.getAttribute("pageDTO");
 			});
 			 
 			document.getElementById("outputDiv").innerHTML = output;
-			
-			
-			
 		}
 		
-		function checkBook(){
+		/* function checkBook(){
 			console.log($(this).closest(".chex").val());
-		}
+		} */
 	</script>
-	
-	
+	 
 	<!-- 페이지번호  -->
+	<div class="pageNum" style="font-size : 20px">
 <%
 // 이전 startPage 시작페이지 pageBlock 보여줄 페이지 수 비교 
 // startPage 더 크면 [이전] 글자 나타남
@@ -112,22 +106,26 @@ if(pageDTO.getStartPage()> pageDTO.getPageBlock()){
 	<a href="allbookList.bo?pageNum=<%=pageDTO.getStartPage()-pageDTO.getPageBlock()%>&searchKeyWord=<%=request.getParameter("searchKeyWord")%>">[이전]</a>
 	<%
 }
+
 //for문을 통한 하단 페이지 증가 // </table 하단부터 연결
-for(int i = pageDTO.getStartPage(); i<=pageDTO.getEndPage(); i++){
-	%>
-	
-	<%
+for(int i = pageDTO.getStartPage(); i <= pageDTO.getEndPage(); i++){
 	
 	// TODO: total로 더 이상 출력될 내용이 없을 때 , 하단 숫자 사라지게  
+	%>
 	
+	<%-- 
+	<%
 	if((i*10+1) < pageDTO.getEndPage()){ // 페이지 하단 숫자가 토탈 수보다 작을 때 멈추고(안나오고) 끝남
 		break;
 	}
-	
 	%>
+	 --%>
+	 
 	<a href="allbookList.bo?pageNum=<%=i%>&searchKeyWord=<%=request.getParameter("searchKeyWord")%>"><%=i%></a>
 	<%
 }
+
+
 // 다음 endPage 끝페이지 -> pageCount 전체페이지 비교 
 //	=> 전체페이지가 크면 다음 클릭 했을 때 페이지가 존재  
 if(pageDTO.getEndPage() < pageDTO.getPageCount()){ // 1~10 < 11~20, 21~30 ---
@@ -139,5 +137,7 @@ if(pageDTO.getEndPage() < pageDTO.getPageCount()){ // 1~10 < 11~20, 21~30 ---
 <%
 }
  %>
+ 
+ </div>
 	
 </body>

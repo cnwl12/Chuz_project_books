@@ -1,6 +1,17 @@
 @charset "UTF-8";
 
 
+#outputDiv{
+	width: 100%;
+    min-height: 400px;
+    height: auto;
+    overflow: auto;
+  	padding-top: 25px;
+    padding-bottom: 40px;
+    text-align: left;
+}
+
+
 .printLi{
 	list-style: none;
 	color : black;
@@ -28,6 +39,41 @@
 	padding : 6px;	
 }
 
+.author{
+	padding : 6px;	
+}
+
+.imgLi{
+	margin : 20px;
+	width: 250px;
+	height : 300px;
+}
+
+.link{
+	padding : 6px;
+}
+
+
+.box_left {
+    float: left;
+    padding-left: 10px;
+}
+
+.brod_table {
+	text-align: center;
+	margin : 0 auto;
+    width: 1300px;
+    border-top: 1px solid #000; 
+}
+
+
+.showBook{
+	margin : 0 auto;
+}
+
+#gallaryBt{
+	
+}
 
 .sub_cont {
     clear: both;
@@ -40,40 +86,45 @@
     text-align: left;
 }
 
-.box_left {
-    float: left;
-    padding-left: 10px;
-}
 
-.brod_table {
-	text-align: center;
-	margin : 0 auto;
+.contenTable{ 
+	clear: both;
+	margin: 0 auto;
+	margin-top: 80px;
+	/* margin-left: 550px; */
     width: 1300px;
-    border-top: 1px solid #8d8d8d; 
-}
-
-
-.showBook{
-	margin : 0 auto;
-}
-
-#gallaryBt{
+    overflow: auto;
+    padding-top: 45px;
+    border-top: 2px solid #000;
+    font-weight :bold; 
+    text-align: left;
+	
 	
 }
 
-.contenTable{ 
-	margin : auto;
-	width : 80%;
+.table-striped{
+	text-align: center;
+	border: 1px solid #000;
+	margin : 0 auto;
+	width: 1300px;
+	
+}
+
+.buttonPN{
+	text-align: center;
+    align-content: center;
+    margin :10px; 
 }
 
 .buttonDiv{
 	text-align: center;
     align-content: center;
+    size: 20px;
 }
 
 .pageNum{
     text-align: center;
-    margin :5px;
+    margin :10px; 
 }
 
 .buttonUtil{
@@ -100,7 +151,7 @@
     height: 100%;
 }
 .con_title {
-    font-size: 34px;
+    font-size: 34px; 
     color: #333;
     margin-top: 30px;
     width: 100%;

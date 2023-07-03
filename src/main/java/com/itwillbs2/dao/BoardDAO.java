@@ -37,7 +37,7 @@ public class BoardDAO {
 		try {//1~4단계 sql 구문작성 및 db연결
 			con = getConnection(); // DB연결 +
 			// sql실행문						// 생략해도 되지만, 프로그램 가독성 등을 위해 작성이 좋음 
-			String sql="insert into board(board_num,board_subject,board_content, board_name,board_readcount,board_recommend,board_file,board_date) values(?,?,?,?,?,?,?,?)";
+			String sql="insert into board(board_num,board_subject,board_content, board_name,board_readcount,board_file,board_date) values(?,?,?,?,?,?,?)";
 			// 연결된 문자열 통해 들어온(sql) 실행정보 변수에 담기 pstmt(prepareStatement 담을 리턴형 연결 맞추기)
 			pstmt = con.prepareStatement(sql);
 			
@@ -47,9 +47,8 @@ public class BoardDAO {
 			pstmt.setString(3, dto.getBoard_content());
 			pstmt.setString(4, dto.getBoard_name());
 			pstmt.setInt(5, dto.getBoard_readcount());
-			pstmt.setInt(6, dto.getBoard_recommend());
-			pstmt.setString(7, dto.getBoard_file()); 
-			pstmt.setTimestamp(8, dto.getBoard_date());  
+			pstmt.setString(6, dto.getBoard_file()); 
+			pstmt.setTimestamp(7, dto.getBoard_date());  
 			
 			// 실행
 			pstmt.executeUpdate(); 
@@ -141,7 +140,6 @@ public class BoardDAO {
 				dto.setBoard_content(rs.getString("board_content"));
 				dto.setBoard_name(rs.getString("board_name"));
 				dto.setBoard_readcount(rs.getInt("board_readcount"));
-				dto.setBoard_recommend(rs.getInt("board_recommend"));   
 				dto.setBoard_file(rs.getString("board_file"));
 				dto.setBoard_date(rs.getTimestamp("board_date"));
 				// 큰바구니 배열에 게시판 글 하나 저장 [ㅇㅁㅁㅁㅁㅁㅁㅁ]  
@@ -193,7 +191,6 @@ public class BoardDAO {
 				dto.setBoard_content(rs.getString("board_content"));
 				dto.setBoard_name((rs.getString("board_name")));
 				dto.setBoard_readcount(rs.getInt("board_readcount"));
-				dto.setBoard_recommend(rs.getInt("board_recommend"));   
 				dto.setBoard_file(rs.getString("board_file"));
 				dto.setBoard_date(rs.getTimestamp("board_date"));
 				
@@ -377,31 +374,6 @@ public class BoardDAO {
 		
 	}//fupdateBoard 메서드 마무리 
 	
-	public int recommend(String id) {
-
-		int recommend_num =0;
-		
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		
-		try {
-			con = getConnection();	
-			
-			String sql = "insert into board board_recommend values=?";
-			
-			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, recommend_num);
-			pstmt.executeUpdate();
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}finally {
-			if(pstmt !=null)try{pstmt.close();}catch(Exception ex){}
-			if(con !=null)try{con.close();}catch(Exception ex){}
-		}
-		
-		return -1;
-	}
 	
 	
 	public void insertComment(HashMap<String, String> comment ) {

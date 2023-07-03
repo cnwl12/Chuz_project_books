@@ -2,3 +2,36 @@
 .joinTable td:nth-child(2){
 	padding-left: 30px
 }
+
+.joinTable{
+	margin-top: 5%;
+    text-align: left;
+    margin-left: 40%;
+    align-content: center;
+    width: auto;
+    padding-top : 3px;
+}
+
+.buttonJN{
+	margin-top: 30px;
+    text-align: center;
+    align-content: center;
+    width: auto;
+}
+
+#table_JN {
+	  padding-top : 3px;
+	  border-spacing:0 3px !important;
+}
+
+.buttonJN2{
+	margin-top: 4px;
+	text-align: center;
+    align-content: center;
+    width: auto;
+}
+
+#upB{
+	background-color : #005553;
+	padding : 0 26px;
+}

@@ -10,20 +10,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>board/list.jsp</title>
-
-<link rel="stylesheet" href="fonts/icomoon/style.css" />
-
+<html>    
+<head>   
+<meta charset="UTF-8">  
+<title>board/list.jsp</title>   
+ 
+<link rel="stylesheet" href="fonts/icomoon/style.css" /> 
+  
 <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.js"></script>
 <link rel="stylesheet" href="css/style.css" />
-<link rel="stylesheet" href="css/board.css" />
-
+<link rel="stylesheet" href="css/board.css" /> 
+ 
 </head>
 <body>
-
+ 
 <script type="text/javascript">
 
 $(function() {
@@ -138,7 +138,7 @@ if(pageDTO.getEndPage() < pageDTO.getPageCount()){ // 1~10 < 11~20, 21~30 ---
  
 <div class="buttonDiv">
 <form action="list.bo">
-<input type="text" name="keyWord" id="keyWord"  >
+<input type="text" name="keyWord" id="keyWord" placeholder="제목 키워드" >
 <input type="submit" value="검색" >
 </form>
 </div>

@@ -7,13 +7,12 @@
 <meta charset="UTF-8">
 <title>회원정보 수정</title>
 <link rel="stylesheet" href="fonts/icomoon/style.css" />
-<link rel="stylesheet" href="fonts/flaticon/font/flaticon.css" />
 
-<link rel="stylesheet" href="css/tiny-slider.css" />
-<link rel="stylesheet" href="css/aos.css" />
 <link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="css/bs.css"/>
+<link rel="stylesheet" href="css/member.css"/>
 <jsp:include page="../include/top.jsp"></jsp:include>
-<br><br><br><br><br><br>
+
 </head>
 <body>
 
@@ -22,48 +21,68 @@ BookDTO bookDTO =(BookDTO)request.getAttribute("bookDTO");
 %>
 
 <form action="updatePro.bs" method="post">
-<label>ID<span>*</span></label>
-<input type="text" name="id" value="<%=bookDTO.getId()%>" readonly> <br>
-<label>PASS<span>*</span></label>
-<input type="password" name="pass" value="" ><br>
-<label>이름<span>*</span></label>
-<input type="text" name="name" value="<%=bookDTO.getName()%>" ><br>
-<label>휴대폰번호(연락처)<span>*</span></label>
-<input type="text" name="phone" value="<%=bookDTO.getPhone()%>"><br>
-<label>E-mail</label> 
-<input type="email" name="email" value="<%=bookDTO.getEmail()%>"> <br>
-<label>주소</label>
-<input type="text" id="sample6_postcode" placeholder="우편번호">
-<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"> <br>
-<input type="text" name="addressMain" id="sample6_address" value="<%=bookDTO.getAddressMain()%>"> 
-<input type="text" id="sample6_extraAddress" placeholder="상세주소" name="addressSub" value="<%=bookDTO.getAddressSub()%>">
-
-			
-			
-		
-
-
-
-
-<!-- 제출/초기화 -->   
-<div>
-    <input type="submit" value="회원 정보 수정">
-    <a href="main.bs"><input type="button" value="뒤로가기"></a>
-    </form> 
-</div>  
-  <!--회원탈퇴 -->
-    <a href="delete.bs"><input type="submit" value="회원탈퇴"></a>
-</body>
-</html>
-
-
-
+<div  class="joinTable">
+	<table id="table_JN">
+	<tbody >
+	<tr><td style="color: maroon; font-size: 20px" > 회원정보 수정</td> </tr>
+	
+	<!-- <td style="color: red">비밀번호를 알맞게 작성바랍니다!</td> -->
+	
+	<tr>
+	<td>아이디 </td>
+	<td><input type="text" name="id" id="id" value="<%=bookDTO.getId()%>" readonly></td>	
+	</tr>
+	
+	<tr>
+	<td>비밀번호</td>
+	<td><input type="password" name="pass" id="pass" value=""></td>
+	</tr>
+	
+	<tr>
+	<td>이름</td>
+	<td><input type="text" name="name" id="name" value="<%=bookDTO.getName()%>"></td>
+	</tr>
+	
+	<tr>
+	<td>휴대전화</td>
+	<td><input type="text" name="phone" id="phone"  value="<%=bookDTO.getPhone()%>" oninput="removeHyphen(event)" ></td>
+	</tr>
+	
+	<tr>
+	<td>E-mail</td>
+	<td><input type="email" name="email" value="<%=bookDTO.getEmail()%>"></td>
+	</tr>
+	
+	<tr>
+	<td vertical-align:top>주소</td>
+	<td>
+			<input type="text" id="sample6_postcode" placeholder="우편번호"></td>
+			<td>
+			<input type="button" onclick="sample6_execDaumPostcode()"
+				value="우편번호 찾기"></td></tr>
+				<tr>
+				<td></td>
+				<td>
+				<input type="text" id="sample6_address" placeholder="주소"
+						name="addressMain" value="<%=bookDTO.getAddressMain()%>"></td>
+				</tr>
+				
+				<tr>
+				<td></td>
+				<td><input type="text" id="sample6_detailAddress"
+							placeholder="상세주소" name="addressSub" value="<%=bookDTO.getAddressSub()%>"></td>
+				<td >
+				<input type="text" 	id="sample6_extraAddress" placeholder="참고항목"></td>
+				</tr>
+				
 		<script
-			src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+			src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js">
+		</script>
+		
 		<script>
-    function sample6_execDaumPostcode() {
-        new daum.Postcode({
-            oncomplete: function(data) {
+    	function sample6_execDaumPostcode() {
+        	new daum.Postcode({
+           	 oncomplete: function(data) {
                 // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
 
                 // 각 주소의 노출 규칙에 따라 주소를 조합한다.
@@ -109,3 +128,48 @@ BookDTO bookDTO =(BookDTO)request.getAttribute("bookDTO");
         }).open();
     }
 </script>
+
+
+		
+		
+</tbody>
+</table>
+</div>
+
+<div style=" margin:0 auto; padding:30px 0 0 0; border-bottom:4px solid #505050; width:930px"></div>
+
+<!-- 제출/초기화 -->   
+<div>
+	<div class= "buttonJN">
+    <input type="submit" id="upB" value="회원 정보 수정">
+    </div>
+</div>  
+    </form>
+     
+  <!--회원탈퇴 --> 
+  <div class="buttonJN2">
+    <a href="main.bs"><input type="button" value="뒤로가기"></a>
+    <a href="delete.bs"><input type="submit" value="회원탈퇴"></a>
+  </div>  
+</body>
+</html> 
+	  
+<%-- <input type="text" name="id" value="<%=bookDTO.getId()%>" readonly> <br>
+<input type="password" name="pass" value="" ><br>
+<input type="text" name="name" value="<%=bookDTO.getName()%>" ><br>
+<input type="text" name="phone" value="<%=bookDTO.getPhone()%>"><br>
+<input type="email" name="email" value="<%=bookDTO.getEmail()%>"> <br>
+<label>주소</label>
+<input type="text" id="sample6_postcode" placeholder="우편번호">
+<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"> <br>
+<input type="text" name="addressMain" id="sample6_address" value="<%=bookDTO.getAddressMain()%>"> 
+<input type="text" id="sample6_extraAddress" placeholder="상세주소" name="addressSub" value="<%=bookDTO.getAddressSub()%>">
+
+			  
+			
+		 --%>
+
+
+
+
+

@@ -254,17 +254,16 @@ public class BoardService {
 			e.printStackTrace();
 		}finally {
 		}
-	}//
+	}// 
 	
-	// 메인화면에서 (기존 입력값) 
+	// allbookList로 가져올때 
 	public JsonObject searchBook(HttpServletRequest request) {
 	   //  System.out.println("서비스");
 		String keyWord = request.getParameter("searchKeyWord");
 		int pageNum = Integer.parseInt(request.getParameter("pageNum"));
 		
-		if(pageNum != 1){
-			pageNum = pageNum*10+1; //페이지 번호 없으면 무조건 1페이지로 하겠다 
-		}
+		pageNum -= 1; // 페이지를 처음에 -1로 넣고, 그다음 페이지 넘어갈때 1로
+		pageNum = pageNum*10+1; //페이지 번호 없으면 무조건 1페이지로 하겠다 
 		
 	    ApiExamSearchBook api = new ApiExamSearchBook();
 	    return api.getBook(keyWord, pageNum);
@@ -275,7 +274,7 @@ public class BoardService {
 		
 	    ApiExamSearchBook api = new ApiExamSearchBook();
 	    return api.getBook(keyWord);
-	}
+	} 
 
 	public void insertComment(HttpServletRequest request) {
 		

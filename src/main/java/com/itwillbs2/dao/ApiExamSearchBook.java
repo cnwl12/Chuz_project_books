@@ -23,7 +23,7 @@ public class ApiExamSearchBook {
 
 	// TODO : 오버로딩 줄이기,,,,,,,,,,, 
 	
-    // 없을 때 
+    // 없을 때 -- > 바탕화면 (하드코딩) 
 	public JsonObject getBook(String keyWord) {
     	
         String clientId = "SG77rERJkx5teoolk8vI"; //애플리케이션 클라이언트 아이디
@@ -36,7 +36,7 @@ public class ApiExamSearchBook {
         }
 
 
-        String apiURL = "https://openapi.naver.com/v1/search/book.json?query=" + text ;    // JSON 결과
+        String apiURL = "https://openapi.naver.com/v1/search/book.json?query=" + text;    // JSON 결과
         //String apiURL = "https://openapi.naver.com/v1/search/blog.xml?query="+ text; // XML 결과
 
 
@@ -44,7 +44,6 @@ public class ApiExamSearchBook {
         requestHeaders.put("X-Naver-Client-Id", clientId);
         requestHeaders.put("X-Naver-Client-Secret", clientSecret);
         String responseBody = get(apiURL,requestHeaders);
-      //  System.out.println(responseBody);
         
         
         return JsonParser.parseString(responseBody).getAsJsonObject();
@@ -58,7 +57,6 @@ public class ApiExamSearchBook {
         String text = null;
         try {
             text = URLEncoder.encode(keyWord, "UTF-8"); // keyWord 안받았을 때 무조건 받음 (하드코딩)
-            
         } catch (UnsupportedEncodingException e) {
             throw new RuntimeException("검색어 인코딩 실패",e);
         }
@@ -75,11 +73,6 @@ public class ApiExamSearchBook {
         
         return JsonParser.parseString(responseBody).getAsJsonObject();
     }
-    
-    
-    
-    
-    
     
     // ------------------------------------------------------------------------
 

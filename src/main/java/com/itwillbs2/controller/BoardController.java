@@ -258,7 +258,6 @@ public class BoardController extends HttpServlet { //상속받아서 오버라�
 			request.setAttribute("pageDTO", pageDTO);
 			
 			// ----------------------------------------------
-			
 			request.setAttribute("bookList", bookList );
 			
 			RequestDispatcher dis = request.getRequestDispatcher("board/allbookList.jsp");

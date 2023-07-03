@@ -4,7 +4,7 @@
 	list-style: none;
 }
 
-#ySContent{ 
+/* #ySContent{ 
 	margin: 0 auto;
     padding: 130px 0;
     width: 958px;
@@ -12,13 +12,13 @@
     border: solid 1px #d8d8d8;
     text-align: center;
     background-color: #fff;
-}
+} */
 
-.loginCont{
+/* .loginCont{
 	float: left;
     width: 360px;
 }
-
+ */ 
 .btnC.btn_blue .bWrap{
     border-color: #196ab3;
     border-bottom-color: #165fa1;

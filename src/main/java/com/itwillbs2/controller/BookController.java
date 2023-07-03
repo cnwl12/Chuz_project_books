@@ -99,8 +99,8 @@ public class BookController extends HttpServlet {
 				HttpSession session = request.getSession();
 				session.setAttribute("id", bookDTO.getId());
 				// main.me로 이동
-				response.sendRedirect("main.bs"); // 주소값 바뀌면서 이동 (jsp경우엔 dispatch..)
-
+				 response.sendRedirect("main.bs"); // 주소값 바뀌면서 이동 (jsp경우엔 dispatch..)
+				
 			} else { // id,pw 불일치 => member/msg.jsp
 				RequestDispatcher dis = request.getRequestDispatcher("bmember/msg.jsp");
 				dis.forward(request, response);

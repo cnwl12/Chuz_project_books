@@ -74,4 +74,12 @@ public class PageDTO { // 페이징 작업 처리할 변수가 많아서 DTO에 
 	public void setPageCount(int pageCount) {
 		this.pageCount = pageCount;
 	}
+	@Override
+	public String toString() {
+		return "PageDTO [pageSize=" + pageSize + ", pageNum=" + pageNum + ", currentPage=" + currentPage + ", startRow="
+				+ startRow + ", endRow=" + endRow + ", pageBlock=" + pageBlock + ", startPage=" + startPage
+				+ ", endPage=" + endPage + ", cnt=" + cnt + ", pageCount=" + pageCount + "]";
+	}
+	
+	
 }

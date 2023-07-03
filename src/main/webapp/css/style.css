@@ -268,7 +268,7 @@ svg {
 
 table {
   caption-side: bottom;
-  border-collapse: collapse; }
+ /*  border-collapse: collapse; */ }
 
 caption {
   padding-top: 0.5rem;
@@ -283,12 +283,18 @@ th {
 thead,
 tbody,
 tfoot,
-tr,
 td,
 th {
   border-color: inherit;
   border-style: solid;
   border-width: 0; }
+  
+tr{
+	padding-top : 2px;
+	border-color: inherit;
+  border-style: solid;
+  border-width: 0;
+}  
 
 label {
   display: inline-block; }
@@ -6897,11 +6903,11 @@ textarea.form-control-lg {
 
 .text-muted {
   --bs-text-opacity: 1;
-  color: #6c757d !important; }
+  color: #000 !important; }
 
 .text-black-50, body {
   --bs-text-opacity: 1;
-  color: rgba(0, 0, 0, 0.5) !important; }
+  color: #000 !important; }
 
 .text-white-50 {
   --bs-text-opacity: 1;
@@ -9595,8 +9601,8 @@ html {
 
 body {
   font-family: "Work Sans", sans-serif;
-  font-weight: 400;
-  font-size: 14px;
+  font-weight: 500;
+  font-size: 15px;
   overflow-x: hidden; }
   body:before {
     content: "";

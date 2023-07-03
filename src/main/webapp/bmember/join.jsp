@@ -13,11 +13,7 @@
 <link rel="stylesheet" href="css/style.css" />
 <link rel="stylesheet" href="css/bs.css"/>
 <link rel="stylesheet" href="css/member.css"/>
-<style type="text/css">
-td not("#notd"){
-padding-left: 20px;
-}
-</style>
+
 <script type="text/javascript">
 
 $(function(){
@@ -53,7 +49,18 @@ $(function(){
 	console.log(pass==pass2);
 	*/
 	
-
+	// 비밀번호 자리 수 
+	$("#pass").on("input", function() {
+		pass = $("#pass").val().length;
+		
+		if(pass < 8){
+			$(".checkPass1Result").html("8자리 이상 작성 바랍니다").css("color","red");	
+		}else{
+			$(".checkPass1Result").html(" ");	
+		}
+	})
+	
+	// 비밀번호 재확인 일치여부 
 	$("#pass2").on("input", function(){
 		pass = $("#pass").val();
 		pass2 = $("#pass2").val();
@@ -69,6 +76,7 @@ $(function(){
 		}
 	})
 	
+	// 핸드폰 자리 수 
 	$("#phone").on("input",function(){
 		
 		tel =$("#phone").val().length;
@@ -81,42 +89,13 @@ $(function(){
  		if(tel > 11 || tel < 11){
  			$(".checkTelResult").html("연락처 자리수 확인").css("color","red");
  		}else{
-			$(".checkTelResult").html(" ")	
+			$(".checkTelResult").html(" ")
 		}
- 		
- 		
-		/* if(!(regexTel.tel)){
-			$(".checkTelResult").html("연락처 자리수 확인").css("color","red");
-		}else{
-			$(".checkTelResult").html(" ")	
-		} */
-		
 		
 	})//
 	
-// 	$("#id").on("input",function(){
-// 		var id = $("#id").val()
-		
-// 		$.ajax({
-// 			data : id,
-// 			method : "POST",
-// 			url : "/checkId.bs"
-// 		})
-// 		.done(function(result){
-// 			if(result.result){
-// 				$(".checkIdResult").html("사용 가능한 아이디입니다.");
-// 			}else{
-// 				$(".checkIdResult").html("중복된 아이디입니다.");
-// 			}
-// 		})
-// // 		$(".checkIdResult").html("");
-// 	})
-	
-// 	$(".checkPassResult")
-
 })
 
-// $(document).ready(function(){})
 
 // - 제거 
 function removeHyphen(event) {
@@ -135,45 +114,36 @@ function fun1() {
 		return false;
 	} 
 	
-	//회원 아이디 제어
-	if(document.checkform.id.value.length < 4 ||
-		document.checkform.id.value.length >10){
-		alert("ID는 4~10자 내로 작성바랍니다");
-		document.checkform.id.focus();
-		return false;
-	}
-	
 	//비밀번호 작성 1)
 	if(document.checkform.pass.value==""){
 		alert("비밀번호 작성 바랍니다");
 		document.checkform.pass.focus();
 		return false;
 	}
-	//비밀번호 작성 제어 
-	if(document.checkform.pass.value.length < 4 ||
-		document.checkform.pass.value.length > 10){
-		alert("비밀번호는 4~10자 내로 작성바랍니다");
-		document.cf.pass.focus();
+	
+	//비밀번호 작성 2)
+	if(document.checkform.pass2.value==""){
+		alert("비밀번호 작성 바랍니다");
+		document.checkform.pass2.focus();
 		return false;
 	}
 	
-	//비밀번호 작성 2 확인용)
-	if(document.checkform.pass2.value==""){
-		alert("비밀번호 동일 작성 바랍니다");
-		document.checkform.pass2.focus();
+	if(document.checkform.name.value==""){
+		alert("이름 작성 바랍니다");
+		document.checkform.name.focus();
 		return false;
 	}
-	//비밀번호 작성 재확인 
-	if(document.checkform.pass2.value !=document.cf.pass.value){
-		alert("비밀번호가 일치하지 않습니다");
-		document.checkform.pass2.focus();
-		return false;
-	}
+	
+	// 연락처 작성 
 	if(document.checkform.phone.value==""){
 		alert("연락처 작성 바랍니다");
 		document.checkform.phone.focus();
 		return false;
 	}
+	
+	
+	
+	
 }//fun1 끝  
 	
 	// 중복확인 완료 안내
@@ -191,30 +161,33 @@ function fun1() {
 	
 	<!-- id/pass 설정하기  -->
 	<form action="joinPro.bs" method="post" name="checkform" onsubmit="return fun1()"> <!--  -->
-	<div>
+	<div  class="joinTable">
 	
-	<table style=" margin:0 auto; padding:30px 0 0 0;" class="joinTable">
+	<table id="table_JN">
 	<tbody >
-	<tr><td style="color: maroon;" > 회원가입 :)</td> </tr>
+	<tr><td style="color: maroon; font-size: 20px" > 회원가입 :) </td> </tr>
 	
 	<tr>
-	<td>아이디 </td>
+	<td>아이디<span style="color: red">*</span> </td>
 	<td><input type="text" name="id" id="id" ></td>	
 	<td><span class="checkIdResult"></span></td>
 	</tr>
 	
 	<tr>
-	<td>비밀번호 </td> <td><input type="password" name="pass" id="pass" ></td></tr>
+	<td>비밀번호<span style="color: red">*</span> </td>
+	<td><input type="password" name="pass" id="pass" ></td>
+	<td><span class="checkPass1Result"></span></td>
+	</tr>
 	
 	<tr>
-	<td>비밀번호 재입력 </td>
+	<td>비밀번호 재입력<span style="color: red">*</span> </td>
 	<td><input type="password" name="pass2" id="pass2"></td>	
 	<td><span class="checkPassResult"></span></td>
 	</tr>
 	
-	<tr><td>이름 </td>
+	<tr><td>이름<span style="color: red">*</span> </td>
 		<td><input type="text" name="name" id="name" ></td></tr>
-	<tr><td>휴대전화 </td>
+	<tr><td>휴대전화<span style="color: red">*</span> </td>
 		<td><input type="text" name="phone" id="phone" oninput="removeHyphen(event)" ></td>
 		<td><span class="checkTelResult"></span></td></tr>
 	<tr><td>E-mail</td>
@@ -290,15 +263,19 @@ function fun1() {
 </script>
 </tbody>
 </table>
-		<!-- 제출/초기화 -->
-	<div style=" margin:0 auto; padding:30px 0 0 0; border-bottom:4px solid #505050; width:930px"></div>
+</div>
+
+<div style=" margin:0 auto; padding:30px 0 0 0; border-bottom:4px solid #505050; width:930px"></div>
+
+<div>
+		<!-- 제출/초기화 --> 
+	<div  class= "buttonJN">
 	
-			<div style=" margin:0 auto; padding:20px 0; text-align:center;width:930px">
 				<input type="button" value="가입취소" onclick="history.back();">
 				<input type="submit" value="회원가입" > 
 				<input type="reset" value="초기화">
-			</div>
-		</div>
+	</div>
+</div>
 	</form>
 
 </body>

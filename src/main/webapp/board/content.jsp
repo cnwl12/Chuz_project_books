@@ -11,15 +11,15 @@
 
 <link rel="stylesheet" href="fonts/icomoon/style.css" />
 <link rel="stylesheet" href="css/style.css" />
-<link rel="stylesheet" href="css/listcomment.css" />
+<link rel="stylesheet" href="css/board.css" />
 
 <script type="text/javascript">
 function comment_delete(comment_num){
 	
 	var board_num = ${dto.getBoard_num()};
-	alert(board_num);
+	// alert(board_num);
 	
-	if(confirm("삭제하시겠습니까?" + comment_num)){
+	if(confirm("삭제하시겠습니까?")){
 		location.href="commentDelete.bo?comment_num="+comment_num +"&board_num="+board_num;
 	//	location.href="main.bs";
 	}
@@ -31,17 +31,15 @@ function comment_delete(comment_num){
 <body>
 
 <jsp:include page="../include/top.jsp"></jsp:include>
-
-<br><br><br><br><br><br><br><br>
-
+ 
 <!--로그인 되어있는 아이디 == 세션에 저장된 "id"일치  -->
 <!-- string으로 형변환 -->
-
+  
 <%
 BoardDTO dto=(BoardDTO)request.getAttribute("dto");
 String id =(String)session.getAttribute("id");
-%>
-
+%>  
+ 
 <table border="2" class="contenTable">
 
 <tr><td>No.</td><td><%=dto.getBoard_num()%></td></tr>
@@ -50,9 +48,9 @@ String id =(String)session.getAttribute("id");
 <tr><td>작성일</td><td><%=dto.getBoard_date()%></td></tr>
 <tr><td>제목</td><td><%=dto.getBoard_subject() %></td></tr>
 <tr><td>첨부파일</td>
-
-<td>
-
+ 
+<td> 
+ 
 
 <img src ="upload/<%=dto.getBoard_file()%>" width="400" height="400"><br>
 
@@ -82,10 +80,10 @@ if(id!=null){ //세션값이 있으면
 </table>
 <br>
 <br>
-<br>
+<br> 
 <br>
 
-<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
+<table class="table-striped">
 
 		<tr>
 			<td>아이디</td>
@@ -162,7 +160,7 @@ if(id!=null){ //세션값이 있으면
 	</form> --%>
 		
 		<!-- 이전, 다음글 없을 때  -->
-
+<div class="buttonPN">
 <% if (dto.getPrev_num() != 0) { %>
 <input type="button" value="이전 글" onclick="location.href='content.bo?board_num=<%=dto.getPrev_num()%>'">
 <% } %>
@@ -173,8 +171,9 @@ if(id!=null){ //세션값이 있으면
 <% if (dto.getNext_num() != 0) { %>
 <input type="button" value="다음 글" onclick="location.href='content.bo?board_num=<%=dto.getNext_num()%>'">
 <%
-} 
+}   
 %>
+</div>
 <!-- <input type="hidden" value="다음 글" >  -->
 
 	 
