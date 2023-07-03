@@ -244,3 +244,21 @@ ol, ul, dl {
     width: 100%;
     height: 100%;
 }
+
+/*allbookList.jsp chex*/
+.chex{
+	background-image: url('../image/unChecked.png'); 
+	background-size: cover;
+	background-repeat: no-repeat;
+	 background-position: center;
+	 width: 50px; height: 25px;
+}
+
+.unchex{
+	background-image: url('../image/checked.png'); 
+	background-size: cover;
+	background-repeat: no-repeat;
+ 	background-position: center;
+ 	width: 50px; height: 25px;
+}
+  

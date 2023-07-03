@@ -74,7 +74,7 @@ PageDTO pageDTO =(PageDTO)request.getAttribute("pageDTO");
 				output += 			'</ul>';  
 				output += 		'</td>' 
 				output += 		'<td>'
-				output += 			'<div class="chex" style="background-image: url(\'image/unChecked.png\'); background-size: cover; background-repeat: no-repeat; background-position: center; width: 50px; height: 25px;">'
+				output += 			'<div class="chex">'
 				output += 				'<a href="#" onclick="checkBook(this)"> 조아요 </a>' 
 				output += 			'</div>'
 				output += 		'</td>'
@@ -82,10 +82,10 @@ PageDTO pageDTO =(PageDTO)request.getAttribute("pageDTO");
 				output += '</table>';
 				output += '<br>';
 			});
-			 
+			  
 			document.getElementById("outputDiv").innerHTML = output;
 		}
-		
+		   
 		function checkBook(e){
 			var isbn = $(e).closest('.showBook').find('.printLi').attr('data-isbn');
 			var title = $(e).closest('.showBook').find('.title').text();	//제목 이미지 isbn date id는 나중에 
@@ -96,6 +96,8 @@ PageDTO pageDTO =(PageDTO)request.getAttribute("pageDTO");
 		    console.log(author);
 		    console.log(image);
 		    location.href="checkBook.bs?isbn="+isbn+"&title="+title+"&image="+image;
+		     
+		    $(e).closest('.chex').toggleClass('unchex');
 		}
 	</script>
 	 
