@@ -4,7 +4,6 @@
 <!DOCTYPE html>
 
 <link rel="stylesheet" href="fonts/icomoon/style.css" />
-
 <link rel="stylesheet" href="css/style.css" />
 <link rel="stylesheet" href="css/board.css" />
 <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.js"></script>
@@ -12,7 +11,6 @@
 <head>
 <div>
 	<jsp:include page="../include/top.jsp"></jsp:include>
-	
 </div>
 </head>
 
@@ -21,7 +19,6 @@
 <%
 PageDTO pageDTO =(PageDTO)request.getAttribute("pageDTO");
 %>
-
 
 	<!--  ////출력하기 - 하나용 //////  -->
 	<script type="text/javascript">
@@ -60,40 +57,46 @@ PageDTO pageDTO =(PageDTO)request.getAttribute("pageDTO");
 				//output += '<div>Total : '+ book.total +' (권)</div>';
 			
 			arr.forEach(function(book, index) {
-				output += '<div data-isbn='+book.isbn+'>';
 				output += '<table width="1300" border="1" class="showBook">';
-				output += '<tbody>'  
-				output += '<tr>'
-				output += '<td width="'+ 250 +'" height="'+ 200+'">';
-				output += '<img src='+ book.image +' class="imgLi" alt=+'+  +'"></td>';
-				output += '</tr>'
-				output += '<td>'
-				output += '  <ul class="printLi">';
-				output += '    <li class="title">' + book.title + '</li>'; 
-				output += '    <li class="price">판매가(할인적용)' + book.discount + '</sli>'; 
-				output += '    <li class="author"> 지은이 ' + book.author + '</li>';
-				output += '    <li class="publisher">출판사 ' + book.publisher + '</li>';
-				output += '    <li class="description">' + book.description + '</li>';
-				output += '    <li class="link"><a href="' + book.link + '">구매하기</a></li>';
-				output += '   </ul>';  
-				output += '</td>' 
-				output += '<td>'
-				output += 	'<div class="chex" style="background-image: url(\'image/unChecked.png\'); background-size: cover; background-repeat: no-repeat; background-position: center; width: 50px; height: 25px;">'
-				output += 		'<a href="#" onclick="checkBook()"> 조아요 </a>' 
-				output += 	'</div>'
-				output += '</td>'
+				output += 	'<tbody>'  
+				output += 		'<tr>'
+				output += 			'<td width="'+ 250 +'" height="'+ 200+'">';
+				output += 				'<img src='+ book.image +' class="imgLi" alt=+'+  +'"></td>';
+				output += 		'</tr>'
+				output += 		'<td>'
+				output += 			'<ul class="printLi" data-isbn="'+book.isbn+'">';
+				output += 				'<li class="title">' + book.title + '</li>'; 
+				output += 				'<li class="price">' + book.discount + '</sli>'; 
+				output += 				'<li class="author">' + book.author + '</li>';
+				output += 				'<li class="publisher">' + book.publisher + '</li>';
+				output += 				'<li class="description">' + book.description + '</li>';
+				output += 				'<li class="link"><a href="' + book.link + '">구매하기</a></li>';
+				output += 			'</ul>';  
+				output += 		'</td>' 
+				output += 		'<td>'
+				output += 			'<div class="chex" style="background-image: url(\'image/unChecked.png\'); background-size: cover; background-repeat: no-repeat; background-position: center; width: 50px; height: 25px;">'
+				output += 				'<a href="#" onclick="checkBook(this)"> 조아요 </a>' 
+				output += 			'</div>'
+				output += 		'</td>'
 				output += 	'</tbody>'  
 				output += '</table>';
 				output += '<br>';
-				output += '</div>';
 			});
 			 
 			document.getElementById("outputDiv").innerHTML = output;
 		}
 		
-		/* function checkBook(){
-			console.log($(this).closest(".chex").val());
-		} */
+		function checkBook(e){
+			var isbn = $(e).closest('.showBook').find('.printLi').attr('data-isbn');
+			var title = $(e).closest('.showBook').find('.title').text();	//제목 이미지 isbn date id는 나중에 
+			var author = $(e).closest('.showBook').find('.author').text();
+			var image = $(e).closest('.showBook').find('.imgLi').attr('src');
+		    console.log(isbn);
+		    console.log(image);
+		    console.log(author);
+		    console.log(image);
+		    location.href="checkBook.bs?isbn="+isbn+"&title="+title+"&image="+image;
+		}
 	</script>
 	 
 	<!-- 페이지번호  -->

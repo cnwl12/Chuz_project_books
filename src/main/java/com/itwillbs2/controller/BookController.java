@@ -73,14 +73,13 @@ public class BookController extends HttpServlet {
 			
 			HttpSession session = request.getSession();
 			String id = (String)session.getAttribute("id");
-			System.out.println(id);
+			
 			BookService bookService = new BookService();
-			// bookService.getBookShelves(id);
 			
 			List<HashMap<String, String>> bookShelves = bookService.getBookShelves(id);
 			request.setAttribute("bookShelves", bookShelves);
 			
-			//System.out.println("bookShelves  컨: "+ bookShelves);
+			System.out.println("bookShelves  컨: "+ bookShelves);
 			
 			RequestDispatcher dis = request.getRequestDispatcher("bmember/bookShelf.jsp");
 			dis.forward(request, response);
@@ -99,10 +98,13 @@ public class BookController extends HttpServlet {
 				HttpSession session = request.getSession();
 				session.setAttribute("id", bookDTO.getId());
 				// main.me로 이동
-				 response.sendRedirect("main.bs"); // 주소값 바뀌면서 이동 (jsp경우엔 dispatch..)
+//				 response.sendRedirect("main.bs"); // 주소값 바뀌면서 이동 (jsp경우엔 dispatch..)
+				RequestDispatcher dis = request.getRequestDispatcher("bmember/success.jsp");
+				dis.forward(request, response);
 				
 			} else { // id,pw 불일치 => member/msg.jsp
 				RequestDispatcher dis = request.getRequestDispatcher("bmember/msg.jsp");
+				request.setAttribute("msg", "id/pass가 불일치합니다.");
 				dis.forward(request, response);
 			}
 		} //
@@ -129,7 +131,8 @@ public class BookController extends HttpServlet {
 			String id = (String) session.getAttribute("id");
 
 			if (id == null) { // 로그인 안한상태
-				RequestDispatcher dis = request.getRequestDispatcher("bmember/msg2.jsp");
+				RequestDispatcher dis = request.getRequestDispatcher("bmember/msg.jsp");
+				request.setAttribute("msg", "로그인 이후 이용 가능합니다");
 				dis.forward(request, response);
 				// response.sendRedirect("main.bs");
 			} else {
@@ -156,8 +159,9 @@ public class BookController extends HttpServlet {
 
 				response.sendRedirect("main.bs");
 
-			} else {
+			} else {	//회원정보 수정시 비밀번호 틀렸을 때 
 				RequestDispatcher dis = request.getRequestDispatcher("bmember/msg.jsp");
+				request.setAttribute("msg", "비밀번호가 일치하지 않습니다.");
 				dis.forward(request, response);
 			}
 		}
@@ -190,7 +194,27 @@ public class BookController extends HttpServlet {
 			 * */
 			
 		} // 세션 삭제
-
+		
+		
+		if (strPath.equals("/checkBook.bs")) {		// 책 찜하기
+			
+			HttpSession session = request.getSession();
+			String id = (String) session.getAttribute("id");
+			
+			if(id != null) {
+				BookService bookService = new BookService();
+				bookService.insertCheckBook(request);
+				
+				request.setAttribute("msg", "나의 책장에 추가되었습니다.");
+				
+			}else {// id가 없을때 
+				request.setAttribute("msg", "로그인 후 이용가능합니다.");
+			}
+			
+			RequestDispatcher dis = request.getRequestDispatcher("bmember/msg.jsp");
+			dis.forward(request, response);
+			
+		} //
 		
 		
 //		if (strPath.equals("/checkId.bs")) {

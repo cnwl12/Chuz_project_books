@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
             
 <script type="text/javascript">
-	function fun1() {
+	function login() {
 		window.open("login.bs","","width=450,height=450, top=250,left=150");
 	}	
 	
@@ -39,7 +39,7 @@
               
               if(id==null){ // 로그인 안한 상태 
               %>
-               <a href="#" onclick="fun1()">login</a>
+               <a href="#" onclick="login()">login</a>
                 <%
               }else{ // 세션값 있음 -> 로그인 성공
             	  %>

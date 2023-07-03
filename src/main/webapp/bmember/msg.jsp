@@ -4,11 +4,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 <title>BookStore_error</title>
 </head>
 <body>
 <script type="text/javascript">
-	alert("아이디/비밀번호가 틀립니다");
+	alert('${msg}');
 	history.back(); // 로그인페이지로 이동 
 </script>
 </body>

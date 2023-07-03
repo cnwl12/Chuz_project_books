@@ -40,7 +40,7 @@
 <li><input type="text" name="id" placeholder="아이디"></li>
 <li><input type="password" name="pass" placeholder="비밀번호"> <br>
 
-<input type="submit" value="로그인" onclick="fun2()">
+<input type="submit" value="로그인" >
 </ul>
 </div>
 </form> 

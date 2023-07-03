@@ -1,18 +1,13 @@
 package com.itwillbs2.service;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.itwillbs2.dao.ApiExamSearchBook;
 import com.itwillbs2.dao.BookDAO;
 import com.itwillbs2.domain.BookDTO;
-import com.mysql.cj.Session;
 
 public class BookService {
 	
@@ -167,6 +162,36 @@ public class BookService {
 		}
 		
 		return bookShelves;
+	}
+
+	public void insertCheckBook(HttpServletRequest request) {
+		try {
+			request.setCharacterEncoding("utf-8");
+			
+			String id = (String) request.getSession().getAttribute("id");
+			String title = request.getParameter("title");
+			String image = request.getParameter("image");
+			String isbn = request.getParameter("isbn");
+			//Timestamp date = new Timestamp(System.currentTimeMillis());	dao에서 해줄거에요
+			
+			HashMap<String, String> book = new HashMap<>();
+			book.put("title", title);
+			book.put("image", image);
+			book.put("isbn", isbn);
+			book.put("id", id);
+			//book.put("date", date);
+			
+			
+			// MemberDAO 객체를 생성해야 호출 가능(기억장소 할당)
+			BookDAO dao = new BookDAO();
+			// insertMember() 메서드 호출  // 회원가입 -> DB로 전달 
+			dao.insertCheckBook(book);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			
+		}
 	}
 	
 } // 클래스

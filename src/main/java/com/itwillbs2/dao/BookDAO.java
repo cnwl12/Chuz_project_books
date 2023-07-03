@@ -266,7 +266,7 @@ public class BookDAO {
 	
 			rs= pstmt.executeQuery();
 			
-			if(rs.next()) {// 아이디 존재
+			while(rs.next()) {// 아이디 존재
 				
 				HashMap<String, String> books = new HashMap<String, String>();
 				
@@ -277,11 +277,8 @@ public class BookDAO {
 				books.put("bookShelf_date", rs.getString("bookShelf_date"));
 				
 				bookShelves.add(books);
-				
-			}else {
-				// 아이디 부재 => null
 			}
-		
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
@@ -291,5 +288,36 @@ public class BookDAO {
 			if(con !=null)try{con.close();}catch(Exception ex){}
 		}
 		return bookShelves; 
+	}
+	
+	
+	public void insertCheckBook(HashMap<String, String> book) {
+	
+		Connection con = null; //리턴값 con이라서 
+		PreparedStatement pstmt = null;
+		
+		try {
+			con = getConnection();
+			
+			String sql=
+					"insert into BookShelf (bookShelf_id, bookShelf_isbn, bookShelf_title, bookShelf_image) values(?,?,?,?)";
+					
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, book.get("id"));
+			pstmt.setString(2, book.get("isbn"));
+			pstmt.setString(3, book.get("title"));
+			pstmt.setString(4, book.get("image"));
+
+			pstmt.executeUpdate();
+			System.out.println("나의 책장 추가 성공");
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("나의 책장 추가 실패");
+		}finally {
+			
+			if(pstmt !=null)try{pstmt.close();}catch(Exception ex){}
+			if(con !=null)try{con.close();}catch(Exception ex){}
+		}
 	}
 }// 클래스

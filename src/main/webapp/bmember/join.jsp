@@ -272,6 +272,7 @@ function fun1() {
 	<div  class= "buttonJN">
 	
 				<input type="button" value="가입취소" onclick="history.back();">
+				<!-- msg -->
 				<input type="submit" value="회원가입" > 
 				<input type="reset" value="초기화">
 	</div>
