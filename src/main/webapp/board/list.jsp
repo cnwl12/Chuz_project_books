@@ -85,11 +85,11 @@ if(id!=null){%>
  
 <table border="1" width="100" class="brod_table">
 <tr>
-<th>No.</th>   
-<th>제목</th> 
-<th>작성자</th>
-<th>조회수</th>   
-<th>작성일</th>   
+<th id="td01">No.</th>   
+<th id="td01">제목</th> 
+<th id="td01">작성자</th>  
+<th id="td01">조회수</th>    
+<th id="td01">작성일</th>    
 
 <% //결과 while 접근(rs.next()) -> T -> 열접근 rs.getInt("num") ...
 

@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>글쓰기</title>
+<title>자료실</title>
 
 <link rel="stylesheet" href="css/style.css" />
 <link rel="stylesheet" href="css/board.css" />
@@ -24,26 +24,10 @@
 // enctype="multipart/form-data" //form에서 넘길 때 멀티파트~형식으로 넘기겠다  
   
 %> 
- 
-<%-- <h4 style="text-align: center;">글쓰기</h4> <!--get방식 경우)주소값에 입력값이 나타남 -->
-<form action="fwritePro.bo" method="post" enctype="multipart/form-data">
-<table border="1" class="brod_table2">	
-<tr><td>글쓴이</td>						<!--  ┌글쓴이 id값 가져올거라서 : 글쓴이 알려주는 인증값  -->
-	<td><input type="text" name="board_name" value="<%=id%>" readonly="readonly"></td></tr>
-<tr><td>글제목</td>
-	<td><input type="text" name="board_subject"></td></tr> <!-- value 사용자가 적을거 -->
-<tr><td>첨부파일</td>
-	<td><input type="file" name="board_file"></td></tr>
-<tr><td>글내용</td>
-	<td><textarea name="board_content" rows="10" cols="20"></textarea></td></tr>
-<tr><td colspan="2"><input type="submit" value="글쓰기"></td></tr>
-</table>
-</form>
- --%>
 
 <!-- ////////////  -->
 <div class="sub_cont">
-	<form action="fwritePro.bo" method="post" enctype="multipart/form-data">
+	<form action="stackPro.bo" method="post" enctype="multipart/form-data">
 		<table class="type09">
 		  <thead>
 		  <tr>
@@ -60,10 +44,10 @@
 		    <th scope="row">글제목</th>
 		    <td><input type="text" name="board_subject" style="border : none; width : 1050px" ></td>
 		  </tr>
-		  <tr> 
+		<!--   <tr> 
 		    <th scope="row">글내용</th>
 		    <td><textarea name="board_content" rows="10px" cols="150px" style="border : none;"></textarea></td>
-		  </tr>
+		  </tr> -->
 		   <tr> 
 		    <th scope="row">첨부파일</th>
 		    <td><input type="file" name="board_file"></td>
@@ -71,7 +55,7 @@
 		  </tbody>
 		</table>
 		<div style=" align-content: center; text-align: center; margin-top: 15px">
-			<input type="submit" value="글쓰기"  >
+			<input type="submit" value="자료실 글쓰기"  >
 		</div>
 	</form>
 </div>

@@ -259,9 +259,9 @@ public class BookDAO {
 		try {
 			con	= getConnection();
 			
-			String sql="select * from BookShelf where bookShelf_id=?"; 
+			String sql="select * from BookShelf where bookShelf_id=? order by bookShelf_date desc "; 
 	
-			pstmt = con.prepareStatement(sql);
+			pstmt = con.prepareStatement(sql); 
 			pstmt.setString(1, id);
 	
 			rs= pstmt.executeQuery();
@@ -290,6 +290,44 @@ public class BookDAO {
 		return bookShelves; 
 	}
 	
+	
+	public boolean insertYN (String id, String isbn) {
+		Connection con = null; 
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		boolean result = false;
+		
+		try {
+			con	= getConnection();
+			
+			String sql="SELECT CASE WHEN COUNT(*) = 1 THEN 'N'\r\n"
+					+ "							      ELSE 'Y' END insertYN\r\n"
+					+ "  FROM bookshelf\r\n"
+					+ " WHERE bookShelf_id = ?\r\n"
+					+ "   AND bookShelf_isbn = ?"; 
+	
+			pstmt = con.prepareStatement(sql); 
+			pstmt.setString(1, id);
+			pstmt.setString(2, isbn);
+	
+			rs= pstmt.executeQuery();
+			
+			rs.next();
+			String insertYn = rs.getString("insertYN");
+			result = insertYn.equals("Y") ? true : false;
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			//마무리
+			if(rs !=null) try {rs.close();} catch(Exception ex){}
+			if(pstmt !=null)try{pstmt.close();}catch(Exception ex){}
+			if(con !=null)try{con.close();}catch(Exception ex){}
+		}
+		return result;
+	}
 	
 	public void insertCheckBook(HashMap<String, String> book) {
 	

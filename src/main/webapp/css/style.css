@@ -9666,7 +9666,7 @@ textarea {
   transform: translate(-50%, -50%); }
 
 .menu-bg-wrap {
-  background-color: #005555;
+  background-color: #2D90B0;
   padding: 20px 30px;
   position: relative;
   float: left;
@@ -9727,7 +9727,7 @@ textarea {
   .hero .form-search .form-control {
     margin-right: 10px; }
   .hero .form-search .btn {
-    background-color: #005555;
+    background-color: #2D90B0;
     padding-left: 30px;
     padding-right: 30px;
     color: #fff; }
@@ -9808,7 +9808,7 @@ textarea {
   -o-transition: .3s all ease;
   transition: .3s all ease; }
   .btn.btn-primary {
-    background: #005555;
+    background:#2D90B0; 
     color: #fff; }
   .btn:hover {
     top: -2px;
@@ -9917,7 +9917,7 @@ textarea {
     font-weight: 700;
     color: #000; }
   .property-item .property-content .price {
-    color: #005555; }
+    color: #2D90B0; }
     .property-item .property-content .price span {
       position: relative;
       padding-bottom: 4px;
@@ -9929,7 +9929,7 @@ textarea {
         height: 2px;
         left: 0;
         bottom: 0;
-        background-color: #005555; }
+        background-colo: #2D90B0; }
   .property-item .property-content .specs {
     font-size: 18px; }
     .property-item .property-content .specs .caption {
@@ -9942,7 +9942,7 @@ textarea {
     cursor: pointer;
     display: inline-block;
     width: 7px;
-    height: 7px;
+    height: 7px; 
     border-radius: 50%;
     background-color: white; }
 
@@ -10294,7 +10294,7 @@ nav[aria-label="breadcrumb"] li:before {
     width: 100%;
     bottom: 0;
     height: 2px;
-    background-color: #005555;
+    background-color:#2D90B0;
     -webkit-transition: .3s all ease;
     -o-transition: .3s all ease;
     transition: .3s all ease; }

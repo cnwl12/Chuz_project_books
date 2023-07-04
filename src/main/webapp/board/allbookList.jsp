@@ -15,7 +15,7 @@
 </head>
 
 <body>
-
+ 
 <%
 PageDTO pageDTO =(PageDTO)request.getAttribute("pageDTO");
 %>
@@ -24,8 +24,7 @@ PageDTO pageDTO =(PageDTO)request.getAttribute("pageDTO");
 	<script type="text/javascript">
 		window.onload = function() {
 			var bookJson = <%=request.getAttribute("bookList")%>;
-	
-		
+			
 			var arr = bookJson.items;
 			//	한개씩 접근 	
 			//	var book = arr[0];
@@ -35,7 +34,6 @@ PageDTO pageDTO =(PageDTO)request.getAttribute("pageDTO");
 
 			arr.forEach(function(book, index) { // forEach (함수(이름, 인덱스))
 				/* 콘솔확인용  	*/
-				
 				console.log(document.getElementById('bookTitle').textContent = book.title);
 				console.log(document.getElementById('bookDiscount').textContent = book.discount);
 				console.log(document.getElementById('bookImg').src = book.image);
@@ -51,13 +49,19 @@ PageDTO pageDTO =(PageDTO)request.getAttribute("pageDTO");
 	<script type="text/javascript">
 		window.onload = function() {
 			var bookJson =	<%=request.getAttribute("bookList")%>;
+			var isbns = <%=request.getAttribute("isbns")%>;
 			var arr = bookJson.items;
 			var output = '';  
 			
 				//output += '<div>Total : '+ book.total +' (권)</div>';
-			
+			 
 			arr.forEach(function(book, index) {
-				output += '<table width="1300" border="1" class="showBook">';
+				var classChex = 'chex'
+				if(isbns.indexOf(Number(book.isbn)) > -1){ // 이미 등록했으면
+					classChex = 'unChex'
+				}
+				
+	 			output += '<table width="1300" border="1" class="showBook">';
 				output += 	'<tbody>'  
 				output += 		'<tr>'
 				output += 			'<td width="'+ 250 +'" height="'+ 200+'">';
@@ -71,11 +75,11 @@ PageDTO pageDTO =(PageDTO)request.getAttribute("pageDTO");
 				output += 				'<li class="publisher">' + book.publisher + '</li>';
 				output += 				'<li class="description">' + book.description + '</li>';
 				output += 				'<li class="link"><a href="' + book.link + '">구매하기</a></li>';
-				output += 			'</ul>';  
+				output += 			'</ul>';      
 				output += 		'</td>' 
 				output += 		'<td>'
-				output += 			'<div class="chex">'
-				output += 				'<a href="#" onclick="checkBook(this)"> 조아요 </a>' 
+				output += 			'<div class="' + classChex + '" onclick="checkBook(this)" style="cursor: pointer;">'
+				output += 				'<a href="#" style="font-color : #000"></a>' 
 				output += 			'</div>'
 				output += 		'</td>'
 				output += 	'</tbody>'  
@@ -91,13 +95,16 @@ PageDTO pageDTO =(PageDTO)request.getAttribute("pageDTO");
 			var title = $(e).closest('.showBook').find('.title').text();	//제목 이미지 isbn date id는 나중에 
 			var author = $(e).closest('.showBook').find('.author').text();
 			var image = $(e).closest('.showBook').find('.imgLi').attr('src');
-		    console.log(isbn);
+		    /*  
+			console.log(isbn);
 		    console.log(image);
 		    console.log(author);
 		    console.log(image);
-		    location.href="checkBook.bs?isbn="+isbn+"&title="+title+"&image="+image;
-		     
-		    $(e).closest('.chex').toggleClass('unchex');
+		    */
+		   // $(e).closest('.chex').toggleClass('unchex');
+
+		    $(e).closest('.chex').removeClass('chex').addClass('unChex'); 
+			location.href="checkBook.bs?isbn="+isbn+"&title="+title+"&image="+image;	
 		}
 	</script>
 	 

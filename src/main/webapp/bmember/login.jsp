@@ -32,19 +32,21 @@
  <div class="logo m-0 float-start">BookStore</div>
 </div>
 
- 
+  
 <br>
 <div class="loginF">
 <form  action="loginPro.bs" method="post">
 <ul  class="formulli">
-<li><input type="text" name="id" placeholder="아이디"></li>
-<li><input type="password" name="pass" placeholder="비밀번호"> <br>
+<li ><input type="text" name="id" placeholder="아이디" class="lP"></li>
+<li style="padding-top :4px;"><input type="password" name="pass" placeholder="비밀번호" class="lP"> <br>
 
-<input type="submit" value="로그인" >
-</ul>
+<div class="FD"> 
+<input type="submit" value="로그인" style="width: 210px">
 </div>
-</form> 
-
+</ul>   
+</div>  
+</form>  
+ 
 <!-- <a href="join.bs"><input type="button" value="회원가입"></a> -->
 
 

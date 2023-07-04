@@ -40,56 +40,74 @@ BoardDTO dto=(BoardDTO)request.getAttribute("dto");
 String id =(String)session.getAttribute("id");
 %>  
  
-<table border="2" class="contenTable">
-
-<tr><td>No.</td><td><%=dto.getBoard_num()%></td></tr>
-<tr><td>글쓴이</td><td><%=dto.getBoard_name() %></td></tr>
-<tr><td>조회수</td><td><%=dto.getBoard_readcount()%></td></tr>
-<tr><td>작성일</td><td><%=dto.getBoard_date()%></td></tr>
-<tr><td>제목</td><td><%=dto.getBoard_subject() %></td></tr>
-<tr><td>첨부파일</td>
  
-<td> 
- 
-
-<img src ="upload/<%=dto.getBoard_file()%>" width="400" height="400"><br>
-
-<a href="upload/<%=dto.getBoard_file()%>" download> 
-<!-- 링크를 연결해야 이미지가 나타남(연결된 파일 이름) -->
-<!--download로 되어있으면 하이퍼링크 통해 다운로드 되어짐  -->
-<%=dto.getBoard_file()%></a>
-</td></tr> 
-<tr><td>글내용</td><td><%=dto.getBoard_content() %></td></tr>
-<tr>
-<td colspan="2">													<!--몇번글을 갖고 넘어갈건지 num으로 가져가야함  -->
-<%
-// 세션값이 있으면 
-// 로그인값(세션값), 글쓴이 일치하면 => 글수정, 글삭제 보이기 
-if(id!=null){ //세션값이 있으면 
-	if(id.equals(dto.getBoard_name())){ // 로그인한 사람 = 글쓴이 =>수정/삭제버튼 보임 
-%>
-<input type="button" value="삭제" onclick="location.href='delete.bo?board_num=<%=dto.getBoard_num()%>'">
-<input type="button" value="수정" onclick="location.href='fupdate.bo?board_num=<%=dto.getBoard_num()%>'">
-<%	
+ <!-- ////////////  -->
+<div class="sub_cont">
+	<form action="fwritePro.bo" method="post" enctype="multipart/form-data">
+		<table class="type09">
+		  <thead>
+		  <tr>
+		    <th scope="cols">게시글보기</th> 
+		    <th scope="cols"> </th>
+		  </tr>
+		  </thead>
+		  <tbody>
+		  <tr>
+		    <th scope="row">No.</th>
+		    <td><input type="text" name="board_name" value="<%=dto.getBoard_num()%>" disabled="disabled"  style="border : none;"></td>
+		  </tr>
+		  <tr>
+		    <th scope="row">글쓴이</th>
+		    <td><input type="text" name="board_num" value="<%=dto.getBoard_name() %>" disabled="disabled"  style="border : none;"></td>
+		  </tr>
+		  <tr>
+		    <th scope="row">조회수</th>
+		    <td><input type="text" name="board_num" value="<%=dto.getBoard_readcount()%>" disabled="disabled"  style="border : none;"></td>
+		  </tr>
+		  <tr> 
+		    <th scope="row">글제목</th>
+		    <td><input type="text" name="board_subject" value="<%=dto.getBoard_subject()%>" disabled="disabled" style="border : none; width : 1050px" ></td>
+		  </tr>
+		  <tr> 
+		    <th scope="row">글내용</th>
+		    <td><textarea name="board_content"   disabled="disabled"  rows="10px" cols="150px" style="border : none;"><%=dto.getBoard_content()%></textarea></td>
+		  </tr>
+		  
+		   <tr> 
+		    <th scope="row">첨부파일</th>
+		    <td>
+		    <a href="upload/<%=dto.getBoard_file()%>" download>
+		    	<img src ="upload/<%=dto.getBoard_file()%>" width="500" height="500">
+		 	</a>  
+			</td>
+		  </tr>
+		  </tbody>
+		</table>
 		
-	}
-}
-
-%>
-
-</table>
-<br>
-<br>
-<br> 
-<br>
-
+		<%
+		// 로그인값(세션값), 글쓴이 일치하면 => 글수정, 글삭제 보이기 
+		if(id!=null){ //세션값이 있으면 
+			if(id.equals(dto.getBoard_name())){ // 로그인한 사람 = 글쓴이 =>수정/삭제버튼 보임 
+			%>
+				<div style=" align-content:right; text-align: center; margin-top: 15px">
+					<input type="button" value="삭제" onclick="location.href='delete.bo?board_num=<%=dto.getBoard_num()%>'">
+					<input type="button" value="수정" onclick="location.href='fupdate.bo?board_num=<%=dto.getBoard_num()%>'">
+			<%
+			}
+		}
+		%>	
+				</div>
+			</form>
+		</div> 
+ 
+ <!-- 댓글 --> 
 <table class="table-striped">
-
+	
+	
 		<tr>
-			<td>아이디</td>
-			<td>내용</td>
-			<td>작성일</td>
-			<td> </td>
+				<td id="td01">아이디</td>
+				<td id="td01">내용</td>
+				<td colspan="2" id="td01">작성일</td>
 		</tr>	
 		
 		<c:forEach var="comment" items="${commentList }">
@@ -109,6 +127,7 @@ if(id!=null){ //세션값이 있으면
 
 	</table>
 
+<div style="margin-top : 5px;">
 <form method="post" action="comment_insert.bo">
 		<input type="hidden" name="board_num" value="<%=dto.getBoard_num()%>">
 		<input type="hidden" name="comment_id" value="<%=id%>">
@@ -120,7 +139,7 @@ if(id!=null){ //세션값이 있으면
 			%>
 			<td style="border-bottom:none;" valign="middle"><%=id%></td>
 			<td><input type="text" style="height:50px;" class="form-control"  placeholder="상대방을 존중하는 댓글을 남깁시다." name ="comment_text">
-			<td><input type="submit" value="댓글 작성"></td>
+			<td><div style="margin-top:15px;"><input type="submit" value="댓글 작성"></div></td>
 			<%
 			}else{
 				%>
@@ -129,12 +148,10 @@ if(id!=null){ //세션값이 있으면
 				</td>
 			<%} 
 			%>
-			
-			
 			</tr>
 		</table>
 	</form>
-
+</div>
 <%-- 
 	<form method="post"  action="comment_insert.bo">
 		<input type="hidden" name="board_num" value="<%=dto.getBoard_num()%>">

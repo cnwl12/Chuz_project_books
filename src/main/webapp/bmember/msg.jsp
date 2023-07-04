@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-<title>BookStore_error</title>
+<title>BookStore_alert</title>
 </head>
 <body>
 <script type="text/javascript">
@@ -13,4 +13,4 @@
 	history.back(); // 로그인페이지로 이동 
 </script>
 </body>
-</html>
+</html> 

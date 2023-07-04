@@ -164,6 +164,16 @@ public class BookService {
 		return bookShelves;
 	}
 
+	public boolean insertYn(HttpServletRequest request) {
+		String id = (String) request.getSession().getAttribute("id");
+		String isbn = request.getParameter("isbn");
+		
+		// MemberDAO 객체를 생성해야 호출 가능(기억장소 할당)
+		BookDAO dao = new BookDAO();
+		// insertMember() 메서드 호출  // 회원가입 -> DB로 전달 
+		return dao.insertYN(id, isbn);
+	}
+	
 	public void insertCheckBook(HttpServletRequest request) {
 		try {
 			request.setCharacterEncoding("utf-8");

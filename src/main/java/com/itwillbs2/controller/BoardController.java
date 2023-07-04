@@ -1,20 +1,24 @@
 package com.itwillbs2.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.google.gson.JsonObject;
 import com.itwillbs2.dao.ApiExamSearchBook;
 import com.itwillbs2.domain.BoardDTO;
 import com.itwillbs2.service.BoardService;
 import com.itwillbs2.service.BookService;
+import com.mysql.cj.Session;
 import com.itwillbs2.domain.PageDTO;
 
 public class BoardController extends HttpServlet { //상속받아서 오버라이딩 
@@ -77,7 +81,7 @@ public class BoardController extends HttpServlet { //상속받아서 오버라�
 			PageDTO pageDTO = new PageDTO();
 			
 			// 한 페이지에 보여줄 글 개수 설정 
-			int pageSize = 3;
+			int pageSize = 10;
 			// 페이지 번호 가져오기 (페이지 번호가 없으면 무조건 1page 설정) [보통 창 켰을 때 첫번째 페이지]
 			String pageNum =request.getParameter("pageNum"); //get방식으로 설정해서 가져오기 
 			
@@ -195,7 +199,7 @@ public class BoardController extends HttpServlet { //상속받아서 오버라�
 		if(strPath.equals("/allbookList.bo")) {
 			
 			BoardService boardService = new BoardService();
-			
+			BookService bookService = new BookService();
 			PageDTO pageDTO = new PageDTO();
 			
 			// 한 페이지에 보여줄 글 개수 설정 
@@ -208,18 +212,27 @@ public class BoardController extends HttpServlet { //상속받아서 오버라�
 //			}
 			
 			String keyWord = request.getParameter("searchKeyWord");
-
 			JsonObject bookList = boardService.searchBook(request);		
 			
-			//System.out.println(bookList.asMap().get("total") + " : total");
-			
 			int count = Integer.parseInt(bookList.asMap().get("total").toString());		
-			
+			// 검색 키워드가 없을 때 
 			if(count ==0) {
 				RequestDispatcher dis = request.getRequestDispatcher("board/searchFail.jsp");
 				dis.forward(request, response);
 			}
+			// ----------------------------------------------------------------------------
+			HttpSession session = request.getSession();
+			List<String> isbns = new ArrayList<>();
+			if(session != null) {
+				String id = session.getAttribute("id").toString();
+				List<HashMap<String, String>> bookShelves = bookService.getBookShelves(id);
+				
+				for(Map<String, String> book : bookShelves) {
+					isbns.add(book.get("bookShelf_isbn")); 
+				}
+			}
 			
+			// ------------------ 이하 paging -----------------------
 			// pageNum 정수형으로 변경(currentPage)
 			int currentPage = Integer.parseInt(pageNum);
 			
@@ -256,16 +269,15 @@ public class BoardController extends HttpServlet { //상속받아서 오버라�
 			pageDTO.setPageCount(pageCount);
 			
 			request.setAttribute("pageDTO", pageDTO);
-			
-			// ----------------------------------------------
 			request.setAttribute("bookList", bookList );
+			request.setAttribute("isbns", isbns);
 			
 			RequestDispatcher dis = request.getRequestDispatcher("board/allbookList.jsp");
 			dis.forward(request, response);
 		}
 		
 		// 갤러리 이미지 
-		if(strPath.equals("/gallary.bo")) {
+		if(strPath.equals("/gallary.bo")) { 
 
 			PageDTO pageDTO = new PageDTO();
 

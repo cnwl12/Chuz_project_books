@@ -70,7 +70,6 @@ public class ApiExamSearchBook {
         String responseBody = get(apiURL,requestHeaders);
         System.out.println(responseBody);
         
-        
         return JsonParser.parseString(responseBody).getAsJsonObject();
     }
     

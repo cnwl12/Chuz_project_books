@@ -1,6 +1,6 @@
 @charset "UTF-8";
 .menu-bg-wrap {
-  background-color: #005555;
+  background-color:#2D90B0;
   padding: 15px 30px;
   position: relative;
   float: left;
@@ -10,10 +10,22 @@
   box-shadow: 0 15px 30px -15px rgba(0, 0, 0, 0.1); 
   }
   
-  .formulli{
+  .formulli{ 
 	list-style: none;
 }
 
-.loginF{
+.lP{
+	width: 210px;
+    height: 45px;
 	
+}
+
+
+.FD{
+	padding-top : 8px;
+}
+
+.loginF{
+	width : 15px;
+	margin: 138px 50px 150px 80px;
 }

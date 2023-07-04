@@ -35,8 +35,8 @@ public class BookController extends HttpServlet {
 	// 주소매핑 메서드
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
 		String strPath = request.getServletPath(); // 연결된 실제주소 /insert.me
-
 		// 게시판 매핑
 		if (strPath.equals("/board.bs")) {
 			// "/insert.bs" 주소가 변경되지 않고(가상주소 유지) 이동
@@ -59,7 +59,7 @@ public class BookController extends HttpServlet {
 			bookService.insertMember(request);
 
 			// 로그인 페이지(login.me)로 이동 (주소변경 insertpro에서 login.me로 )
-			response.sendRedirect("login.bs"); // web.xml로 가서 가상주소 뽑아옴
+			response.sendRedirect("main.bs"); // web.xml로 가서 가상주소 뽑아옴
 		}
 
 		if (strPath.equals("/login.bs")) { // login.jsp로 넘어감
@@ -104,7 +104,7 @@ public class BookController extends HttpServlet {
 				
 			} else { // id,pw 불일치 => member/msg.jsp
 				RequestDispatcher dis = request.getRequestDispatcher("bmember/msg.jsp");
-				request.setAttribute("msg", "id/pass가 불일치합니다.");
+				request.setAttribute("msg", " 아이디 또는 비밀번호가 불일치합니다.");
 				dis.forward(request, response);
 			}
 		} //
@@ -201,14 +201,16 @@ public class BookController extends HttpServlet {
 			HttpSession session = request.getSession();
 			String id = (String) session.getAttribute("id");
 			
+			request.setAttribute("msg", "로그인 후 이용가능합니다.");
+			
 			if(id != null) {
 				BookService bookService = new BookService();
-				bookService.insertCheckBook(request);
-				
-				request.setAttribute("msg", "나의 책장에 추가되었습니다.");
-				
-			}else {// id가 없을때 
-				request.setAttribute("msg", "로그인 후 이용가능합니다.");
+				if(bookService.insertYn(request)) {
+					bookService.insertCheckBook(request);
+					request.setAttribute("msg", "나의 책장에 추가되었습니다.");
+				} else {
+					request.setAttribute("msg", "이미 책장에 추가되어 있습니다.");
+				}
 			}
 			
 			RequestDispatcher dis = request.getRequestDispatcher("bmember/msg.jsp");

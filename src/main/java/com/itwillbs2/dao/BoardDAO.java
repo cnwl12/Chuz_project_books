@@ -54,10 +54,10 @@ public class BoardDAO {
 			pstmt.executeUpdate(); 
 			
 		} catch (Exception e) {
-			e.printStackTrace();
+			e.printStackTrace(); 
 			
 		}finally {
-			// 기억장소 누적되면, 과부하 ---> 기억장소 해제 처리
+			// 기억장소 누적되면, 과부하 ---> 기억장소 해제 처리 
 			//마무리 -> 기억장소 해제 -> 예외처리 (DB랑도 해제해야해서)
 			if(pstmt !=null)try{pstmt.close();}catch(Exception ex){}
 			if(con !=null)try{con.close();}catch(Exception ex){}

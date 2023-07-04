@@ -13,7 +13,7 @@
             // 로그인 성공한 경우 세션값을 이용하여 로그인 상태로 처리
             var userId = data.userId;
             // 세션값을 이용한 로그인 상태 처리 로직을 구현합니다.
-            // 예시로 콘솔에 로그인 상태 메시지를 출력하는 것으로 대체하였습니다.
+            // 예시로 콘솔에 로그인 상태 메시지를 출력하는 것으로 대체하였습니다. 
             console.log("로그인 상태로 변경됨. 사용자 아이디: " + userId);
             
             location.reload();
@@ -26,7 +26,9 @@
       <div class="container">
         <div class="menu-bg-wrap">
           <div class="site-navigation">
-            <a href="main.bs" class="logo m-0 float-start">BookStore</a>
+            <a href="main.bs" class="logo m-0 float-start">
+            <img src="./image/logo.png" alt="" width="200" height="50" >
+            </a>
             
             <ul class="js-clone-nav d-none d-lg-inline-block text-start site-menu float-end">
               
@@ -60,9 +62,9 @@
                   <%
                   if(id!=null){
                 	 %>
+                  <li><a href="bookShelf.bs">나의책장</a></li>
                   <li><a href="update.bs">회원정보 수정 | 삭제</a></li>
              	  <li><a href="logout.bs">로그아웃</a></li>
-                  <li><a href="bookShelf.bs">읽은책장</a></li>
                 	<%
                   }
                   %>

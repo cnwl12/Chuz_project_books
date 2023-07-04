@@ -41,6 +41,10 @@ public class BoardService {
 			String board_content = multi.getParameter("board_content");
 			String board_file = multi.getFilesystemName("board_file");
 			
+			/*
+			 * if(board_file==null){ board_file = multi.getParameter("oldfile"); // 기존 파일 }
+			 */
+			
 			// 글번호 num => 구해주기 => /*일단 수동으로 1씩 넣어서 작업 */
 			int board_num = 1; 
 			// 조회수 readcount => 0 설정(작성전까진 아무도 못보니까)
