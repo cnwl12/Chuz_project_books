@@ -28,7 +28,7 @@ $(function(){
 	$("#id").on("input", function() {
 		id = $("#id").val().length;
 		
-		if(id < 4 ){
+		if(id < 4 ){ 
 			$(".checkIdResult").html("4자리 이상 작성").css("color","red");
 		}else{
 			// 요건 충족했을 때 삭제

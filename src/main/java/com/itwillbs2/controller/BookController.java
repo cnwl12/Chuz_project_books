@@ -33,42 +33,31 @@ public class BookController extends HttpServlet {
 	}
 
 	// 주소매핑 메서드
-	protected void doProcess(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doProcess(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		String strPath = request.getServletPath(); // 연결된 실제주소 /insert.me
-		// 게시판 매핑
-		if (strPath.equals("/board.bs")) {
-			// "/insert.bs" 주소가 변경되지 않고(가상주소 유지) 이동
-			// RequestDispatcher 자바파일 forward 메서드 호출 // jsp주소 화면에 안보이게 주소변경없이 유지
-			RequestDispatcher dis = request.getRequestDispatcher("bmember/board.jsp");
-			dis.forward(request, response);
-		}
 
 		// 회원가입 매핑
 		if (strPath.equals("/join.bs")) {
-			// "/insert.bs" 주소가 변경되지 않고(가상주소 유지) 이동
-			// RequestDispatcher 자바파일 forward 메서드 호출 // jsp주소 화면에 안보이게 주소변경없이 유지
 			RequestDispatcher dis = request.getRequestDispatcher("bmember/join.jsp");
 			dis.forward(request, response);
 		}
-
+		
+		// 회원가입처리 
 		if (strPath.equals("/joinPro.bs")) {
-			// insertMember()메서드 호출
 			BookService bookService = new BookService(); // 처리작업
 			bookService.insertMember(request);
 
-			// 로그인 페이지(login.me)로 이동 (주소변경 insertpro에서 login.me로 )
 			response.sendRedirect("main.bs"); // web.xml로 가서 가상주소 뽑아옴
 		}
-
+		
+		// 로그인 페이지
 		if (strPath.equals("/login.bs")) { // login.jsp로 넘어감
-			// member/login.jsp로 이동 (주소 변경 없이 이동- jsp주소가 안보이면서 이동해야해서)
-			// RequestDispatcher 자바파일 forward 메서드 호출 - jsp 이동방식
 			RequestDispatcher dis = request.getRequestDispatcher("bmember/login.jsp");
 			dis.forward(request, response);
 		}
 		
+		// 나의 책장 
 		if (strPath.equals("/bookShelf.bs")) { // 
 			
 			HttpSession session = request.getSession();
@@ -79,26 +68,20 @@ public class BookController extends HttpServlet {
 			List<HashMap<String, String>> bookShelves = bookService.getBookShelves(id);
 			request.setAttribute("bookShelves", bookShelves);
 			
-			System.out.println("bookShelves  컨: "+ bookShelves);
-			
 			RequestDispatcher dis = request.getRequestDispatcher("bmember/bookShelf.jsp");
 			dis.forward(request, response);
 		}
 		
-		
-		
 		// 로그인 일치여부 확인
 		if (strPath.equals("/loginPro.bs")) { // 뽑아온 값은 / 붙여줘야함
 			BookService bookService = new BookService();
-			// 리턴값MemberDTO = userCheck(request) 메서드 호출
 			BookDTO bookDTO = bookService.userCheck(request);
 
 			if (bookDTO != null) {
 				// DB에서 ID 등 정보 일치하면 => 페이지 상관없이 값 유지하기 위해 세션값 생성(권한부여받은것!)
 				HttpSession session = request.getSession();
 				session.setAttribute("id", bookDTO.getId());
-				// main.me로 이동
-//				 response.sendRedirect("main.bs"); // 주소값 바뀌면서 이동 (jsp경우엔 dispatch..)
+				
 				RequestDispatcher dis = request.getRequestDispatcher("bmember/success.jsp");
 				dis.forward(request, response);
 				
@@ -107,25 +90,20 @@ public class BookController extends HttpServlet {
 				request.setAttribute("msg", " 아이디 또는 비밀번호가 불일치합니다.");
 				dis.forward(request, response);
 			}
-		} //
+		} 
 
 		// 메인으로 이동
 		if (strPath.equals("/main.bs")) { // main.me 유지하면서
-			// member/main.jsp로 이동
 			
 			BoardService boardService = new BoardService();
-			request.setAttribute("bookList", boardService.searchBook("자바"));
-//			이거 딴데서도 쓰면되깅
-//			System.out.println("bookList");
-			
-			
+			// 화면에서 기본적으로 보이게끔 설정했었음 (현재는 삭제)
+			// request.setAttribute("bookList", boardService.searchBook("자바"));
 			RequestDispatcher dis = request.getRequestDispatcher("bmember/main.jsp");
 			dis.forward(request, response);
 		}
 
 		// 회원정보 수정/삭제 이동
 		if (strPath.equals("/update.bs")) { // main.me 유지하면서
-			// member/main.jsp로 이동
 
 			HttpSession session = request.getSession();
 			String id = (String) session.getAttribute("id");
@@ -134,7 +112,6 @@ public class BookController extends HttpServlet {
 				RequestDispatcher dis = request.getRequestDispatcher("bmember/msg.jsp");
 				request.setAttribute("msg", "로그인 이후 이용 가능합니다");
 				dis.forward(request, response);
-				// response.sendRedirect("main.bs");
 			} else {
 
 				BookService bookService = new BookService();
@@ -146,11 +123,11 @@ public class BookController extends HttpServlet {
 				dis.forward(request, response);
 			}
 		}
-
+		
+		// 회원정보 수정 처리 페이지 
 		if (strPath.equals("/updatePro.bs")) { // main.me 유지하면서
 
 			BookService bookService = new BookService();
-
 			BookDTO bookDTO = bookService.userCheck(request);
 
 			if (bookDTO != null) {
@@ -172,13 +149,13 @@ public class BookController extends HttpServlet {
 			session.invalidate();
 
 			response.sendRedirect("main.bs");
-		} //
-
+		} 
+		
+		// 회원탈퇴 페이지 
 		if (strPath.equals("/delete.bs")) {
 
 			HttpSession session = request.getSession();
 			String id = (String) session.getAttribute("id");
-			// System.out.println(id + "북서비스 리퀘스트");
 			
 			BookService bookService = new BookService();
 			bookService.deleteMember(id);
@@ -195,8 +172,8 @@ public class BookController extends HttpServlet {
 			
 		} // 세션 삭제
 		
-		
-		if (strPath.equals("/checkBook.bs")) {		// 책 찜하기
+		// 책 찜하기
+		if (strPath.equals("/checkBook.bs")) {		
 			
 			HttpSession session = request.getSession();
 			String id = (String) session.getAttribute("id");
