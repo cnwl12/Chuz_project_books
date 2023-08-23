@@ -54,23 +54,23 @@ String id =(String)session.getAttribute("id");
 		  <tbody>
 		  <tr>
 		    <th scope="row">No.</th>
-		    <td><input type="text" name="board_name" value="<%=dto.getBoard_num()%>" disabled="disabled"  style="border : none;"></td>
+		    <td><input type="text" name="board_name" value="<%=dto.getBoard_num()%>" disabled="disabled"  style="border : none; background: white;"></td>
 		  </tr>
 		  <tr>
 		    <th scope="row">글쓴이</th>
-		    <td><input type="text" name="board_num" value="<%=dto.getBoard_name() %>" disabled="disabled"  style="border : none;"></td>
+		    <td><input type="text" name="board_num" value="<%=dto.getBoard_name() %>" disabled="disabled"  style="border : none; background: white;"></td>
 		  </tr>
 		  <tr>
 		    <th scope="row">조회수</th>
-		    <td><input type="text" name="board_num" value="<%=dto.getBoard_readcount()%>" disabled="disabled"  style="border : none;"></td>
+		    <td><input type="text" name="board_num" value="<%=dto.getBoard_readcount()%>" disabled="disabled"  style="border : none; background: white;"></td>
 		  </tr>
 		  <tr> 
 		    <th scope="row">글제목</th>
-		    <td><input type="text" name="board_subject" value="<%=dto.getBoard_subject()%>" disabled="disabled" style="border : none; width : 1050px" ></td>
+		    <td><input type="text" name="board_subject" value="<%=dto.getBoard_subject()%>" disabled="disabled" style="border : none; width : 1050px; background: white;" ></td>
 		  </tr>
 		  <tr> 
 		    <th scope="row">글내용</th>
-		    <td><textarea name="board_content"   disabled="disabled"  rows="10px" cols="150px" style="border : none;"><%=dto.getBoard_content()%></textarea></td>
+		    <td><textarea name="board_content"   disabled="disabled"  rows="10px" cols="150px" style="border : none; background: white;"><%=dto.getBoard_content()%></textarea></td>
 		  </tr>
 		  
 		   <tr> 

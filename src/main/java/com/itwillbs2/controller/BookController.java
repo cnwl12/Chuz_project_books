@@ -195,17 +195,5 @@ public class BookController extends HttpServlet {
 			
 		} //
 		
-		
-//		if (strPath.equals("/checkId.bs")) {
-//			 System.out.println("체크 아이디");
-//			    String id = (String) request.getAttribute("id");
-//			    MemberService memberService = new MemberService();
-//			    boolean checkResult = memberService.checkId(id);
-//			    response.setContentType("application/json");
-//			    response.setCharacterEncoding("UTF-8");
-//			    PrintWriter out = response.getWriter();
-//			    out.print("{\"result\": " + checkResult + "}");
-//			    out.flush();
-//		}
 	}// doProcess()
 } // 클래스

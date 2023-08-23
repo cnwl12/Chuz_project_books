@@ -154,8 +154,10 @@
 }
 
 #td01{
-	background-color: #ccc;
+	background-color: #2D90B0;
 	border: 0px solid #000;
+	color: white;
+	
 }
 
 .buttonPN{
@@ -180,6 +182,14 @@
 	margin-bottom : 10px;
 	text-align:right;
 	width:1300px;
+}
+
+#listBtn{
+	color: white;
+	border: none; 
+	background-color: #2D90B0; 
+	border-radius: 10px; 
+	font-size: 20px;
 }
 
 
@@ -212,7 +222,6 @@ table.type09 td {
   vertical-align: top;
   border-bottom: 1px solid #ccc;
 }
-
 
 
 
@@ -333,7 +342,7 @@ ol, ul, dl {
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    width: 55px;
+    width: 80px;
     height: 80px;
     text-align: center;
 }
@@ -343,7 +352,7 @@ ol, ul, dl {
 	background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    width: 55px;
+    width: 80px;
     height: 80px;
 	text-align: center;
 }
