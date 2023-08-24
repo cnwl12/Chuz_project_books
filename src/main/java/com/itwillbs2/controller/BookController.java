@@ -96,8 +96,6 @@ public class BookController extends HttpServlet {
 		if (strPath.equals("/main.bs")) { // main.me 유지하면서
 			
 			BoardService boardService = new BoardService();
-			// 화면에서 기본적으로 보이게끔 설정했었음 (현재는 삭제)
-			// request.setAttribute("bookList", boardService.searchBook("자바"));
 			RequestDispatcher dis = request.getRequestDispatcher("bmember/main.jsp");
 			dis.forward(request, response);
 		}
@@ -194,6 +192,14 @@ public class BookController extends HttpServlet {
 			dis.forward(request, response);
 			
 		} //
+		
+		if (strPath.equals("/delLike.bs")) {	
+		
+			BookService bookService = new BookService();
+			bookService.delLike(request);
+			
+			response.sendRedirect("bookShelf.bs");
+		}
 		
 	}// doProcess()
 } // 클래스

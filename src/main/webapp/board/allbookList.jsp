@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="css/style.css" />
 <link rel="stylesheet" href="css/board.css" />
 <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.js"></script>
+<script type="text/javascript" src="js/searchBook.js"></script>
 
 <head>
 <div>
@@ -15,6 +16,20 @@
 </head>
 
 <body>
+
+	<div class="container">
+		<div class="row justify-content-center align-items-center">
+			<div class="col-lg-9 text-center" style="width: 100%; margin: 1%;">
+				<form class="narrow-w form-search d-flex align-items-stretch mb-3"
+					data-aos="fade-up" data-aos-delay="200" id="searchForm">
+
+					<input type="text" class="form-control px-4"
+						placeholder="검색어를 입력해주세요" name="searchKeyWord" id="searchF">
+					<button type="submit" class="btn btn-primary">Search</button>
+				</form>
+			</div>
+		</div>
+	</div> 
  
 <%
 PageDTO pageDTO =(PageDTO)request.getAttribute("pageDTO");
@@ -95,13 +110,6 @@ PageDTO pageDTO =(PageDTO)request.getAttribute("pageDTO");
 			var title = $(e).closest('.showBook').find('.title').text();	//제목 이미지 isbn date id는 나중에 
 			var author = $(e).closest('.showBook').find('.author').text();
 			var image = $(e).closest('.showBook').find('.imgLi').attr('src');
-		    /*  
-			console.log(isbn);
-		    console.log(image);
-		    console.log(author);
-		    console.log(image);
-		    */
-		   // $(e).closest('.chex').toggleClass('unchex');
 
 		    $(e).closest('.chex').removeClass('chex').addClass('unChex'); 
 			location.href="checkBook.bs?isbn="+isbn+"&title="+title+"&image="+image;	
@@ -124,15 +132,6 @@ for(int i = pageDTO.getStartPage(); i <= pageDTO.getEndPage(); i++){
 	
 	// TODO: total로 더 이상 출력될 내용이 없을 때 , 하단 숫자 사라지게  
 	%>
-	
-	<%-- 
-	<%
-	if((i*10+1) < pageDTO.getEndPage()){ // 페이지 하단 숫자가 토탈 수보다 작을 때 멈추고(안나오고) 끝남
-		break;
-	}
-	%>
-	 --%>
-	 
 	<a href="allbookList.bo?pageNum=<%=i%>&searchKeyWord=<%=request.getParameter("searchKeyWord")%>"><%=i%></a>
 	<%
 }
@@ -143,9 +142,6 @@ for(int i = pageDTO.getStartPage(); i <= pageDTO.getEndPage(); i++){
 if(pageDTO.getEndPage() < pageDTO.getPageCount()){ // 1~10 < 11~20, 21~30 ---
 %>
 <a href="allbookList.bo?pageNum=<%=pageDTO.getStartPage()+pageDTO.getPageBlock()%>&searchKeyWord=<%=request.getParameter("searchKeyWord")%>">[다음]</a>
-	<%-- <a href="allbookList.bo?pageNum=<%=pageDTO.getStartPage()+pageDTO.getPageBlock()%>">[다음]</a>  --%>
-							<!--currentpage+pageblock해도됨  -->
-							<!-- 1~10 -> 11~20으로 넘어가게  -->
 <%
 }
  %>

@@ -17,11 +17,9 @@
 function comment_delete(comment_num){
 	
 	var board_num = ${dto.getBoard_num()};
-	// alert(board_num);
 	
 	if(confirm("삭제하시겠습니까?")){
 		location.href="commentDelete.bo?comment_num="+comment_num +"&board_num="+board_num;
-	//	location.href="main.bs";
 	}
 }
 
@@ -32,16 +30,11 @@ function comment_delete(comment_num){
 
 <jsp:include page="../include/top.jsp"></jsp:include>
  
-<!--로그인 되어있는 아이디 == 세션에 저장된 "id"일치  -->
-<!-- string으로 형변환 -->
-  
 <%
 BoardDTO dto=(BoardDTO)request.getAttribute("dto");
 String id =(String)session.getAttribute("id");
 %>  
  
- 
- <!-- ////////////  -->
 <div class="sub_cont">
 	<form action="fwritePro.bo" method="post" enctype="multipart/form-data">
 		<table class="type09">

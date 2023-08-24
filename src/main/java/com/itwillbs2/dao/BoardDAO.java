@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import javax.naming.Context;
+import javax.naming.*;
 import javax.naming.InitialContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.sql.DataSource;
@@ -267,8 +267,6 @@ public class BoardDAO {
 	public void deleteComment(int comment_num) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		
-		System.out.println("들리나요?");
 		
 		try {
 			con = getConnection(); // DB연결

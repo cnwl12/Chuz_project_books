@@ -1,10 +1,8 @@
 package com.itwillbs2.dao;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -357,5 +355,28 @@ public class BookDAO {
 			if(pstmt !=null)try{pstmt.close();}catch(Exception ex){}
 			if(con !=null)try{con.close();}catch(Exception ex){}
 		}
+	}
+	public void delLike(String bookShelf_title) {
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			con = getConnection(); 
+			
+			//SQL 구문 
+			String sql = "delete from bookshelf where bookShelf_title=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1,bookShelf_title);
+			
+			pstmt.executeUpdate(); //delete 실행
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			if(pstmt !=null) try {pstmt.close();} catch(Exception ex){}
+			if(con !=null) try {con.close();} catch(Exception ex){}
+		}
+		
 	}
 }// 클래스

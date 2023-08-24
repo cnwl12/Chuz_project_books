@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.itwillbs2.dao.BoardDAO;
 import com.itwillbs2.dao.BookDAO;
 import com.itwillbs2.domain.BookDTO;
 
@@ -201,6 +202,19 @@ public class BookService {
 			e.printStackTrace();
 		}finally {
 			
+		}
+	}
+
+	public void delLike(HttpServletRequest request) {
+		try {
+			String book_title = request.getParameter("bookShelf_title");
+			
+			BookDAO dao = new BookDAO();
+
+			dao.delLike(book_title);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 	
